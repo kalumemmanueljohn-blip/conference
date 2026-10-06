@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block title %}{% trans "Accueil" %}{% endblock %}
+
+{% block content %}
+<section class="section-padding-lg bg-black text-white">
+    <div class="container text-center">
+        <h1 class="display-4 text-yellow mb-4 fade-in-up">
+            {% trans "Bienvenue" %}
+        </h1>
+        <p class="lead text-white-50 mb-4 fade-in-up delay-1">
+            {% trans "Le layout global fonctionne. Les vrais templates arrivent au Lot 8.2." %}
+        </p>
+        <div class="d-flex gap-3 justify-content-center fade-in-up delay-2">
+            <a href="{% url 'accounts:register' %}" class="btn btn-primary btn-lg">
+                <i class="bi bi-ticket-perforated"></i> {% trans "Réserver ma place" %}
+            </a>
+            <a href="{% url 'accounts:login' %}" class="btn btn-outline-yellow btn-lg">
+                {% trans "Connexion" %}
+            </a>
+        </div>
+    </div>
+</section>
+
+<section class="section-padding">
+    <div class="container">
+        <div class="row g-4">
+            <div class="col-md-4 fade-in-up">
+                <div class="card h-100">
+                    <div class="card-header">
+                        <i class="bi bi-ticket-perforated"></i> Réservation
+                    </div>
+                    <div class="card-body">
+                        <p>Réservez votre place en quelques clics.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 fade-in-up delay-1">
+                <div class="card h-100">
+                    <div class="card-header">
+                        <i class="bi bi-credit-card"></i> Paiement
+                    </div>
+                    <div class="card-body">
+                        <p>SASPAY ou WhatsApp — à votre choix.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 fade-in-up delay-2">
+                <div class="card h-100">
+                    <div class="card-header">
+                        <i class="bi bi-qr-code"></i> Billet QR
+                    </div>
+                    <div class="card-body">
+                        <p>Recevez votre billet PDF avec QR code unique.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

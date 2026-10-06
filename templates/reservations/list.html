@@ -1,0 +1,129 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block title %}{% trans "Mes réservations" %}{% endblock %}
+
+{% block content %}
+
+<section class="dashboard-section">
+    <div class="container">
+
+        <!-- Header -->
+        <div class="dashboard-header">
+            <div class="dashboard-welcome">
+                <span class="dashboard-label">{% trans "Mes réservations" %}</span>
+                <h1>{% trans "Historique" %}</h1>
+                <p>{% trans "Consultez et gérez toutes vos réservations" %}</p>
+            </div>
+            <a href="{% url 'reservations:create' %}" class="btn btn-primary">
+                <i class="bi bi-plus-circle-fill"></i>
+                {% trans "Nouvelle réservation" %}
+            </a>
+        </div>
+
+        {% if reservations %}
+
+        <div class="reservations-list">
+            {% for reservation in reservations %}
+            <a href="{% url 'reservations:detail' reservation.reference %}" class="reservation-item">
+
+                <!-- En-tête : référence + statut -->
+                <div class="reservation-item-header">
+                    <div class="reservation-item-ref">
+                        <span class="reservation-item-ref-label">
+                            {% trans "Référence" %}
+                        </span>
+                        <code>{{ reservation.reference }}</code>
+                    </div>
+
+                    <span class="reservation-status status-{{ reservation.status }}">
+                        {% if reservation.status == 'created' %}
+                            <i class="bi bi-hourglass-split"></i>
+                            {{ reservation.get_status_display }}
+                        {% elif reservation.status == 'payment_pending' %}
+                            <i class="bi bi-clock-fill"></i>
+                            {{ reservation.get_status_display }}
+                        {% elif reservation.status == 'payment_confirmed' %}
+                            <i class="bi bi-credit-card-fill"></i>
+                            {{ reservation.get_status_display }}
+                        {% elif reservation.status == 'confirmed' %}
+                            <i class="bi bi-check-circle-fill"></i>
+                            {{ reservation.get_status_display }}
+                        {% elif reservation.status == 'ticket_generated' %}
+                            <i class="bi bi-ticket-perforated-fill"></i>
+                            {{ reservation.get_status_display }}
+                        {% elif reservation.status == 'present' %}
+                            <i class="bi bi-person-check-fill"></i>
+                            {{ reservation.get_status_display }}
+                        {% elif reservation.status == 'cancelled' %}
+                            <i class="bi bi-x-circle-fill"></i>
+                            {{ reservation.get_status_display }}
+                        {% endif %}
+                    </span>
+                </div>
+
+                <!-- Titre conférence -->
+                <h3 class="reservation-item-title">
+                    {{ reservation.conference.title }}
+                </h3>
+
+                <!-- Métadonnées -->
+                <div class="reservation-item-meta">
+                    <span>
+                        <i class="bi bi-calendar3"></i>
+                        {{ reservation.conference.date|date:"d F Y" }}
+                    </span>
+                    <span>
+                        <i class="bi bi-geo-alt-fill"></i>
+                        {{ reservation.conference.location }}
+                    </span>
+                    <span>
+                        <i class="bi bi-people-fill"></i>
+                        {{ reservation.seats }} place{{ reservation.seats|pluralize }}
+                    </span>
+                </div>
+
+                <!-- Pied : prix + action -->
+                <div class="reservation-item-footer">
+                    <div class="reservation-item-price">
+                        {% if reservation.total_amount == 0 %}
+                            <span class="reservation-price-value">{% trans "Gratuit" %}</span>
+                        {% else %}
+                            <span class="reservation-price-value">
+                                {{ reservation.total_amount }} {{ reservation.currency }}
+                            </span>
+                            <span class="reservation-price-label">
+                                ({{ reservation.seats }} × {{ reservation.conference.price_per_seat }} {{ reservation.currency }})
+                            </span>
+                        {% endif %}
+                    </div>
+
+                    <span class="reservation-item-arrow">
+                        <i class="bi bi-arrow-right"></i>
+                    </span>
+                </div>
+
+            </a>
+            {% endfor %}
+        </div>
+
+        {% else %}
+
+        <div class="empty-state">
+            <div class="empty-state-icon">
+                <i class="bi bi-ticket-perforated"></i>
+            </div>
+            <h2>{% trans "Aucune réservation" %}</h2>
+            <p>{% trans "Vous n'avez pas encore réservé de place pour cette conférence." %}</p>
+            <a href="{% url 'reservations:create' %}" class="btn btn-primary btn-lg">
+                <i class="bi bi-ticket-perforated-fill"></i>
+                {% trans "Réserver maintenant" %}
+            </a>
+        </div>
+
+        {% endif %}
+
+    </div>
+</section>
+
+{% endblock %}

@@ -1,0 +1,116 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block title %}{% trans "Choisir le paiement" %}{% endblock %}
+
+{% block content %}
+
+<section class="booking-section">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+
+                <!-- Progression -->
+                <div class="booking-steps">
+                    <div class="booking-step is-done">
+                        <div class="booking-step-circle"><i class="bi bi-check"></i></div>
+                        <div class="booking-step-label">{% trans "Places" %}</div>
+                    </div>
+                    <div class="booking-step is-active">
+                        <div class="booking-step-circle">2</div>
+                        <div class="booking-step-label">{% trans "Paiement" %}</div>
+                    </div>
+                    <div class="booking-step">
+                        <div class="booking-step-circle">3</div>
+                        <div class="booking-step-label">{% trans "Confirmation" %}</div>
+                    </div>
+                </div>
+
+                <!-- Récapitulatif -->
+                <div class="payment-summary">
+                    <div class="payment-summary-item">
+                        <span>{% trans "Référence" %}</span>
+                        <code>{{ reservation.reference }}</code>
+                    </div>
+                    <div class="payment-summary-item">
+                        <span>{% trans "Places" %}</span>
+                        <strong>{{ reservation.seats }}</strong>
+                    </div>
+                    <div class="payment-summary-item total">
+                        <span>{% trans "Total à payer" %}</span>
+                        <strong>{{ reservation.total_amount }} {{ reservation.currency }}</strong>
+                    </div>
+                </div>
+
+                <h2 class="payment-title">{% trans "Choisissez votre méthode de paiement" %}</h2>
+
+                <div class="payment-methods">
+
+                    <!-- SASPAY -->
+                    <div class="payment-method-card" style="cursor:default;">
+                        <div class="payment-method-icon" style="background: linear-gradient(135deg, #2563eb, #1e40af);">
+                            <i class="bi bi-credit-card-2-front-fill"></i>
+                        </div>
+                        <div class="payment-method-content">
+                            <h3>SASPAY</h3>
+                            <p>{% trans "Paiement mobile money en USD. Vous recevez une notification sur votre téléphone." %}</p>
+                            <span class="payment-method-badge">
+                                <i class="bi bi-lightning-charge-fill"></i>
+                                {% trans "Recommandé" %}
+                            </span>
+
+                            <form method="post"
+                                  action="{% url 'payments:saspay_init' reservation.reference %}"
+                                  class="mt-3">
+                                {% csrf_token %}
+                                <div class="mb-2">
+                                    <label class="form-label" style="font-size:.85rem;">
+                                        {% trans "Votre opérateur mobile money" %}
+                                    </label>
+                                    <select name="saspay_network" class="form-select" required>
+                                        <option value="vodacom_cd_usd">
+                                            {% trans "Vodacom Congo (M-Pesa USD)" %}
+                                        </option>
+                                        <option value="airtel_cd_usd">
+                                            {% trans "Airtel Congo (USD)" %}
+                                        </option>
+                                        <option value="orange_cd_usd">
+                                            {% trans "Orange Congo (USD)" %}
+                                        </option>
+                                    </select>
+                                </div>
+                                <button type="submit" class="btn btn-primary w-100">
+                                    <i class="bi bi-arrow-right-circle-fill"></i>
+                                    {% trans "Payer avec SASPAY" %}
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+
+                    <!-- WhatsApp -->
+                    <a href="{% url 'payments:whatsapp_init' reservation.reference %}" class="payment-method-card">
+                        <div class="payment-method-icon" style="background: linear-gradient(135deg, #10b981, #059669);">
+                            <i class="bi bi-whatsapp"></i>
+                        </div>
+                        <div class="payment-method-content">
+                            <h3>WhatsApp</h3>
+                            <p>{% trans "Payez via WhatsApp et envoyez votre preuve. Validation manuelle par un administrateur." %}</p>
+                        </div>
+                        <i class="bi bi-arrow-right payment-method-arrow"></i>
+                    </a>
+
+                </div>
+
+                <div class="d-flex justify-content-center mt-4">
+                    <a href="{% url 'reservations:detail' reservation.reference %}" class="btn btn-outline-dark">
+                        <i class="bi bi-arrow-left"></i>
+                        {% trans "Retour à ma réservation" %}
+                    </a>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock %}

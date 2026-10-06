@@ -1,0 +1,49 @@
+{% extends 'notifications/emails/base_email.html' %}
+
+{% block title %}Bienvenue{% endblock %}
+{% block header_subtitle %}Bienvenue{% endblock %}
+
+{% block content %}
+
+<h2 style="margin:0 0 20px; color:#0b1324; font-size:22px; font-weight:900;">
+    Bonjour {{ user.first_name }},
+</h2>
+
+<p style="margin:0 0 16px; color:#475569; font-size:15px;">
+    Nous sommes ravis de vous accueillir chez <strong style="color:#0b1324;">Bantondo's Génération ASBL</strong>.
+</p>
+
+<p style="margin:0 0 24px; color:#475569; font-size:15px;">
+    Votre compte a été créé avec succès. Vous pouvez dès maintenant réserver votre place pour la conférence.
+</p>
+
+<!-- Encadré récapitulatif -->
+<div style="background:#fff8e1; border-left:4px solid #d6a63a; padding:20px; border-radius:8px; margin:0 0 24px;">
+    <p style="margin:0 0 8px; font-size:13px; font-weight:800; letter-spacing:1px; text-transform:uppercase; color:#9a711b;">
+        Vos informations
+    </p>
+    <p style="margin:0 0 6px; font-size:14px; color:#172033;">
+        <strong>Nom complet :</strong> {{ user.full_name }}
+    </p>
+    <p style="margin:0; font-size:14px; color:#172033;">
+        <strong>Email :</strong> {{ user.email }}
+    </p>
+</div>
+
+<!-- Bouton CTA -->
+<table role="presentation" cellspacing="0" cellpadding="0" border="0" style="margin:0 auto 24px;">
+    <tr>
+        <td style="background:#d6a63a; border-radius:10px;">
+            <a href="{{ login_url|default:'#' }}"
+               style="display:inline-block; padding:14px 32px; color:#0b1324; text-decoration:none; font-weight:800; font-size:15px; letter-spacing:0.5px;">
+                Accéder à mon espace
+            </a>
+        </td>
+    </tr>
+</table>
+
+<p style="margin:0; color:#8892a0; font-size:13px; text-align:center;">
+    À très bientôt !
+</p>
+
+{% endblock %}

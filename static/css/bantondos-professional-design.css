@@ -1,0 +1,90 @@
+/* =========================================================
+   BANTONDOS — PROFESSIONAL DESIGN V2
+   Finitions premium / micro-interactions
+   ========================================================= */
+
+.site-header.is-scrolled{
+    background:rgba(7,13,27,.985);
+    box-shadow:0 10px 35px rgba(0,0,0,.2);
+}
+
+.hero-section .btn-primary,
+.cta-section .btn-primary{
+    position:relative;
+    overflow:hidden;
+}
+
+.hero-section .btn-primary::before,
+.cta-section .btn-primary::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:linear-gradient(
+        110deg,
+        transparent 25%,
+        rgba(255,255,255,.28) 50%,
+        transparent 75%
+    );
+    transform:translateX(-120%);
+    transition:transform .7s ease;
+}
+
+@media (hover:hover) and (pointer:fine){
+    .hero-section .btn-primary:hover::before,
+    .cta-section .btn-primary:hover::before{
+        transform:translateX(120%);
+    }
+
+    .hero-section .btn-primary:hover,
+    .cta-section .btn-primary:hover{
+        transform:translateY(-3px);
+    }
+
+    .info-card:hover,
+    .feature-box:hover,
+    .practical-card:hover,
+    .speaker-card:hover{
+        transform:translateY(-7px);
+    }
+}
+
+.hero-section .btn,
+.cta-section .btn{
+    transition:
+        transform .3s cubic-bezier(.2,.8,.2,1),
+        box-shadow .3s ease,
+        background .25s ease;
+}
+
+.about-core{
+    transition:transform .5s cubic-bezier(.2,.8,.2,1);
+}
+
+@media (hover:hover) and (pointer:fine){
+    .about-core:hover{
+        transform:scale(1.035);
+    }
+}
+
+@media (max-width:767px){
+    .site-header .navbar-collapse{
+        animation:menu-open .22s ease both;
+    }
+
+    @keyframes menu-open{
+        from{
+            opacity:0;
+            transform:translateY(-8px);
+        }
+        to{
+            opacity:1;
+            transform:translateY(0);
+        }
+    }
+}
+
+@media (prefers-reduced-motion:reduce){
+    .about-orbit{
+        animation:none!important;
+    }
+}

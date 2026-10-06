@@ -1,0 +1,152 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block title %}{% trans "Contrôle à l'entrée" %}{% endblock %}
+
+{% block content %}
+
+<section class="admin-section">
+    <div class="container-fluid px-4">
+
+        <!-- Header -->
+        <div class="admin-header">
+            <div>
+                <span class="dashboard-label">{% trans "Contrôle" %}</span>
+                <h1>{% trans "Contrôle à l'entrée" %}</h1>
+                <p>{% trans "Scannez un QR code ou recherchez manuellement" %}</p>
+            </div>
+            <a href="{% url 'dashboard:home' %}" class="btn btn-outline-dark">
+                <i class="bi bi-arrow-left"></i>
+                {% trans "Retour" %}
+            </a>
+        </div>
+
+        <!-- Barre de recherche -->
+        <form method="get" class="checkin-form">
+            <div class="checkin-input-wrapper">
+                <i class="bi bi-qr-code-scan"></i>
+                <input type="text"
+                       name="q"
+                       value="{{ query }}"
+                       placeholder="{% trans 'Scanner QR, référence, email, WhatsApp...' %}"
+                       class="checkin-input"
+                       autofocus>
+                <button type="submit" class="btn btn-primary">
+                    {% trans "Vérifier" %}
+                </button>
+            </div>
+        </form>
+
+        {% if error %}
+        <div class="checkin-error">
+            <i class="bi bi-exclamation-triangle-fill"></i>
+            <div>
+                <strong>{% trans "Billet introuvable" %}</strong>
+                <p>{{ error }}</p>
+            </div>
+        </div>
+        {% endif %}
+
+        {% if ticket %}
+        <div class="checkin-result">
+
+            {% if ticket.status == 'generated' %}
+            <div class="checkin-status checkin-status-success">
+                <i class="bi bi-check-circle-fill"></i>
+                <span>{% trans "Billet valide" %}</span>
+            </div>
+            {% elif ticket.status == 'used' %}
+            <div class="checkin-status checkin-status-warning">
+                <i class="bi bi-exclamation-triangle-fill"></i>
+                <span>{% trans "Billet déjà utilisé" %}</span>
+            </div>
+            {% else %}
+            <div class="checkin-status checkin-status-danger">
+                <i class="bi bi-x-circle-fill"></i>
+                <span>{% trans "Billet annulé" %}</span>
+            </div>
+            {% endif %}
+
+            <div class="checkin-card">
+
+                <div class="checkin-card-header">
+                    <div class="checkin-avatar">
+                        {{ ticket.reservation.user.first_name|first|upper }}{{ ticket.reservation.user.last_name|first|upper }}
+                    </div>
+                    <div class="checkin-card-header-info">
+                        <h2>{{ ticket.reservation.user.full_name }}</h2>
+                        <p>{{ ticket.reservation.user.email }}</p>
+                    </div>
+                    <div class="checkin-card-seat">
+                        <span>{% trans "Place" %}</span>
+                        <strong>{{ ticket.seat_number }} / {{ ticket.reservation.seats }}</strong>
+                    </div>
+                </div>
+
+                <div class="checkin-card-body">
+                    <div class="checkin-info-item">
+                        <span>{% trans "Référence" %}</span>
+                        <code>{{ ticket.ticket_reference }}</code>
+                    </div>
+                    <div class="checkin-info-item">
+                        <span>{% trans "WhatsApp" %}</span>
+                        <strong>{{ ticket.reservation.user.whatsapp_number }}</strong>
+                    </div>
+                    <div class="checkin-info-item">
+                        <span>{% trans "Conférence" %}</span>
+                        <strong>{{ ticket.reservation.conference.title }}</strong>
+                    </div>
+                    <div class="checkin-info-item">
+                        <span>{% trans "Statut" %}</span>
+                        <span class="reservation-status status-{{ ticket.status }}">
+                            {% if ticket.status == 'generated' %}{% trans "Valide" %}
+                            {% elif ticket.status == 'used' %}{% trans "Utilisé" %}
+                            {% else %}{{ ticket.get_status_display }}{% endif %}
+                        </span>
+                    </div>
+                    {% if ticket.used_at %}
+                    <div class="checkin-info-item">
+                        <span>{% trans "Utilisé le" %}</span>
+                        <strong>{{ ticket.used_at|date:"d F Y à H:i" }}</strong>
+                    </div>
+                    {% endif %}
+                </div>
+
+                {% if ticket.status == 'generated' %}
+                <form method="post"
+                      action="{% url 'dashboard:checkin_confirm' ticket.ticket_reference %}"
+                      class="checkin-card-footer">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-primary btn-lg w-100">
+                        <i class="bi bi-check-circle-fill"></i>
+                        {% trans "Valider la présence" %}
+                    </button>
+                </form>
+                {% elif ticket.status == 'used' %}
+                <div class="checkin-card-footer">
+                    <div class="checkin-already-used">
+                        <i class="bi bi-shield-x"></i>
+                        <span>{% trans "Ce billet a déjà été scanné. Entrée refusée." %}</span>
+                    </div>
+                </div>
+                {% endif %}
+
+            </div>
+
+        </div>
+        {% endif %}
+
+        {% if not query and not ticket %}
+        <div class="empty-state mt-4">
+            <div class="empty-state-icon">
+                <i class="bi bi-qr-code-scan"></i>
+            </div>
+            <h2>{% trans "Prêt pour le contrôle" %}</h2>
+            <p>{% trans "Scannez un QR code ou tapez une référence pour valider la présence." %}</p>
+        </div>
+        {% endif %}
+
+    </div>
+</section>
+
+{% endblock %}

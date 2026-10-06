@@ -1,0 +1,224 @@
+{% extends 'base.html' %}
+{% load static i18n %}
+
+{% block title %}{{ reservation.reference }}{% endblock %}
+
+{% block content %}
+
+<section class="dashboard-section">
+    <div class="container">
+
+        <!-- Header -->
+        <div class="reservation-detail-header">
+            <div class="reservation-detail-title">
+                <span class="dashboard-label">{% trans "Réservation" %}</span>
+                <h1>{{ reservation.reference }}</h1>
+                <p class="reservation-detail-date">
+                    <i class="bi bi-clock"></i>
+                    {% trans "Créée le" %} {{ reservation.created_at|date:"d F Y à H:i" }}
+                </p>
+            </div>
+            <span class="reservation-status status-{{ reservation.status }} status-large">
+                {% if reservation.status == 'created' %}
+                    <i class="bi bi-hourglass-split"></i>
+                    {{ reservation.get_status_display }}
+                {% elif reservation.status == 'payment_pending' %}
+                    <i class="bi bi-clock-fill"></i>
+                    {{ reservation.get_status_display }}
+                {% elif reservation.status == 'payment_confirmed' %}
+                    <i class="bi bi-credit-card-fill"></i>
+                    {{ reservation.get_status_display }}
+                {% elif reservation.status == 'confirmed' %}
+                    <i class="bi bi-check-circle-fill"></i>
+                    {{ reservation.get_status_display }}
+                {% elif reservation.status == 'ticket_generated' %}
+                    <i class="bi bi-ticket-perforated-fill"></i>
+                    {{ reservation.get_status_display }}
+                {% elif reservation.status == 'present' %}
+                    <i class="bi bi-person-check-fill"></i>
+                    {{ reservation.get_status_display }}
+                {% elif reservation.status == 'cancelled' %}
+                    <i class="bi bi-x-circle-fill"></i>
+                    {{ reservation.get_status_display }}
+                {% endif %}
+            </span>
+        </div>
+
+        <div class="row g-4">
+
+            <!-- Colonne principale -->
+            <div class="col-lg-8">
+
+                <!-- Conférence -->
+                <div class="reservation-detail-card">
+                    <h2>{{ reservation.conference.title }}</h2>
+
+                    <div class="reservation-detail-info">
+
+                        <div class="reservation-detail-info-item">
+                            <div class="reservation-detail-info-icon">
+                                <i class="bi bi-calendar3"></i>
+                            </div>
+                            <div>
+                                <span>{% trans "Date et heure" %}</span>
+                                <strong>{{ reservation.conference.date|date:"d F Y à H:i" }}</strong>
+                            </div>
+                        </div>
+
+                        <div class="reservation-detail-info-item">
+                            <div class="reservation-detail-info-icon">
+                                <i class="bi bi-geo-alt-fill"></i>
+                            </div>
+                            <div>
+                                <span>{% trans "Lieu" %}</span>
+                                <strong>{{ reservation.conference.location }}</strong>
+                            </div>
+                        </div>
+
+                        <div class="reservation-detail-info-item">
+                            <div class="reservation-detail-info-icon">
+                                <i class="bi bi-people-fill"></i>
+                            </div>
+                            <div>
+                                <span>{% trans "Places réservées" %}</span>
+                                <strong>{{ reservation.seats }} place{{ reservation.seats|pluralize }}</strong>
+                            </div>
+                        </div>
+
+                        <div class="reservation-detail-info-item">
+                            <div class="reservation-detail-info-icon">
+                                <i class="bi bi-cash-coin"></i>
+                            </div>
+                            <div>
+                                <span>{% trans "Montant total" %}</span>
+                                <strong>
+                                    {% if reservation.total_amount == 0 %}
+                                        {% trans "Gratuit" %}
+                                    {% else %}
+                                        {{ reservation.total_amount }} {{ reservation.currency }}
+                                    {% endif %}
+                                </strong>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- Actions selon statut -->
+                {% if reservation.status == 'created' or reservation.status == 'payment_pending' %}
+                <div class="reservation-action-card">
+                    <div class="reservation-action-icon reservation-action-icon-warning">
+                        <i class="bi bi-credit-card-2-front-fill"></i>
+                    </div>
+                    <div class="reservation-action-content">
+                        <h3>{% trans "Finaliser le paiement" %}</h3>
+                        <p>{% trans "Votre réservation n'est pas encore confirmée. Procédez au paiement pour la valider." %}</p>
+                        <div class="d-flex gap-2 flex-wrap">
+                            <a href="{% url 'payments:choose' reservation.reference %}" class="btn btn-primary">
+                                <i class="bi bi-arrow-right-circle-fill"></i>
+                                {% trans "Payer maintenant" %}
+                            </a>
+                            <a href="{% url 'reservations:cancel' reservation.reference %}" class="btn btn-outline-dark">
+                                {% trans "Annuler" %}
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
+
+                {% if reservation.is_confirmed %}
+                <div class="reservation-action-card reservation-action-success">
+                    <div class="reservation-action-icon reservation-action-icon-success">
+                        <i class="bi bi-check-circle-fill"></i>
+                    </div>
+                    <div class="reservation-action-content">
+                        <h3>{% trans "Réservation confirmée" %}</h3>
+                        <p>{% trans "Votre place est garantie. Téléchargez votre billet ci-dessous." %}</p>
+                        {% if reservation.tickets.exists %}
+                        <a href="{% url 'tickets:reservation_tickets' reservation.reference %}" class="btn btn-primary btn-lg">
+                            <i class="bi bi-ticket-perforated-fill"></i>
+                            {% trans "Voir mes billets" %}
+                        </a>
+                        {% else %}
+                        <div class="auth-info-box" style="margin-top: 1rem;">
+                            <i class="bi bi-info-circle-fill"></i>
+                            <span>{% trans "Vos billets sont en cours de génération. Vous recevrez un email dès qu'ils seront prêts." %}</span>
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+                {% endif %}
+
+            </div>
+
+            <!-- Sidebar -->
+            <div class="col-lg-4">
+
+                <!-- Récapitulatif -->
+                <div class="reservation-summary-card">
+                    <h3>
+                        <i class="bi bi-receipt"></i>
+                        {% trans "Récapitulatif" %}
+                    </h3>
+
+                    <div class="reservation-summary-row">
+                        <span>{% trans "Référence" %}</span>
+                        <code>{{ reservation.reference }}</code>
+                    </div>
+
+                    <div class="reservation-summary-row">
+                        <span>{% trans "Statut" %}</span>
+                        <strong>{{ reservation.get_status_display }}</strong>
+                    </div>
+
+                    {% if reservation.payment_method %}
+                    <div class="reservation-summary-row">
+                        <span>{% trans "Paiement" %}</span>
+                        <strong>{{ reservation.get_payment_method_display }}</strong>
+                    </div>
+                    {% endif %}
+
+                    <div class="reservation-summary-row">
+                        <span>{% trans "Places" %}</span>
+                        <strong>{{ reservation.seats }}</strong>
+                    </div>
+
+                    <div class="reservation-summary-row total">
+                        <span>{% trans "Total" %}</span>
+                        <strong>
+                            {% if reservation.total_amount == 0 %}
+                                {% trans "Gratuit" %}
+                            {% else %}
+                                {{ reservation.total_amount }} {{ reservation.currency }}
+                            {% endif %}
+                        </strong>
+                    </div>
+                </div>
+
+                <!-- Actions rapides -->
+                <div class="reservation-summary-card">
+                    <h3>
+                        <i class="bi bi-lightning-charge-fill"></i>
+                        {% trans "Actions" %}
+                    </h3>
+
+                    <div class="reservation-actions-list">
+                        <a href="{% url 'reservations:list' %}" class="reservation-action-link">
+                            <i class="bi bi-arrow-left"></i>
+                            {% trans "Toutes mes réservations" %}
+                        </a>
+                        <a href="{% url 'conference:contact' %}" class="reservation-action-link">
+                            <i class="bi bi-envelope"></i>
+                            {% trans "Contacter l'organisation" %}
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+</section>
+
+{% endblock %}

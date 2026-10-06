@@ -1,0 +1,53 @@
+{% extends 'notifications/emails/base_email.html' %}
+
+{% block title %}Preuve rejetée{% endblock %}
+{% block header_subtitle %}Action requise{% endblock %}
+
+{% block content %}
+
+<div style="text-align:center; margin:0 0 24px;">
+    <div style="width:70px; height:70px; margin:0 auto 16px; background:#fee2e2; border-radius:50%; display:inline-flex; align-items:center; justify-content:center; color:#dc2626; font-size:32px; font-weight:900;">
+        !
+    </div>
+    <h2 style="margin:0 0 8px; color:#0b1324; font-size:22px; font-weight:900;">
+        Preuve de paiement rejetée
+    </h2>
+</div>
+
+<p style="margin:0 0 20px; color:#475569; font-size:15px;">
+    Bonjour {{ user.first_name }}, votre preuve de paiement n'a pas pu être validée.
+</p>
+
+<!-- Motif -->
+{% if reason %}
+<div style="background:#fef2f2; border-left:4px solid #dc2626; padding:16px 20px; border-radius:8px; margin:0 0 24px;">
+    <p style="margin:0 0 4px; color:#991b1b; font-size:12px; font-weight:800; letter-spacing:1px; text-transform:uppercase;">
+        Motif du rejet
+    </p>
+    <p style="margin:0; color:#7f1d1d; font-size:14px;">
+        {{ reason }}
+    </p>
+</div>
+{% endif %}
+
+<p style="margin:0 0 20px; color:#475569; font-size:15px;">
+    <strong>Que faire ?</strong><br>
+    Rendez-vous sur votre espace participant pour envoyer une nouvelle preuve de paiement.
+</p>
+
+<table role="presentation" cellspacing="0" cellpadding="0" border="0" style="margin:0 auto 24px;">
+    <tr>
+        <td style="background:#d6a63a; border-radius:10px;">
+            <a href="#"
+               style="display:inline-block; padding:14px 32px; color:#0b1324; text-decoration:none; font-weight:800; font-size:15px;">
+                Envoyer une nouvelle preuve
+            </a>
+        </td>
+    </tr>
+</table>
+
+<p style="margin:0; color:#8892a0; font-size:13px; text-align:center;">
+    Référence : {{ reservation.reference }}
+</p>
+
+{% endblock %}

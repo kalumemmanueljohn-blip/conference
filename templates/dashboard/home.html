@@ -1,0 +1,461 @@
+{% extends 'base.html' %}
+{% load static i18n %}
+
+{% block title %}{% trans "Accueil" %}{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/landing.css' %}">
+{% endblock %}
+
+{% block content %}
+
+{% if conference %}
+
+    <!-- ============================================================
+         HERO
+         ============================================================ -->
+    <section class="hero-section">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-10 mx-auto text-center">
+
+                    <div class="hero-badge fade-in-up">
+                        <i class="bi bi-broadcast"></i>
+                        {{ conference.date|date:"d F Y" }}
+                    </div>
+
+                    <h1 class="hero-title fade-in-up delay-1">
+                        {{ conference.title }}
+                    </h1>
+
+                    <p class="hero-subtitle fade-in-up delay-2">
+                        <i class="bi bi-geo-alt-fill"></i>
+                        {{ conference.location }}
+                    </p>
+
+                    <div class="hero-actions fade-in-up delay-3">
+                        {% if user.is_authenticated %}
+                            <a href="{% url 'reservations:create' %}" class="btn btn-primary btn-lg btn-pulse">
+                                <i class="bi bi-ticket-perforated-fill"></i>
+                                {% trans "Réserver ma place" %}
+                            </a>
+                        {% else %}
+                            <a href="{% url 'accounts:register' %}" class="btn btn-primary btn-lg btn-pulse">
+                                <i class="bi bi-ticket-perforated-fill"></i>
+                                {% trans "Réserver ma place" %}
+                            </a>
+                            <a href="{% url 'accounts:login' %}" class="btn btn-outline-yellow btn-lg">
+                                {% trans "J'ai déjà un compte" %}
+                            </a>
+                        {% endif %}
+                    </div>
+
+                    <div class="hero-stats fade-in-up delay-4">
+                        <div class="hero-stat">
+                            <div class="hero-stat-value">{{ conference.price_per_seat }} $</div>
+                            <div class="hero-stat-label">{% trans "par place" %}</div>
+                        </div>
+                        {% if conference.total_seats > 0 %}
+                        <div class="hero-stat">
+                            <div class="hero-stat-value">{{ conference.seats_remaining }}</div>
+                            <div class="hero-stat-label">{% trans "places" %}</div>
+                        </div>
+                        {% endif %}
+                        <div class="hero-stat">
+                            <div class="hero-stat-value">{{ conference.date|date:"d M" }}</div>
+                            <div class="hero-stat-label">{{ conference.date|date:"Y" }}</div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="hero-scroll-indicator">
+            <i class="bi bi-chevron-double-down"></i>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         COMPTE À REBOURS
+         ============================================================ -->
+    {% if conference.is_upcoming %}
+    <section class="countdown-section">
+        <div class="container">
+            <div class="countdown-header fade-in-up">
+                <i class="bi bi-hourglass-split"></i>
+                <span>{% trans "L'événement commence dans" %}</span>
+            </div>
+
+            <div class="countdown-grid"
+                 id="countdown"
+                 data-target="{{ conference.date|date:'c' }}">
+
+                <div class="countdown-block fade-in-up delay-1">
+                    <div class="countdown-value" id="cd-days">--</div>
+                    <div class="countdown-label">{% trans "Jours" %}</div>
+                </div>
+
+                <div class="countdown-sep fade-in-up delay-1">:</div>
+
+                <div class="countdown-block fade-in-up delay-2">
+                    <div class="countdown-value" id="cd-hours">--</div>
+                    <div class="countdown-label">{% trans "Heures" %}</div>
+                </div>
+
+                <div class="countdown-sep fade-in-up delay-2">:</div>
+
+                <div class="countdown-block fade-in-up delay-3">
+                    <div class="countdown-value" id="cd-minutes">--</div>
+                    <div class="countdown-label">{% trans "Minutes" %}</div>
+                </div>
+
+                <div class="countdown-sep fade-in-up delay-3">:</div>
+
+                <div class="countdown-block fade-in-up delay-4">
+                    <div class="countdown-value" id="cd-seconds">--</div>
+                    <div class="countdown-label">{% trans "Secondes" %}</div>
+                </div>
+
+            </div>
+
+            <div class="countdown-footer fade-in-up delay-4">
+                <i class="bi bi-calendar-event"></i>
+                {{ conference.date|date:"d F Y à H:i" }}
+            </div>
+        </div>
+    </section>
+    {% endif %}
+
+    <!-- ============================================================
+         PRÉSENTATION
+         ============================================================ -->
+    <section class="section-padding about-section">
+        <div class="container">
+            <div class="row align-items-center g-5">
+
+                <div class="col-lg-6 slide-in-left">
+                    <span class="section-label">{% trans "À propos" %}</span>
+                    <h2 class="section-title">{% trans "La conférence" %}</h2>
+                    <div class="about-lead">{{ conference.description|linebreaks }}</div>
+                </div>
+
+                <div class="col-lg-6 slide-in-right">
+                    <div class="info-card">
+                        <div class="info-card-icon">
+                            <i class="bi bi-people-fill"></i>
+                        </div>
+                        <h4>{% trans "Un événement pour la jeunesse" %}</h4>
+                        <p>
+                            {% trans "Rassembler les jeunes entrepreneurs, étudiants et professionnels autour d'un débat ouvert sur l'entrepreneuriat à Kinshasa." %}
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         OBJECTIF
+         ============================================================ -->
+    <section class="section-padding bg-black text-white">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 mx-auto text-center">
+                    <span class="section-label text-yellow">{% trans "Notre objectif" %}</span>
+                    <h2 class="section-title text-white">{% trans "Pourquoi cette conférence ?" %}</h2>
+                    <div class="objective-text text-white-50">{{ conference.objective|linebreaks }}</div>
+                </div>
+            </div>
+
+            <div class="row g-4 mt-5">
+                <div class="col-md-4 fade-in-up">
+                    <div class="feature-box">
+                        <i class="bi bi-lightbulb-fill"></i>
+                        <h5>{% trans "Inspirer" %}</h5>
+                        <p>{% trans "Donner aux jeunes des modèles inspirants." %}</p>
+                    </div>
+                </div>
+                <div class="col-md-4 fade-in-up delay-1">
+                    <div class="feature-box">
+                        <i class="bi bi-chat-square-quote-fill"></i>
+                        <h5>{% trans "Débattre" %}</h5>
+                        <p>{% trans "Ouvrir un vrai débat : mythe ou réalité ?" %}</p>
+                    </div>
+                </div>
+                <div class="col-md-4 fade-in-up delay-2">
+                    <div class="feature-box">
+                        <i class="bi bi-rocket-takeoff-fill"></i>
+                        <h5>{% trans "Agir" %}</h5>
+                        <p>{% trans "Provoquer des vocations et des projets concrets." %}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         INTERVENANTS
+         ============================================================ -->
+    {% with speakers=conference.speakers.all %}
+    {% if speakers %}
+    <section class="section-padding speakers-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 mx-auto text-center mb-5">
+                    <span class="section-label">{% trans "Intervenants" %}</span>
+                    <h2 class="section-title">{% trans "Ils seront présents" %}</h2>
+                    <p class="section-text">
+                        {% trans "Des voix engagées pour éclairer le débat." %}
+                    </p>
+                </div>
+            </div>
+
+            <div class="row g-4 justify-content-center">
+                {% for speaker in speakers %}
+                    {% if speaker.is_visible %}
+                    <div class="col-6 col-md-4 col-lg-3 fade-in-up delay-{{ forloop.counter0|add:1 }}">
+                        <div class="speaker-card">
+                            <div class="speaker-photo">
+                                {% if speaker.photo %}
+                                    <img src="{{ speaker.photo.url }}" alt="{{ speaker.name }}">
+                                {% else %}
+                                    <div class="speaker-placeholder">
+                                        <i class="bi bi-person-fill"></i>
+                                    </div>
+                                {% endif %}
+                            </div>
+                            <div class="speaker-info">
+                                <h5 class="speaker-name">{{ speaker.name }}</h5>
+                                <p class="speaker-role">{{ speaker.role }}</p>
+                            </div>
+                        </div>
+                    </div>
+                    {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+    {% endif %}
+    {% endwith %}
+
+    <!-- ============================================================
+         AFFICHE
+         ============================================================ -->
+    {% if conference.poster %}
+    <section class="section-padding poster-section">
+        <div class="container">
+            <div class="row align-items-center g-5">
+
+                <div class="col-lg-5 slide-in-left">
+                    <span class="section-label text-yellow">{% trans "Affiche officielle" %}</span>
+                    <h2 class="section-title text-white">{% trans "L'événement en image" %}</h2>
+                    <p class="text-white-50 mb-4">
+                        {% trans "Retrouvez l'affiche officielle de la conférence. Partagez-la autour de vous." %}
+                    </p>
+                    <div class="d-flex gap-3 flex-wrap">
+                        <a href="{{ conference.poster.url }}" download class="btn btn-primary">
+                            <i class="bi bi-download"></i> {% trans "Télécharger l'affiche" %}
+                        </a>
+                        <a href="{% url 'reservations:create' %}" class="btn btn-outline-yellow">
+                            <i class="bi bi-ticket-perforated"></i> {% trans "Réserver" %}
+                        </a>
+                    </div>
+                </div>
+
+                <div class="col-lg-7 slide-in-right">
+                    <div class="poster-frame">
+                        <img src="{{ conference.poster.url }}" alt="{% trans 'Affiche de la conférence' %}">
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+    {% endif %}
+
+    <!-- ============================================================
+         INFORMATIONS PRATIQUES
+         ============================================================ -->
+    <section class="section-padding infos-section">
+        <div class="container">
+
+            <div class="row">
+                <div class="col-lg-8 mx-auto text-center mb-5">
+                    <span class="section-label">{% trans "Informations pratiques" %}</span>
+                    <h2 class="section-title">{% trans "Tout ce qu'il faut savoir" %}</h2>
+                    <p class="section-text">
+                        {% trans "Toutes les informations essentielles pour bien préparer votre venue." %}
+                    </p>
+                </div>
+            </div>
+
+            <div class="infos-grid">
+
+                <div class="info-card-new info-card-new-gold fade-in-up">
+                    <div class="info-card-new-icon">
+                        <i class="bi bi-calendar3"></i>
+                    </div>
+                    <h5 class="info-card-new-title">{% trans "Date" %}</h5>
+                    <p class="info-card-new-value">{{ conference.date|date:"d F Y" }}</p>
+                    <span class="info-card-new-sub">{{ conference.date|date:"H:i" }}</span>
+                </div>
+
+                <div class="info-card-new info-card-new-blue fade-in-up delay-1">
+                    <div class="info-card-new-icon">
+                        <i class="bi bi-geo-alt-fill"></i>
+                    </div>
+                    <h5 class="info-card-new-title">{% trans "Lieu" %}</h5>
+                    <p class="info-card-new-value">{{ conference.location }}</p>
+                </div>
+
+                <div class="info-card-new info-card-new-violet fade-in-up delay-2">
+                    <div class="info-card-new-icon">
+                        <i class="bi bi-cash-coin"></i>
+                    </div>
+                    <h5 class="info-card-new-title">{% trans "Tarif" %}</h5>
+                    {% if conference.is_free %}
+                        <p class="info-card-new-value text-success">{% trans "Gratuit" %}</p>
+                    {% else %}
+                        <p class="info-card-new-value">{{ conference.price_per_seat }} {{ conference.currency }}</p>
+                        <span class="info-card-new-sub">{% trans "par place" %}</span>
+                    {% endif %}
+                </div>
+
+                <div class="info-card-new info-card-new-green fade-in-up delay-3">
+                    <div class="info-card-new-icon">
+                        <i class="bi bi-people-fill"></i>
+                    </div>
+                    <h5 class="info-card-new-title">{% trans "Places" %}</h5>
+                    {% if conference.total_seats == 0 %}
+                        <p class="info-card-new-value">{% trans "Illimité" %}</p>
+                    {% else %}
+                        <p class="info-card-new-value">{{ conference.seats_remaining }}</p>
+                        <span class="info-card-new-sub">{% trans "places restantes" %}</span>
+                    {% endif %}
+                </div>
+
+            </div>
+
+         {% if conference.practical_info %}
+            <div class="practical-details-premium fade-in-up">
+
+                <div class="practical-details-header">
+                    <div class="practical-details-header-icon">
+                        <i class="bi bi-info-circle-fill"></i>
+                    </div>
+                    <div>
+                        <h4>{% trans "À noter" %}</h4>
+                        <p class="practical-details-header-sub">
+                            {% trans "Règles et informations importantes" %}
+                        </p>
+                    </div>
+                </div>
+
+                <div class="practical-details-grid">
+                    {% for line in conference.practical_info.splitlines %}
+                        {% if line|slice:":1" == "-" %}
+                        <div class="practical-item">
+                            <div class="practical-item-icon">
+                                <i class="bi bi-check2-circle"></i>
+                            </div>
+                            <div class="practical-item-text">
+                                {{ line|slice:"1:"|cut:" " }}
+                            </div>
+                        </div>
+                        {% elif line %}
+                        <div class="practical-item">
+                            <div class="practical-item-icon">
+                                <i class="bi bi-info-circle"></i>
+                            </div>
+                            <div class="practical-item-text">
+                                {{ line }}
+                            </div>
+                        </div>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+
+            </div>
+            {% endif %}
+
+        </div>
+    </section>
+
+    <!-- ============================================================
+         CTA FINAL
+         ============================================================ -->
+    <section class="cta-section-premium">
+        <div class="cta-decoration-1"></div>
+        <div class="cta-decoration-2"></div>
+
+        <div class="container position-relative">
+            <div class="row justify-content-center">
+                <div class="col-lg-8 text-center">
+
+                    <div class="cta-badge fade-in-up">
+                        <i class="bi bi-star-fill"></i>
+                        {% trans "Ne manquez pas cet événement" %}
+                    </div>
+
+                    <h2 class="cta-title-premium fade-in-up delay-1">
+                        {% trans "Prêt à rejoindre la conversation ?" %}
+                    </h2>
+
+                    <p class="cta-text-premium fade-in-up delay-2">
+                        {% trans "Réservez votre place maintenant. Les places sont limitées et partent rapidement." %}
+                    </p>
+
+                    <div class="cta-actions fade-in-up delay-3">
+                        {% if user.is_authenticated %}
+                            <a href="{% url 'reservations:create' %}" class="btn btn-primary btn-lg">
+                                <i class="bi bi-ticket-perforated-fill"></i>
+                                {% trans "Réserver ma place" %}
+                            </a>
+                        {% else %}
+                            <a href="{% url 'accounts:register' %}" class="btn btn-primary btn-lg">
+                                <i class="bi bi-ticket-perforated-fill"></i>
+                                {% trans "Créer mon compte" %}
+                            </a>
+                            <a href="{% url 'accounts:login' %}" class="btn btn-outline-yellow btn-lg">
+                                {% trans "J'ai déjà un compte" %}
+                            </a>
+                        {% endif %}
+                    </div>
+
+                    <div class="cta-meta fade-in-up delay-4">
+                        <span>
+                            <i class="bi bi-shield-check"></i>
+                            {% trans "Réservation sécurisée" %}
+                        </span>
+                        <span>
+                            <i class="bi bi-clock-history"></i>
+                            {% trans "2 minutes suffisent" %}
+                        </span>
+                        <span>
+                            <i class="bi bi-check-circle-fill"></i>
+                            {% trans "Confirmation immédiate" %}
+                        </span>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+{% else %}
+    <!-- Aucune conférence -->
+    <section class="section-padding-lg bg-black text-white">
+        <div class="container text-center">
+            <i class="bi bi-calendar-x display-1 text-yellow mb-4"></i>
+            <h1 class="text-yellow mb-3">{% trans "Aucune conférence active" %}</h1>
+            <p class="lead text-white-50">{% trans "Revenez bientôt pour découvrir notre prochain événement." %}</p>
+            <a href="{% url 'accounts:register' %}" class="btn btn-primary btn-lg mt-4">
+                {% trans "Créer un compte" %}
+            </a>
+        </div>
+    </section>
+{% endif %}
+
+{% endblock %}

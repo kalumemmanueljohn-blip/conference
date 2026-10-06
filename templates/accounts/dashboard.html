@@ -1,0 +1,176 @@
+{% extends 'base.html' %}
+{% load static i18n %}
+
+{% block title %}{% trans "Mon espace" %}{% endblock %}
+
+{% block content %}
+
+<section class="dashboard-section">
+    <div class="container">
+
+        <!-- Header -->
+        <div class="user-header">
+            <div class="user-header-avatar">
+                {{ user.first_name|first|upper }}{{ user.last_name|first|upper }}
+            </div>
+            <div class="user-header-info">
+                <span class="dashboard-label">{% trans "Mon espace" %}</span>
+                <h1>{% trans "Bonjour" %} {{ user.first_name }}</h1>
+                <p>{% trans "Gérez vos réservations et vos billets" %}</p>
+            </div>
+        </div>
+
+        <!-- Compteurs -->
+        <div class="user-stats">
+            <div class="user-stat">
+                <div class="user-stat-icon user-stat-icon-gold">
+                    <i class="bi bi-ticket-perforated-fill"></i>
+                </div>
+                <div class="user-stat-content">
+                    <div class="user-stat-value">{{ user.reservations.count }}</div>
+                    <div class="user-stat-label">{% trans "Réservations" %}</div>
+                </div>
+            </div>
+
+            <div class="user-stat">
+                <div class="user-stat-icon user-stat-icon-green">
+                    <i class="bi bi-check-circle-fill"></i>
+                </div>
+                <div class="user-stat-content">
+                    <div class="user-stat-value">
+                        {% with confirmed=user.reservations.all %}
+                            {{ confirmed|length }}
+                        {% endwith %}
+                    </div>
+                    <div class="user-stat-label">{% trans "Confirmées" %}</div>
+                </div>
+            </div>
+
+            <div class="user-stat">
+                <div class="user-stat-icon user-stat-icon-blue">
+                    <i class="bi bi-whatsapp"></i>
+                </div>
+                <div class="user-stat-content">
+                    <div class="user-stat-value">{{ user.whatsapp_number }}</div>
+                    <div class="user-stat-label">{% trans "WhatsApp" %}</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Cartes d'action -->
+        <div class="user-cards-grid">
+
+            <!-- Mes réservations -->
+            <a href="{% url 'reservations:list' %}" class="user-card">
+                <div class="user-card-icon user-card-icon-gold">
+                    <i class="bi bi-ticket-perforated-fill"></i>
+                </div>
+                <div class="user-card-content">
+                    <h3>{% trans "Mes réservations" %}</h3>
+                    <p>{% trans "Voir et gérer mes réservations" %}</p>
+                </div>
+                <div class="user-card-arrow">
+                    <i class="bi bi-arrow-right"></i>
+                </div>
+            </a>
+
+            <!-- Nouvelle réservation -->
+            <a href="{% url 'reservations:create' %}" class="user-card user-card-primary">
+                <div class="user-card-icon user-card-icon-white">
+                    <i class="bi bi-plus-circle-fill"></i>
+                </div>
+                <div class="user-card-content">
+                    <h3>{% trans "Réserver ma place" %}</h3>
+                    <p>{% trans "Créer une nouvelle réservation" %}</p>
+                </div>
+                <div class="user-card-arrow">
+                    <i class="bi bi-arrow-right"></i>
+                </div>
+            </a>
+
+            <!-- Mon profil -->
+            <a href="{% url 'accounts:profile' %}" class="user-card">
+                <div class="user-card-icon user-card-icon-blue">
+                    <i class="bi bi-person-fill"></i>
+                </div>
+                <div class="user-card-content">
+                    <h3>{% trans "Mon profil" %}</h3>
+                    <p>{% trans "Modifier mes informations" %}</p>
+                </div>
+                <div class="user-card-arrow">
+                    <i class="bi bi-arrow-right"></i>
+                </div>
+            </a>
+
+            <!-- Sécurité -->
+            <a href="{% url 'accounts:password_change' %}" class="user-card">
+                <div class="user-card-icon user-card-icon-violet">
+                    <i class="bi bi-shield-lock-fill"></i>
+                </div>
+                <div class="user-card-content">
+                    <h3>{% trans "Sécurité" %}</h3>
+                    <p>{% trans "Changer mon mot de passe" %}</p>
+                </div>
+                <div class="user-card-arrow">
+                    <i class="bi bi-arrow-right"></i>
+                </div>
+            </a>
+
+        </div>
+
+        <!-- Informations personnelles -->
+        <div class="user-info-card">
+            <h2>
+                <i class="bi bi-person-badge-fill"></i>
+                {% trans "Informations personnelles" %}
+            </h2>
+
+            <div class="user-info-grid">
+
+                <div class="user-info-item">
+                    <div class="user-info-icon">
+                        <i class="bi bi-person-fill"></i>
+                    </div>
+                    <div>
+                        <span>{% trans "Nom complet" %}</span>
+                        <strong>{{ user.full_name }}</strong>
+                    </div>
+                </div>
+
+                <div class="user-info-item">
+                    <div class="user-info-icon">
+                        <i class="bi bi-envelope-fill"></i>
+                    </div>
+                    <div>
+                        <span>{% trans "Email" %}</span>
+                        <strong>{{ user.email }}</strong>
+                    </div>
+                </div>
+
+                <div class="user-info-item">
+                    <div class="user-info-icon">
+                        <i class="bi bi-whatsapp"></i>
+                    </div>
+                    <div>
+                        <span>{% trans "WhatsApp" %}</span>
+                        <strong>{{ user.whatsapp_number }}</strong>
+                    </div>
+                </div>
+
+                <div class="user-info-item">
+                    <div class="user-info-icon">
+                        <i class="bi bi-calendar-check-fill"></i>
+                    </div>
+                    <div>
+                        <span>{% trans "Inscrit le" %}</span>
+                        <strong>{{ user.date_joined|date:"d F Y" }}</strong>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</section>
+
+{% endblock %}

@@ -1,0 +1,913 @@
+/* =========================================================
+   BANTONDO'S GÉNÉRATION — ANIMATIONS SPECTACULAIRES
+   Mouvements réels, effets premium, transitions fluides
+   ========================================================= */
+
+/* =========================================================
+   REVEAL AU SCROLL — Base
+   ========================================================= */
+
+.fade-in-up{
+  opacity:0;
+  transform:translateY(80px);
+  transition:
+    opacity 1s cubic-bezier(.2,.9,.2,1),
+    transform 1s cubic-bezier(.2,.9,.2,1);
+}
+
+.fade-in-up.is-visible{opacity:1;transform:translateY(0)}
+
+.fade-in{opacity:0;transition:opacity 1s ease}
+.fade-in.is-visible{opacity:1}
+
+.slide-in-left{
+  opacity:0;
+  transform:translateX(-100px) rotate(-3deg);
+  transition:
+    opacity 1s cubic-bezier(.2,.9,.2,1),
+    transform 1s cubic-bezier(.2,.9,.2,1);
+}
+
+.slide-in-left.is-visible{opacity:1;transform:translateX(0) rotate(0)}
+
+.slide-in-right{
+  opacity:0;
+  transform:translateX(100px) rotate(3deg);
+  transition:
+    opacity 1s cubic-bezier(.2,.9,.2,1),
+    transform 1s cubic-bezier(.2,.9,.2,1);
+}
+
+.slide-in-right.is-visible{opacity:1;transform:translateX(0) rotate(0)}
+
+.scale-in{
+  opacity:0;
+  transform:scale(.7);
+  transition:
+    opacity .8s ease,
+    transform .8s cubic-bezier(.34,1.56,.64,1);
+}
+
+.scale-in.is-visible{opacity:1;transform:scale(1)}
+
+.rotate-in{
+  opacity:0;
+  transform:rotate(-15deg) scale(.85);
+  transition:
+    opacity .9s ease,
+    transform .9s cubic-bezier(.34,1.56,.64,1);
+}
+
+.rotate-in.is-visible{opacity:1;transform:rotate(0) scale(1)}
+
+.flip-in{
+  opacity:0;
+  transform:perspective(1000px) rotateY(-90deg);
+  transition:
+    opacity .9s ease,
+    transform .9s cubic-bezier(.34,1.56,.64,1);
+}
+
+.flip-in.is-visible{
+  opacity:1;
+  transform:perspective(1000px) rotateY(0);
+}
+
+.blur-in{
+  opacity:0;
+  filter:blur(12px);
+  transform:scale(1.05);
+  transition:
+    opacity 1s ease,
+    filter 1s ease,
+    transform 1s cubic-bezier(.2,.9,.2,1);
+}
+
+.blur-in.is-visible{
+  opacity:1;
+  filter:blur(0);
+  transform:scale(1);
+}
+
+/* ========== DÉLAIS EN CASCADE ========== */
+
+.delay-1{transition-delay:.12s;animation-delay:.12s}
+.delay-2{transition-delay:.24s;animation-delay:.24s}
+.delay-3{transition-delay:.36s;animation-delay:.36s}
+.delay-4{transition-delay:.48s;animation-delay:.48s}
+.delay-5{transition-delay:.6s;animation-delay:.6s}
+.delay-6{transition-delay:.72s;animation-delay:.72s}
+.delay-7{transition-delay:.84s;animation-delay:.84s}
+.delay-8{transition-delay:.96s;animation-delay:.96s}
+
+/* =========================================================
+   CARTES — Mouvements 3D spectaculaires
+   ========================================================= */
+
+.hover-tilt{
+  transition:transform .5s cubic-bezier(.2,.9,.2,1);
+  transform-style:preserve-3d;
+  perspective:1000px;
+}
+
+@media (hover:hover) and (pointer:fine){
+  .hover-tilt:hover{
+    transform:
+      translateY(-14px)
+      rotateX(-5deg)
+      rotateY(5deg)
+      scale(1.03);
+  }
+}
+
+.hover-lift{
+  transition:
+    transform .45s cubic-bezier(.2,.9,.2,1),
+    box-shadow .45s ease;
+}
+
+@media (hover:hover) and (pointer:fine){
+  .hover-lift:hover{
+    transform:translateY(-10px);
+    box-shadow:0 30px 60px rgba(11,19,36,.15);
+  }
+}
+
+.hover-lift-strong{
+  transition:
+    transform .5s cubic-bezier(.2,.9,.2,1),
+    box-shadow .5s ease;
+}
+
+@media (hover:hover) and (pointer:fine){
+  .hover-lift-strong:hover{
+    transform:translateY(-16px) scale(1.02);
+    box-shadow:0 40px 80px rgba(11,19,36,.22);
+  }
+}
+
+.hover-zoom{overflow:hidden}
+
+.hover-zoom img,
+.hover-zoom .zoom-target{
+  transition:transform .8s cubic-bezier(.2,.9,.2,1);
+}
+
+@media (hover:hover) and (pointer:fine){
+  .hover-zoom:hover img,
+  .hover-zoom:hover .zoom-target{
+    transform:scale(1.15);
+  }
+}
+
+.hover-rotate{
+  transition:transform .6s cubic-bezier(.34,1.56,.64,1);
+}
+
+@media (hover:hover) and (pointer:fine){
+  .hover-rotate:hover{
+    transform:rotate(-3deg) scale(1.04);
+  }
+}
+
+.hover-flip{
+  transition:transform .7s cubic-bezier(.2,.9,.2,1);
+}
+
+@media (hover:hover) and (pointer:fine){
+  .hover-flip:hover{
+    transform:perspective(1000px) rotateY(6deg) rotateX(-4deg);
+  }
+}
+
+/* =========================================================
+   INTERVENANTS — Rotation + zoom spectaculaire
+   ========================================================= */
+
+.speaker-card{
+  transition:transform .5s cubic-bezier(.34,1.56,.64,1);
+}
+
+@media (hover:hover) and (pointer:fine){
+  .speaker-card:hover{
+    transform:translateY(-16px) rotate(-2deg) scale(1.02);
+  }
+}
+
+.speaker-photo{
+  transition:
+    transform .6s cubic-bezier(.34,1.56,.64,1),
+    box-shadow .6s ease,
+    border-color .6s ease;
+}
+
+@media (hover:hover) and (pointer:fine){
+  .speaker-card:hover .speaker-photo{
+    transform:scale(1.12) rotate(5deg);
+    box-shadow:
+      0 30px 60px rgba(214,166,58,.4),
+      0 0 0 8px rgba(214,166,58,.15);
+  }
+}
+
+.speaker-photo img{
+  transition:transform .8s cubic-bezier(.2,.9,.2,1);
+}
+
+@media (hover:hover) and (pointer:fine){
+  .speaker-card:hover .speaker-photo img{
+    transform:scale(1.2);
+  }
+}
+
+/* =========================================================
+   BOUTONS — Effets premium
+   ========================================================= */
+
+.btn{
+  position:relative;
+  overflow:hidden;
+  transition:
+    transform .35s cubic-bezier(.34,1.56,.64,1),
+    box-shadow .35s ease,
+    background .3s ease;
+}
+
+@media (hover:hover) and (pointer:fine){
+  .btn:hover{
+    transform:translateY(-5px) scale(1.04);
+  }
+  .btn:active{
+    transform:translateY(-2px) scale(.98);
+  }
+}
+
+/* Effet brillance */
+.btn-shine::before{
+  content:"";
+  position:absolute;
+  top:0;
+  left:-100%;
+  width:100%;
+  height:100%;
+  background:linear-gradient(
+      90deg,
+      transparent,
+      rgba(255,255,255,.45),
+      transparent
+  );
+  transition:left .8s ease;
+  pointer-events:none;
+}
+
+@media (hover:hover) and (pointer:fine){
+  .btn-shine:hover::before{left:100%}
+}
+
+/* Effet pulse continu */
+.btn-pulse{animation:btn-pulse 2.2s ease-in-out infinite}
+
+@keyframes btn-pulse{
+  0%,100%{box-shadow:0 0 0 0 rgba(214,166,58,.55)}
+  50%{box-shadow:0 0 0 18px rgba(214,166,58,0)}
+}
+
+/* Effet glow au survol */
+.btn-glow{transition:box-shadow .5s ease}
+
+@media (hover:hover) and (pointer:fine){
+  .btn-glow:hover{
+    box-shadow:
+      0 0 25px rgba(214,166,58,.7),
+      0 0 50px rgba(214,166,58,.35),
+      0 20px 40px rgba(11,19,36,.2);
+  }
+}
+
+/* Effet "onde qui se propage" */
+.btn-ripple{
+  position:relative;
+  overflow:hidden;
+}
+
+.btn-ripple::after{
+  content:"";
+  position:absolute;
+  top:50%;
+  left:50%;
+  width:0;
+  height:0;
+  border-radius:50%;
+  background:rgba(255,255,255,.5);
+  transform:translate(-50%,-50%);
+  transition:width .6s ease,height .6s ease,opacity .6s ease;
+  opacity:0;
+}
+
+@media (hover:hover) and (pointer:fine){
+  .btn-ripple:hover::after{
+    width:400px;
+    height:400px;
+    opacity:1;
+  }
+}
+
+/* =========================================================
+   ICÔNES — Bounce, wiggle, spin, pulse
+   ========================================================= */
+
+.icon-bounce{
+  transition:transform .5s cubic-bezier(.34,1.56,.64,1);
+  display:inline-block;
+}
+
+@media (hover:hover) and (pointer:fine){
+  .icon-bounce:hover{animation:icon-bounce .7s ease}
+}
+
+@keyframes icon-bounce{
+  0%,100%{transform:translateY(0)}
+  30%{transform:translateY(-14px) scale(1.15)}
+  50%{transform:translateY(-4px) scale(1.05)}
+  70%{transform:translateY(-9px) scale(1.1)}
+}
+
+.icon-wiggle{display:inline-block}
+
+@media (hover:hover) and (pointer:fine){
+  .icon-wiggle:hover{animation:icon-wiggle .6s ease}
+}
+
+@keyframes icon-wiggle{
+  0%,100%{transform:rotate(0)}
+  20%{transform:rotate(-15deg)}
+  40%{transform:rotate(15deg)}
+  60%{transform:rotate(-10deg)}
+  80%{transform:rotate(10deg)}
+}
+
+.icon-spin{
+  display:inline-block;
+  transition:transform .7s cubic-bezier(.34,1.56,.64,1);
+}
+
+@media (hover:hover) and (pointer:fine){
+  .icon-spin:hover{transform:rotate(360deg) scale(1.2)}
+}
+
+.icon-pulse{
+  display:inline-block;
+  animation:icon-pulse-continuous 2s ease-in-out infinite;
+}
+
+@keyframes icon-pulse-continuous{
+  0%,100%{transform:scale(1)}
+  50%{transform:scale(1.15)}
+}
+
+/* =========================================================
+   LIVE DOT — Pulsation + onde
+   ========================================================= */
+
+.live-dot{
+  display:inline-block;
+  width:10px;
+  height:10px;
+  border-radius:50%;
+  background:#22c55e;
+  position:relative;
+  animation:live-pulse-strong 1.8s ease-in-out infinite;
+  box-shadow:0 0 15px rgba(34,197,94,.6);
+}
+
+.live-dot::before{
+  content:"";
+  position:absolute;
+  inset:-5px;
+  border-radius:50%;
+  background:rgba(34,197,94,.4);
+  animation:live-ring 1.8s ease-out infinite;
+}
+
+@keyframes live-pulse-strong{
+  0%,100%{transform:scale(1);box-shadow:0 0 15px rgba(34,197,94,.6)}
+  50%{transform:scale(1.4);box-shadow:0 0 25px rgba(34,197,94,.9)}
+}
+
+@keyframes live-ring{
+  0%{transform:scale(1);opacity:.7}
+  100%{transform:scale(2.5);opacity:0}
+}
+
+/* =========================================================
+   COMPTE À REBOURS — Flip 3D spectaculaire
+   ========================================================= */
+
+.countdown-value.tick{
+  animation:countdown-tick-strong .6s cubic-bezier(.34,1.56,.64,1);
+}
+
+@keyframes countdown-tick-strong{
+  0%{
+    transform:scale(1) rotateY(0);
+    color:var(--gold-2, #f0c866);
+    filter:brightness(1);
+  }
+  40%{
+    transform:scale(1.35) rotateY(180deg);
+    color:#fff;
+    filter:brightness(1.8);
+    text-shadow:0 0 20px rgba(255,255,255,.8);
+  }
+  100%{
+    transform:scale(1) rotateY(360deg);
+    color:var(--gold-2, #f0c866);
+    filter:brightness(1);
+  }
+}
+
+.countdown-block{
+  transition:
+    transform .5s cubic-bezier(.34,1.56,.64,1),
+    box-shadow .5s ease;
+}
+
+@media (hover:hover) and (pointer:fine){
+  .countdown-block:hover{
+    transform:translateY(-14px) scale(1.08);
+    box-shadow:
+      0 30px 60px rgba(11,19,36,.4),
+      0 0 0 4px rgba(214,166,58,.3);
+  }
+}
+
+/* =========================================================
+   HERO — Mouvements de fond spectaculaires
+   ========================================================= */
+
+.hero-section::after{
+  animation:hero-float 10s ease-in-out infinite;
+}
+
+@keyframes hero-float{
+  0%,100%{transform:translate(0,0) rotate(0) scale(1)}
+  33%{transform:translate(-40px,-25px) rotate(8deg) scale(1.05)}
+  66%{transform:translate(20px,-15px) rotate(-5deg) scale(.98)}
+}
+
+/* Onde au centre du hero */
+.hero-section .container::before{
+  animation:hero-pulse-glow 4s ease-in-out infinite;
+}
+
+@keyframes hero-pulse-glow{
+  0%,100%{opacity:.6;transform:translate(-50%,-50%) scale(1)}
+  50%{opacity:1;transform:translate(-50%,-50%) scale(1.08)}
+}
+
+.scroll-bounce{
+  animation:scroll-bounce-strong 2.2s ease-in-out infinite;
+}
+
+@keyframes scroll-bounce-strong{
+  0%,100%{transform:translateY(0);opacity:.4}
+  50%{transform:translateY(18px);opacity:1}
+}
+
+/* Titre du hero — effet d'entrée */
+.hero-title{
+  animation:hero-title-in 1.2s cubic-bezier(.2,.9,.2,1) both;
+}
+
+@keyframes hero-title-in{
+  0%{
+    opacity:0;
+    transform:translateY(40px) scale(.95);
+    filter:blur(10px);
+  }
+  100%{
+    opacity:1;
+    transform:translateY(0) scale(1);
+    filter:blur(0);
+  }
+}
+
+/* Badge du hero */
+.hero-badge{
+  animation:hero-badge-in .8s cubic-bezier(.34,1.56,.64,1) both;
+}
+
+@keyframes hero-badge-in{
+  0%{opacity:0;transform:translateY(-20px) scale(.9)}
+  100%{opacity:1;transform:translateY(0) scale(1)}
+}
+
+/* Stats du hero — apparition en cascade */
+.hero-stat{
+  animation:hero-stat-in 1s cubic-bezier(.2,.9,.2,1) both;
+}
+
+.hero-stat:nth-child(1){animation-delay:.6s}
+.hero-stat:nth-child(2){animation-delay:.75s}
+.hero-stat:nth-child(3){animation-delay:.9s}
+
+@keyframes hero-stat-in{
+  0%{opacity:0;transform:translateY(30px)}
+  100%{opacity:1;transform:translateY(0)}
+}
+
+/* =========================================================
+   CARTES FLOTTANTES — Oscillation multiple
+   ========================================================= */
+
+.float-y{animation:float-y-strong 4.5s ease-in-out infinite}
+.float-y-delay{animation:float-y-strong 4.5s ease-in-out 1.2s infinite}
+
+@keyframes float-y-strong{
+  0%,100%{transform:translateY(0) rotate(0)}
+  25%{transform:translateY(-14px) rotate(-3deg)}
+  50%{transform:translateY(0) rotate(0)}
+  75%{transform:translateY(-8px) rotate(3deg)}
+}
+
+.float-x{animation:float-x 5s ease-in-out infinite}
+
+@keyframes float-x{
+  0%,100%{transform:translateX(0)}
+  50%{transform:translateX(12px)}
+}
+
+/* =========================================================
+   SPINNER / LOADER
+   ========================================================= */
+
+.spinner-yellow{
+  width:40px;
+  height:40px;
+  border:4px solid rgba(214,166,58,.2);
+  border-top-color:var(--gold, #d6a63a);
+  border-radius:50%;
+  animation:spin 1s linear infinite;
+}
+
+.spinner-double{
+  width:50px;
+  height:50px;
+  position:relative;
+}
+
+.spinner-double::before,
+.spinner-double::after{
+  content:"";
+  position:absolute;
+  border-radius:50%;
+  border:3px solid transparent;
+}
+
+.spinner-double::before{
+  inset:0;
+  border-top-color:var(--gold, #d6a63a);
+  animation:spin 1s linear infinite;
+}
+
+.spinner-double::after{
+  inset:8px;
+  border-top-color:var(--navy, #0b1324);
+  animation:spin 1.5s linear infinite reverse;
+}
+
+@keyframes spin{
+  to{transform:rotate(360deg)}
+}
+
+/* =========================================================
+   PROGRESS BAR ANIMÉE
+   ========================================================= */
+
+.capacity-progress-fill{
+  animation:progress-grow 1.6s cubic-bezier(.2,.9,.2,1) forwards;
+  transform-origin:left;
+  position:relative;
+  overflow:hidden;
+}
+
+.capacity-progress-fill::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:linear-gradient(
+      90deg,
+      transparent,
+      rgba(255,255,255,.4),
+      transparent
+  );
+  animation:progress-shimmer 2s ease-in-out infinite;
+}
+
+@keyframes progress-grow{
+  from{transform:scaleX(0)}
+  to{transform:scaleX(1)}
+}
+
+@keyframes progress-shimmer{
+  0%{transform:translateX(-100%)}
+  100%{transform:translateX(100%)}
+}
+
+/* =========================================================
+   SECTION LABEL — Trait qui se dessine
+   ========================================================= */
+
+.section-label::before{
+  animation:label-line-grow 1s cubic-bezier(.2,.9,.2,1) forwards;
+  transform-origin:left;
+}
+
+@keyframes label-line-grow{
+  from{transform:scaleX(0)}
+  to{transform:scaleX(1)}
+}
+
+/* =========================================================
+   ALERT ENTRANCE
+   ========================================================= */
+
+.alert{
+  animation:alert-slide-in .6s cubic-bezier(.34,1.56,.64,1);
+}
+
+@keyframes alert-slide-in{
+  from{
+    opacity:0;
+    transform:translateY(-25px) scale(.92);
+  }
+  to{
+    opacity:1;
+    transform:translateY(0) scale(1);
+  }
+}
+
+/* =========================================================
+   FORM FOCUS
+   ========================================================= */
+
+.form-control,
+.form-select{
+  transition:
+    border-color .35s ease,
+    box-shadow .35s ease,
+    transform .35s ease;
+}
+
+.form-control:focus,
+.form-select:focus{
+  transform:translateY(-3px);
+  box-shadow:
+    0 0 0 4px rgba(214,166,58,.15),
+    0 8px 25px rgba(214,166,58,.15);
+}
+
+/* =========================================================
+   PROGRESSION DE RÉSERVATION
+   ========================================================= */
+
+.booking-step.is-active .booking-step-circle{
+  animation:step-pop-strong .7s cubic-bezier(.34,1.56,.64,1);
+}
+
+@keyframes step-pop-strong{
+  0%{transform:scale(.7)}
+  50%{transform:scale(1.35)}
+  70%{transform:scale(1.15)}
+  100%{transform:scale(1.1)}
+}
+
+/* =========================================================
+   ABOUT CORE — Rotation continue
+   ========================================================= */
+
+.about-core{
+  animation:about-core-float 6s ease-in-out infinite;
+}
+
+@keyframes about-core-float{
+  0%,100%{transform:translateY(0) rotate(0)}
+  50%{transform:translateY(-15px) rotate(2deg)}
+}
+
+/* =========================================================
+   BADGES — Pulsation douce
+   ========================================================= */
+
+.badge-yellow{
+  animation:badge-pulse 3s ease-in-out infinite;
+}
+
+@keyframes badge-pulse{
+  0%,100%{box-shadow:0 0 0 0 rgba(214,166,58,.5)}
+  50%{box-shadow:0 0 0 8px rgba(214,166,58,0)}
+}
+
+/* =========================================================
+   TEXTE GRADIENT ANIMÉ (optionnel)
+   ========================================================= */
+
+.text-gradient-animated{
+  background:linear-gradient(
+      90deg,
+      #f0c866 0%,
+      #d6a63a 25%,
+      #f0c866 50%,
+      #d6a63a 75%,
+      #f0c866 100%
+  );
+  background-size:200% auto;
+  -webkit-background-clip:text;
+  background-clip:text;
+  -webkit-text-fill-color:transparent;
+  animation:gradient-shift 4s linear infinite;
+}
+
+@keyframes gradient-shift{
+  0%{background-position:0% center}
+  100%{background-position:200% center}
+}
+
+/* =========================================================
+   SHAKE (erreur)
+   ========================================================= */
+
+.form-shake{animation:shake .5s ease}
+
+@keyframes shake{
+  0%,100%{transform:translateX(0)}
+  15%{transform:translateX(-10px)}
+  30%{transform:translateX(10px)}
+  45%{transform:translateX(-6px)}
+  60%{transform:translateX(6px)}
+  75%{transform:translateX(-3px)}
+}
+
+/* =========================================================
+   SCALE-IN ICON (hover sur icônes)
+   ========================================================= */
+
+.icon-hover{transition:transform .4s cubic-bezier(.34,1.56,.64,1)}
+
+@media (hover:hover) and (pointer:fine){
+  .icon-hover:hover{transform:scale(1.12) rotate(-4deg)}
+}
+
+/* =========================================================
+   STAGGER LIST — apparition en cascade
+   ========================================================= */
+
+.stagger-item{
+  opacity:0;
+  transform:translateY(20px);
+  animation:stagger-in .6s cubic-bezier(.2,.9,.2,1) forwards;
+}
+
+@keyframes stagger-in{
+  to{opacity:1;transform:translateY(0)}
+}
+
+/* =========================================================
+   SKELETON LOADING
+   ========================================================= */
+
+.skeleton{
+  background:linear-gradient(
+      90deg,
+      #f0f0f0 25%,
+      #e0e0e0 50%,
+      #f0f0f0 75%
+  );
+  background-size:200% 100%;
+  animation:skeleton-shimmer 1.6s ease-in-out infinite;
+  border-radius:8px;
+}
+
+@keyframes skeleton-shimmer{
+  0%{background-position:200% 0}
+  100%{background-position:-200% 0}
+}
+
+/* =========================================================
+   PAGE ENTRANCE — Fade général
+   ========================================================= */
+
+.page-fade{animation:page-fade .7s ease}
+
+@keyframes page-fade{
+  from{opacity:0;transform:translateY(10px)}
+  to{opacity:1;transform:translateY(0)}
+}
+
+/* =========================================================
+   TRANSLATE ON SCROLL (utilisation JS)
+   ========================================================= */
+
+.parallax-slow{will-change:transform}
+.parallax-fast{will-change:transform}
+
+/* =========================================================
+   GLOW PULSE (décorations)
+   ========================================================= */
+
+.glow-pulse{animation:glow-pulse 3s ease-in-out infinite}
+
+@keyframes glow-pulse{
+  0%,100%{box-shadow:0 0 20px rgba(214,166,58,.3)}
+  50%{box-shadow:0 0 40px rgba(214,166,58,.6)}
+}
+
+/* =========================================================
+   ROTATE CONTINU (spinners, décorations)
+   ========================================================= */
+
+.rotate-continuous{animation:rotate-continuous 20s linear infinite}
+
+@keyframes rotate-continuous{
+  to{transform:rotate(360deg)}
+}
+
+.rotate-continuous-reverse{animation:rotate-continuous 25s linear infinite reverse}
+
+/* =========================================================
+   WAVE (vagues décoratives)
+   ========================================================= */
+
+.wave-animate{
+  animation:wave-move 6s ease-in-out infinite;
+}
+
+@keyframes wave-move{
+  0%,100%{transform:translateX(0)}
+  50%{transform:translateX(-25px)}
+}
+
+/* =========================================================
+   HEARTBEAT (mise en avant d'un élément)
+   ========================================================= */
+
+.heartbeat{animation:heartbeat 2s ease-in-out infinite}
+
+@keyframes heartbeat{
+  0%,100%{transform:scale(1)}
+  15%{transform:scale(1.12)}
+  30%{transform:scale(1)}
+  45%{transform:scale(1.08)}
+  60%{transform:scale(1)}
+}
+
+/* =========================================================
+   RESPECT DES PRÉFÉRENCES UTILISATEUR
+   ========================================================= */
+
+@media (prefers-reduced-motion:reduce){
+  *,
+  *::before,
+  *::after{
+    animation-duration:.01ms!important;
+    animation-iteration-count:1!important;
+    transition-duration:.01ms!important;
+    scroll-behavior:auto!important;
+  }
+
+  .fade-in-up,
+  .fade-in,
+  .slide-in-left,
+  .slide-in-right,
+  .scale-in,
+  .rotate-in,
+  .flip-in,
+  .blur-in{
+    opacity:1!important;
+    transform:none!important;
+    filter:none!important;
+  }
+
+  .btn-pulse,
+  .live-dot,
+  .scroll-bounce,
+  .float-y,
+  .float-y-delay,
+  .float-x,
+  .spinner-yellow,
+  .spinner-double::before,
+  .spinner-double::after,
+  .about-core,
+  .hero-section::after,
+  .hero-section .container::before,
+  .badge-yellow,
+  .icon-pulse,
+  .glow-pulse,
+  .rotate-continuous,
+  .rotate-continuous-reverse,
+  .wave-animate,
+  .heartbeat,
+  .text-gradient-animated{
+    animation:none!important;
+  }
+}

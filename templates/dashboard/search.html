@@ -1,0 +1,152 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block title %}{% trans "Recherche" %}{% endblock %}
+
+{% block content %}
+
+<section class="admin-section">
+    <div class="container-fluid px-4">
+
+        <!-- Header -->
+        <div class="admin-header">
+            <div>
+                <span class="dashboard-label">{% trans "Recherche" %}</span>
+                <h1>{% trans "Rechercher un participant" %}</h1>
+                <p>{% trans "Par nom, postnom, prénom, email, WhatsApp ou référence" %}</p>
+            </div>
+            <a href="{% url 'dashboard:home' %}" class="btn btn-outline-dark">
+                <i class="bi bi-arrow-left"></i>
+                {% trans "Retour" %}
+            </a>
+        </div>
+
+        <!-- Barre de recherche -->
+        <form method="get" class="search-form">
+            <div class="search-input-wrapper">
+                <i class="bi bi-search"></i>
+                <input type="text"
+                       name="q"
+                       value="{{ query }}"
+                       placeholder="{% trans 'Rechercher...' %}"
+                       class="search-input"
+                       autofocus>
+                <button type="submit" class="btn btn-primary">
+                    {% trans "Rechercher" %}
+                </button>
+            </div>
+        </form>
+
+        {% if query %}
+
+            <!-- Résultats réservations -->
+            <div class="admin-card mt-4">
+                <div class="admin-card-header">
+                    <h2>{% trans "Réservations" %} ({{ reservations|length }})</h2>
+                </div>
+
+                {% if reservations %}
+                <div class="table-responsive">
+                    <table class="admin-table">
+                        <thead>
+                            <tr>
+                                <th>{% trans "Référence" %}</th>
+                                <th>{% trans "Participant" %}</th>
+                                <th>{% trans "Email" %}</th>
+                                <th>{% trans "Places" %}</th>
+                                <th>{% trans "Statut" %}</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for r in reservations %}
+                            <tr>
+                                <td><code>{{ r.reference }}</code></td>
+                                <td>
+                                    <strong>{{ r.user.full_name }}</strong><br>
+                                    <small>{{ r.user.whatsapp_number }}</small>
+                                </td>
+                                <td>{{ r.user.email }}</td>
+                                <td>{{ r.seats }}</td>
+                                <td>
+                                    <span class="reservation-status status-{{ r.status }}">
+                                        {{ r.get_status_display }}
+                                    </span>
+                                </td>
+                                <td>
+                                    <a href="/admin/reservations/reservation/{{ r.id }}/change/"
+                                       class="btn btn-sm btn-outline-dark">
+                                        {% trans "Voir" %}
+                                    </a>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                {% else %}
+                <p class="text-muted text-center py-4">{% trans "Aucune réservation trouvée" %}</p>
+                {% endif %}
+            </div>
+
+            <!-- Résultats billets -->
+            <div class="admin-card mt-4">
+                <div class="admin-card-header">
+                    <h2>{% trans "Billets" %} ({{ tickets|length }})</h2>
+                </div>
+
+                {% if tickets %}
+                <div class="table-responsive">
+                    <table class="admin-table">
+                        <thead>
+                            <tr>
+                                <th>{% trans "Billet" %}</th>
+                                <th>{% trans "Participant" %}</th>
+                                <th>{% trans "Place" %}</th>
+                                <th>{% trans "Statut" %}</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for t in tickets %}
+                            <tr>
+                                <td><code>{{ t.ticket_reference }}</code></td>
+                                <td><strong>{{ t.reservation.user.full_name }}</strong></td>
+                                <td>{{ t.seat_number }} / {{ t.reservation.seats }}</td>
+                                <td>
+                                    <span class="reservation-status status-{{ t.status }}">
+                                        {% if t.status == 'generated' %}{% trans "Valide" %}
+                                        {% elif t.status == 'used' %}{% trans "Utilisé" %}
+                                        {% else %}{{ t.get_status_display }}{% endif %}
+                                    </span>
+                                </td>
+                                <td>
+                                    <a href="{% url 'tickets:detail' t.ticket_reference %}"
+                                       class="btn btn-sm btn-outline-dark">
+                                        {% trans "Voir" %}
+                                    </a>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                {% else %}
+                <p class="text-muted text-center py-4">{% trans "Aucun billet trouvé" %}</p>
+                {% endif %}
+            </div>
+
+        {% else %}
+            <div class="empty-state mt-4">
+                <div class="empty-state-icon">
+                    <i class="bi bi-search"></i>
+                </div>
+                <h2>{% trans "Commencez votre recherche" %}</h2>
+                <p>{% trans "Tapez un nom, un email, un numéro WhatsApp ou une référence." %}</p>
+            </div>
+        {% endif %}
+
+    </div>
+</section>
+
+{% endblock %}

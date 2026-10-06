@@ -1,0 +1,158 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block title %}{% trans "Mes billets" %}{% endblock %}
+
+{% block content %}
+
+<section class="dashboard-section">
+    <div class="container">
+
+        <!-- Header -->
+        <div class="tickets-header">
+            <div class="tickets-header-info">
+                <span class="dashboard-label">{% trans "Mes billets" %}</span>
+                <h1>{{ reservation.reference }}</h1>
+                <p class="tickets-conference-title">
+                    <i class="bi bi-megaphone-fill"></i>
+                    {{ reservation.conference.title }}
+                </p>
+            </div>
+            <a href="{% url 'reservations:detail' reservation.reference %}" class="btn btn-outline-dark">
+                <i class="bi bi-arrow-left"></i>
+                {% trans "Retour" %}
+            </a>
+        </div>
+
+        <!-- Stats -->
+        <div class="tickets-stats">
+            <div class="tickets-stat">
+                <div class="tickets-stat-icon tickets-stat-icon-gold">
+                    <i class="bi bi-people-fill"></i>
+                </div>
+                <div class="tickets-stat-value">{{ reservation.seats }}</div>
+                <div class="tickets-stat-label">{% trans "Places réservées" %}</div>
+            </div>
+
+            <div class="tickets-stat">
+                <div class="tickets-stat-icon tickets-stat-icon-blue">
+                    <i class="bi bi-ticket-perforated-fill"></i>
+                </div>
+                <div class="tickets-stat-value">{{ tickets.count }}</div>
+                <div class="tickets-stat-label">{% trans "Billets générés" %}</div>
+            </div>
+
+            <div class="tickets-stat">
+                <div class="tickets-stat-icon tickets-stat-icon-green">
+                    <i class="bi bi-check2-all"></i>
+                </div>
+                <div class="tickets-stat-value">
+                    {{ tickets|length }}
+                </div>
+                <div class="tickets-stat-label">{% trans "Billets utilisés" %}</div>
+            </div>
+        </div>
+
+        <!-- Actions de téléchargement -->
+        <div class="tickets-actions">
+            <a href="{% url 'tickets:reservation_pdf_grouped' reservation.reference %}"
+               class="tickets-action-card tickets-action-primary">
+                <div class="tickets-action-icon">
+                    <i class="bi bi-file-earmark-pdf-fill"></i>
+                </div>
+                <div class="tickets-action-content">
+                    <h3>{% trans "PDF groupé" %}</h3>
+                    <p>{% trans "Tous les billets dans un seul fichier" %}</p>
+                </div>
+                <i class="bi bi-arrow-right tickets-action-arrow"></i>
+            </a>
+
+            <a href="{% url 'tickets:reservation_zip' reservation.reference %}"
+               class="tickets-action-card">
+                <div class="tickets-action-icon tickets-action-icon-blue">
+                    <i class="bi bi-file-zip-fill"></i>
+                </div>
+                <div class="tickets-action-content">
+                    <h3>{% trans "Archive ZIP" %}</h3>
+                    <p>{% trans "Billets séparés en fichiers PDF" %}</p>
+                </div>
+                <i class="bi bi-arrow-right tickets-action-arrow"></i>
+            </a>
+        </div>
+
+        <!-- Titre section billets -->
+        <div class="tickets-section-title">
+            <h2>
+                <i class="bi bi-ticket-perforated-fill"></i>
+                {% trans "Vos billets individuels" %}
+            </h2>
+            <p>{% trans "Cliquez sur un billet pour le voir et le télécharger." %}</p>
+        </div>
+
+        <!-- Grille de billets -->
+        <div class="tickets-grid">
+            {% for ticket in tickets %}
+            <a href="{% url 'tickets:detail' ticket.ticket_reference %}" class="ticket-grid-card">
+
+                <!-- Bandeau place -->
+                <div class="ticket-grid-badge">
+                    {% trans "Place" %} {{ ticket.seat_number }} / {{ reservation.seats }}
+                </div>
+
+                <!-- QR -->
+                <div class="ticket-grid-qr">
+                    {% if ticket.qr_image %}
+                        <img src="{{ ticket.qr_image.url }}" alt="QR">
+                    {% else %}
+                        <i class="bi bi-qr-code"></i>
+                    {% endif %}
+                </div>
+
+                <!-- Infos -->
+                <div class="ticket-grid-info">
+                    <code>{{ ticket.ticket_reference }}</code>
+
+                    <div class="ticket-grid-status-row">
+                        {% if ticket.status == 'generated' %}
+                            <span class="ticket-grid-status ticket-grid-status-generated">
+                                <i class="bi bi-check-circle-fill"></i>
+                                {% trans "Valide" %}
+                            </span>
+                        {% elif ticket.status == 'used' %}
+                            <span class="ticket-grid-status ticket-grid-status-used">
+                                <i class="bi bi-check2-all"></i>
+                                {% trans "Utilisé" %}
+                            </span>
+                        {% else %}
+                            <span class="ticket-grid-status ticket-grid-status-cancelled">
+                                <i class="bi bi-x-circle-fill"></i>
+                                {{ ticket.get_status_display }}
+                            </span>
+                        {% endif %}
+                    </div>
+                </div>
+
+                <!-- Flèche -->
+                <div class="ticket-grid-arrow">
+                    <i class="bi bi-arrow-right"></i>
+                </div>
+
+            </a>
+            {% endfor %}
+        </div>
+
+        <!-- Si aucun billet -->
+        {% if not tickets %}
+        <div class="empty-state">
+            <div class="empty-state-icon">
+                <i class="bi bi-hourglass-split"></i>
+            </div>
+            <h2>{% trans "Billets en cours de génération" %}</h2>
+            <p>{% trans "Vos billets seront disponibles dès que votre paiement sera validé." %}</p>
+        </div>
+        {% endif %}
+
+    </div>
+</section>
+
+{% endblock %}

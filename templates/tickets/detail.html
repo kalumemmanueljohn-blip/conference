@@ -1,0 +1,171 @@
+{% extends 'base.html' %}
+{% load static i18n %}
+
+{% block title %}{{ ticket.ticket_reference }}{% endblock %}
+
+{% block content %}
+
+<section class="ticket-section">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-6">
+
+                <!-- Header avec badge de statut -->
+                <div class="ticket-page-header">
+                    <div class="ticket-status-badge ticket-status-{{ ticket.status }}">
+                        {% if ticket.status == 'generated' %}
+                            <i class="bi bi-check-circle-fill"></i>
+                            {% trans "Billet valide" %}
+                        {% elif ticket.status == 'used' %}
+                            <i class="bi bi-check2-all"></i>
+                            {% trans "Billet utilisé" %}
+                        {% else %}
+                            <i class="bi bi-x-circle-fill"></i>
+                            {% trans "Billet annulé" %}
+                        {% endif %}
+                    </div>
+                </div>
+
+                <!-- Carte billet premium -->
+                <div class="ticket-card-premium">
+
+                    <!-- En-tête noir -->
+                    <div class="ticket-card-header">
+                        {% if conference.logo %}
+                        <img src="{{ conference.logo.url }}" alt="Logo" class="ticket-card-logo">
+                        {% endif %}
+                        <h1>{% trans "BILLET D'ENTRÉE" %}</h1>
+                        <p class="ticket-card-org">
+                            {{ ticket.reservation.conference.organization_name }}
+                        </p>
+                    </div>
+
+                    <!-- Bandeau jaune -->
+                    <div class="ticket-card-band">
+                        {% trans "ACCÈS PERSONNEL — CONFÉRENCE" %}
+                    </div>
+
+                    <!-- Corps -->
+                    <div class="ticket-card-body">
+
+                        <!-- Titre conférence -->
+                        <h2 class="ticket-card-conference-title">
+                            {{ ticket.reservation.conference.title }}
+                        </h2>
+
+                        <!-- Bloc infos date / lieu -->
+                        <div class="ticket-card-info-grid">
+                            <div class="ticket-card-info-item">
+                                <div class="ticket-card-info-icon">
+                                    <i class="bi bi-calendar3"></i>
+                                </div>
+                                <div>
+                                    <span>{% trans "Date et heure" %}</span>
+                                    <strong>{{ ticket.reservation.conference.date|date:"d F Y à H:i" }}</strong>
+                                </div>
+                            </div>
+
+                            <div class="ticket-card-info-item">
+                                <div class="ticket-card-info-icon">
+                                    <i class="bi bi-geo-alt-fill"></i>
+                                </div>
+                                <div>
+                                    <span>{% trans "Lieu" %}</span>
+                                    <strong>{{ ticket.reservation.conference.location }}</strong>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Bloc participant noir -->
+                        <div class="ticket-card-participant">
+                            <div class="ticket-card-avatar">
+                                {{ ticket.reservation.user.first_name|first|upper }}{{ ticket.reservation.user.last_name|first|upper }}
+                            </div>
+                            <div class="ticket-card-participant-info">
+                                <div class="ticket-card-participant-name">
+                                    {{ ticket.reservation.user.full_name }}
+                                </div>
+                                <div class="ticket-card-participant-detail">
+                                    <strong>{% trans "Email :" %}</strong> {{ ticket.reservation.user.email }}
+                                </div>
+                                <div class="ticket-card-participant-detail">
+                                    <strong>{% trans "WhatsApp :" %}</strong> {{ ticket.reservation.user.whatsapp_number }}
+                                </div>
+                                <div class="ticket-card-participant-detail">
+                                    <strong>{% trans "Place :" %}</strong> {{ ticket.seat_number }} / {{ ticket.reservation.seats }}
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Bloc référence -->
+                        <div class="ticket-card-reference">
+                            <div class="ticket-card-reference-label">
+                                {% trans "Référence du billet" %}
+                            </div>
+                            <div class="ticket-card-reference-code">
+                                {{ ticket.ticket_reference }}
+                            </div>
+                            <div class="ticket-card-seat-badge">
+                                {% trans "Place" %} {{ ticket.seat_number }} / {{ ticket.reservation.seats }}
+                            </div>
+                        </div>
+
+                        <!-- Bloc QR -->
+                        <div class="ticket-card-qr-section">
+                            <div class="ticket-card-qr-frame">
+                                {% if ticket.qr_image %}
+                                    <img src="{{ ticket.qr_image.url }}" alt="QR Code">
+                                {% else %}
+                                    <div class="ticket-card-qr-placeholder">
+                                        <i class="bi bi-qr-code"></i>
+                                    </div>
+                                {% endif %}
+                            </div>
+                            <div class="ticket-card-qr-label">
+                                {% trans "Scannez ce code à l'entrée" %}
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <!-- Pied noir -->
+                    <div class="ticket-card-footer">
+                        {{ ticket.reservation.conference.organization_name }}
+                        <span>{% trans "Billet non transférable — Une seule entrée — Ne pas plier" %}</span>
+                    </div>
+
+                </div>
+
+                <!-- Actions -->
+                <div class="ticket-page-actions">
+                    {% if ticket.pdf_file %}
+                    <a href="{% url 'tickets:download_pdf' ticket.ticket_reference %}"
+                       class="btn btn-primary btn-lg flex-fill">
+                        <i class="bi bi-download"></i>
+                        {% trans "Télécharger le PDF" %}
+                    </a>
+                    {% endif %}
+                    <a href="{% url 'reservations:detail' ticket.reservation.reference %}"
+                       class="btn btn-outline-dark">
+                        <i class="bi bi-arrow-left"></i>
+                        {% trans "Retour" %}
+                    </a>
+                </div>
+
+                <!-- Info si déjà utilisé -->
+                {% if ticket.status == 'used' %}
+                <div class="auth-info-box mt-3" style="border-left: 4px solid #10b981;">
+                    <i class="bi bi-check-circle-fill" style="color:#10b981;"></i>
+                    <span>
+                        {% trans "Ce billet a été utilisé le" %}
+                        <strong>{{ ticket.used_at|date:"d F Y à H:i" }}</strong>.
+                    </span>
+                </div>
+                {% endif %}
+
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock %}

@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block title %}{% trans "Annuler la réservation" %}{% endblock %}
+
+{% block content %}
+
+<section class="auth-section">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-6">
+
+                <div class="auth-card text-center">
+                    <div class="auth-icon" style="background: linear-gradient(135deg, #f87171, #dc2626); color: #fff;">
+                        <i class="bi bi-exclamation-triangle-fill"></i>
+                    </div>
+
+                    <h1>{% trans "Annuler la réservation ?" %}</h1>
+                    <p class="auth-message">
+                        {% trans "Cette action est irréversible. Votre réservation sera annulée et les places seront libérées." %}
+                    </p>
+
+                    <div class="auth-info-box">
+                        <i class="bi bi-receipt"></i>
+                        <span>
+                            {% trans "Référence :" %} <strong>{{ reservation.reference }}</strong><br>
+                            {% trans "Places :" %} <strong>{{ reservation.seats }}</strong>
+                        </span>
+                    </div>
+
+                    <form method="post" class="mt-4">
+                        {% csrf_token %}
+                        <div class="d-flex gap-2">
+                            <button type="submit" class="btn btn-lg flex-fill" style="background:#dc2626; color:#fff; border:none;">
+                                <i class="bi bi-x-circle-fill"></i>
+                                {% trans "Oui, annuler" %}
+                            </button>
+                            <a href="{% url 'reservations:detail' reservation.reference %}" class="btn btn-outline-dark btn-lg">
+                                {% trans "Retour" %}
+                            </a>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock %}

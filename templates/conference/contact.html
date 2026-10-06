@@ -1,0 +1,223 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block title %}{% trans "Contact" %}{% endblock %}
+
+{% block extra_css %}
+<style>
+    .contact-hero {
+        background-color: var(--color-black);
+        color: var(--color-white);
+        padding: 5rem 0 3rem;
+        text-align: center;
+    }
+    .contact-hero h1 {
+        color: var(--color-yellow);
+        font-size: clamp(1.8rem, 4vw, 2.8rem);
+        font-weight: 900;
+        margin-bottom: 1rem;
+    }
+    .contact-hero p {
+        color: rgba(255, 255, 255, 0.8);
+        max-width: 600px;
+        margin: 0 auto;
+    }
+    .contact-section {
+        padding: 4rem 0;
+    }
+    .contact-info-card {
+        background: var(--color-black);
+        color: var(--color-white);
+        border-radius: var(--radius-lg);
+        padding: 2rem;
+        border-left: 5px solid var(--color-yellow);
+        height: 100%;
+    }
+    .contact-info-card h4 {
+        color: var(--color-yellow);
+        font-size: 1.2rem;
+        margin-bottom: 1.5rem;
+    }
+    .contact-info-item {
+        display: flex;
+        align-items: flex-start;
+        margin-bottom: 1.25rem;
+    }
+    .contact-info-item i {
+        color: var(--color-yellow);
+        font-size: 1.2rem;
+        margin-right: 0.75rem;
+        margin-top: 0.2rem;
+        flex-shrink: 0;
+    }
+    .contact-info-item a {
+        color: var(--color-white);
+        text-decoration: none;
+    }
+    .contact-info-item a:hover {
+        color: var(--color-yellow);
+    }
+    .contact-form-card {
+        background: var(--color-white);
+        border: 1px solid var(--color-gray-light);
+        border-radius: var(--radius-lg);
+        padding: 2.5rem;
+        box-shadow: var(--shadow);
+    }
+    .contact-form-card h3 {
+        margin-bottom: 1.5rem;
+        color: var(--color-black);
+    }
+    /* Honeypot caché */
+    .hp-field {
+        position: absolute !important;
+        left: -9999px !important;
+        width: 1px !important;
+        height: 1px !important;
+        opacity: 0 !important;
+    }
+    @media (max-width: 768px) {
+        .contact-hero { padding: 3rem 0 2rem; }
+        .contact-form-card { padding: 1.5rem; }
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+
+<!-- Hero -->
+<section class="contact-hero">
+    <div class="container">
+        <span class="badge-yellow mb-3 d-inline-block">
+            <i class="bi bi-chat-dots-fill"></i> {% trans "Contact" %}
+        </span>
+        <h1>{% trans "Parlons-en" %}</h1>
+        <p>{% trans "Une question sur la conférence ? Envie de nous rejoindre ? Écrivez-nous." %}</p>
+    </div>
+</section>
+
+<!-- Contenu -->
+<section class="contact-section">
+    <div class="container">
+        <div class="row g-5">
+
+            <!-- Infos de contact -->
+            <div class="col-lg-5">
+                <div class="contact-info-card">
+                    <h4>{% trans "Nos coordonnées" %}</h4>
+
+                    {% if conference.contact_address %}
+                    <div class="contact-info-item">
+                        <i class="bi bi-geo-alt-fill"></i>
+                        <div>{{ conference.contact_address }}</div>
+                    </div>
+                    {% endif %}
+
+                    {% if conference.contact_phone %}
+                    <div class="contact-info-item">
+                        <i class="bi bi-telephone-fill"></i>
+                        <div>
+                            <a href="tel:{{ conference.contact_phone }}">{{ conference.contact_phone }}</a>
+                        </div>
+                    </div>
+                    {% endif %}
+
+                    {% if conference.contact_email %}
+                    <div class="contact-info-item">
+                        <i class="bi bi-envelope-fill"></i>
+                        <div>
+                            <a href="mailto:{{ conference.contact_email }}">{{ conference.contact_email }}</a>
+                        </div>
+                    </div>
+                    {% endif %}
+
+                    <!-- Réseaux sociaux -->
+                    {% if conference.social_facebook or conference.social_instagram or conference.social_twitter or conference.social_tiktok %}
+                    <hr style="border-color: #333; margin: 1.5rem 0;">
+                    <h4>{% trans "Suivez-nous" %}</h4>
+                    <div class="d-flex gap-3 flex-wrap">
+                        {% if conference.social_facebook %}
+                            <a href="{{ conference.social_facebook }}" target="_blank" rel="noopener" style="color: var(--color-yellow); font-size: 1.5rem;">
+                                <i class="bi bi-facebook"></i>
+                            </a>
+                        {% endif %}
+                        {% if conference.social_instagram %}
+                            <a href="{{ conference.social_instagram }}" target="_blank" rel="noopener" style="color: var(--color-yellow); font-size: 1.5rem;">
+                                <i class="bi bi-instagram"></i>
+                            </a>
+                        {% endif %}
+                        {% if conference.social_twitter %}
+                            <a href="{{ conference.social_twitter }}" target="_blank" rel="noopener" style="color: var(--color-yellow); font-size: 1.5rem;">
+                                <i class="bi bi-twitter-x"></i>
+                            </a>
+                        {% endif %}
+                        {% if conference.social_tiktok %}
+                            <a href="{{ conference.social_tiktok }}" target="_blank" rel="noopener" style="color: var(--color-yellow); font-size: 1.5rem;">
+                                <i class="bi bi-tiktok"></i>
+                            </a>
+                        {% endif %}
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+
+            <!-- Formulaire -->
+            <div class="col-lg-7">
+                <div class="contact-form-card">
+                    <h3>
+                        <i class="bi bi-send-fill text-warning"></i>
+                        {% trans "Envoyez-nous un message" %}
+                    </h3>
+
+                    <form method="post" novalidate>
+                        {% csrf_token %}
+
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <label for="{{ form.name.id_for_label }}" class="form-label">{{ form.name.label }}</label>
+                                {{ form.name }}
+                                {% if form.name.errors %}<div class="text-danger small mt-1">{{ form.name.errors.0 }}</div>{% endif %}
+                            </div>
+
+                            <div class="col-md-6">
+                                <label for="{{ form.email.id_for_label }}" class="form-label">{{ form.email.label }}</label>
+                                {{ form.email }}
+                                {% if form.email.errors %}<div class="text-danger small mt-1">{{ form.email.errors.0 }}</div>{% endif %}
+                            </div>
+
+                            <div class="col-md-6">
+                                <label for="{{ form.phone.id_for_label }}" class="form-label">{{ form.phone.label }}</label>
+                                {{ form.phone }}
+                            </div>
+
+                            <div class="col-md-6">
+                                <label for="{{ form.subject.id_for_label }}" class="form-label">{{ form.subject.label }}</label>
+                                {{ form.subject }}
+                                {% if form.subject.errors %}<div class="text-danger small mt-1">{{ form.subject.errors.0 }}</div>{% endif %}
+                            </div>
+
+                            <div class="col-12">
+                                <label for="{{ form.message.id_for_label }}" class="form-label">{{ form.message.label }}</label>
+                                {{ form.message }}
+                                {% if form.message.errors %}<div class="text-danger small mt-1">{{ form.message.errors.0 }}</div>{% endif %}
+                            </div>
+
+                            <!-- Honeypot -->
+                            {{ form.website }}
+
+                            <div class="col-12">
+                                <button type="submit" class="btn btn-primary btn-lg w-100">
+                                    <i class="bi bi-send-fill"></i>
+                                    {% trans "Envoyer le message" %}
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+{% endblock %}

@@ -1,0 +1,122 @@
+{% extends 'base.html' %}
+{% load static i18n %}
+
+{% block title %}{% trans "Réserver ma place" %}{% endblock %}
+
+{% block content %}
+
+<section class="booking-section">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+
+                <!-- Progression -->
+                <div class="booking-steps">
+                    <div class="booking-step is-active">
+                        <div class="booking-step-circle">1</div>
+                        <div class="booking-step-label">{% trans "Places" %}</div>
+                    </div>
+                    <div class="booking-step">
+                        <div class="booking-step-circle">2</div>
+                        <div class="booking-step-label">{% trans "Paiement" %}</div>
+                    </div>
+                    <div class="booking-step">
+                        <div class="booking-step-circle">3</div>
+                        <div class="booking-step-label">{% trans "Confirmation" %}</div>
+                    </div>
+                </div>
+
+                <!-- Info réservations -->
+                {% if user_reservations_count is not None %}
+                <div class="auth-info-box" style="margin-bottom: 1.5rem;">
+                    <i class="bi bi-info-circle-fill"></i>
+                    <span>
+                        {% trans "Vous avez déjà" %}
+                        <strong>{{ user_reservations_count }} / {{ max_reservations }}</strong>
+                        {% trans "réservation(s) active(s)." %}
+                        {% if places_remaining is not None %}
+                            <br>{% trans "Places restantes pour cette conférence :" %}
+                            <strong>{{ places_remaining }}</strong>
+                        {% endif %}
+                    </span>
+                </div>
+                {% endif %}
+
+                <!-- Carte conférence -->
+                <div class="booking-conference-card">
+                    <div class="booking-conference-badge">
+                        <i class="bi bi-calendar-event"></i>
+                        {{ conference.date|date:"d F Y à H:i" }}
+                    </div>
+                    <h1>{{ conference.title }}</h1>
+                    <p class="booking-location">
+                        <i class="bi bi-geo-alt-fill"></i>
+                        {{ conference.location }}
+                    </p>
+                    <div class="booking-price">
+                        <span class="booking-price-value">{{ conference.price_per_seat }} {{ conference.currency }}</span>
+                        <span class="booking-price-label">{% trans "par place" %}</span>
+                    </div>
+                </div>
+
+                <!-- Formulaire -->
+                <div class="booking-card">
+                    <h2>{% trans "Détails de votre réservation" %}</h2>
+
+                    <form method="post" novalidate>
+                        {% csrf_token %}
+
+                        <div class="booking-seats-selector">
+                            <label for="{{ form.seats.id_for_label }}" class="form-label">
+                                {% trans "Nombre de places" %}
+                            </label>
+                            {{ form.seats }}
+                            {% if form.seats.errors %}<div class="field-error">{{ form.seats.errors.0 }}</div>{% endif %}
+                            <div class="form-text">
+                                {% trans "Entre 1 et 5 places par réservation. Une place = un billet." %}
+                            </div>
+                        </div>
+
+                        <div class="booking-seats-selector mt-3">
+                            <label for="{{ form.payment_phone_number.id_for_label }}" class="form-label">
+                                <i class="bi bi-phone-fill text-warning"></i>
+                                {% trans "Numéro mobile money à débiter" %}
+                            </label>
+                            {{ form.payment_phone_number }}
+                            {% if form.payment_phone_number.errors %}
+                                <div class="field-error">{{ form.payment_phone_number.errors.0 }}</div>
+                            {% endif %}
+                            <div class="form-text">
+                                {% trans "Ce numéro recevra la demande de paiement SASPAY ou WhatsApp. Par défaut : votre numéro WhatsApp." %}
+                            </div>
+                        </div>
+
+                        <div class="booking-info mt-3">
+                            <div class="booking-info-row">
+                                <span>{% trans "Places disponibles" %}</span>
+                                <strong>{{ conference.seats_remaining }}</strong>
+                            </div>
+                            <div class="booking-info-row">
+                                <span>{% trans "Prix unitaire" %}</span>
+                                <strong>{{ conference.price_per_seat }} {{ conference.currency }}</strong>
+                            </div>
+                        </div>
+
+                        <div class="d-flex gap-2 mt-4">
+                            <button type="submit" class="btn btn-primary btn-lg flex-fill">
+                                <i class="bi bi-arrow-right-circle-fill"></i>
+                                {% trans "Continuer vers le paiement" %}
+                            </button>
+                            <a href="{% url 'conference:home' %}" class="btn btn-outline-dark">
+                                {% trans "Annuler" %}
+                            </a>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock %}

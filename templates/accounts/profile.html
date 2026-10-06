@@ -1,0 +1,81 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block title %}{% trans "Mon profil" %}{% endblock %}
+
+{% block content %}
+
+<section class="auth-section">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-7 col-md-9">
+
+                <div class="auth-card">
+                    <div class="auth-header">
+                        <div class="auth-icon">
+                            <i class="bi bi-person-fill"></i>
+                        </div>
+                        <h1>{% trans "Mon profil" %}</h1>
+                        <p>{% trans "Modifiez vos informations personnelles" %}</p>
+                    </div>
+
+                    <form method="post" novalidate class="auth-form">
+                        {% csrf_token %}
+
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <label for="{{ form.last_name.id_for_label }}" class="form-label">
+                                    {% trans "Nom" %}
+                                </label>
+                                {{ form.last_name }}
+                                {% if form.last_name.errors %}<div class="field-error">{{ form.last_name.errors.0 }}</div>{% endif %}
+                            </div>
+
+                            <div class="col-md-6">
+                                <label for="{{ form.postnom.id_for_label }}" class="form-label">
+                                    {% trans "Postnom" %}
+                                </label>
+                                {{ form.postnom }}
+                                {% if form.postnom.errors %}<div class="field-error">{{ form.postnom.errors.0 }}</div>{% endif %}
+                            </div>
+
+                            <div class="col-md-6">
+                                <label for="{{ form.first_name.id_for_label }}" class="form-label">
+                                    {% trans "Prénom" %}
+                                </label>
+                                {{ form.first_name }}
+                                {% if form.first_name.errors %}<div class="field-error">{{ form.first_name.errors.0 }}</div>{% endif %}
+                            </div>
+
+                            <div class="col-md-6">
+                                <label for="{{ form.whatsapp_number.id_for_label }}" class="form-label">
+                                    {% trans "WhatsApp" %}
+                                </label>
+                                {{ form.whatsapp_number }}
+                                {% if form.whatsapp_number.errors %}<div class="field-error">{{ form.whatsapp_number.errors.0 }}</div>{% endif %}
+                            </div>
+                        </div>
+
+                        <div class="auth-info-box">
+                            <i class="bi bi-info-circle-fill"></i>
+                            <span>{% trans "L'adresse email ne peut pas être modifiée. Contactez-nous si nécessaire." %}</span>
+                        </div>
+
+                        <div class="d-flex gap-2 mt-4">
+                            <button type="submit" class="btn btn-primary flex-fill">
+                                <i class="bi bi-check-circle-fill"></i>
+                                {% trans "Enregistrer" %}
+                            </button>
+                            <a href="{% url 'accounts:dashboard' %}" class="btn btn-outline-dark">
+                                {% trans "Annuler" %}
+                            </a>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock %}

@@ -1,0 +1,201 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block title %}{% trans "Validation WhatsApp" %}{% endblock %}
+
+{% block content %}
+
+<section class="admin-section">
+    <div class="container-fluid px-4">
+
+        <!-- Header -->
+        <div class="admin-header">
+            <div>
+                <span class="dashboard-label">{% trans "Validation manuelle" %}</span>
+                <h1>{% trans "Paiements WhatsApp" %}</h1>
+                <p>{% trans "Validez les paiements reçus sur WhatsApp." %}</p>
+            </div>
+            <div class="admin-header-actions">
+                <a href="{% url 'dashboard:home' %}" class="btn btn-outline-dark">
+                    <i class="bi bi-arrow-left"></i>
+                    {% trans "Dashboard" %}
+                </a>
+            </div>
+        </div>
+
+        <!-- Onglets -->
+        <div class="whatsapp-tabs">
+            <a href="?status=pending"
+               class="whatsapp-tab {% if status_filter == 'pending' %}active{% endif %}">
+                <i class="bi bi-hourglass-split"></i>
+                {% trans "En attente" %}
+                {% if counts.pending > 0 %}
+                    <span class="whatsapp-tab-badge">{{ counts.pending }}</span>
+                {% endif %}
+            </a>
+            <a href="?status=confirmed"
+               class="whatsapp-tab {% if status_filter == 'confirmed' %}active{% endif %}">
+                <i class="bi bi-check-circle-fill"></i>
+                {% trans "Confirmés" %} ({{ counts.confirmed }})
+            </a>
+            <a href="?status=rejected"
+               class="whatsapp-tab {% if status_filter == 'rejected' %}active{% endif %}">
+                <i class="bi bi-x-circle-fill"></i>
+                {% trans "Rejetés" %} ({{ counts.rejected }})
+            </a>
+            <a href="?status=all"
+               class="whatsapp-tab {% if status_filter == 'all' %}active{% endif %}">
+                {% trans "Tous" %} ({{ counts.all }})
+            </a>
+        </div>
+
+        <!-- Liste -->
+        {% if payments %}
+
+        <div class="whatsapp-proofs-list">
+            {% for item in payments %}
+            {% with payment=item.obj %}
+            <div class="whatsapp-proof-card">
+
+                <!-- Icône -->
+                <div class="whatsapp-proof-thumb">
+                    <i class="bi bi-whatsapp" style="color: #25D366; font-size: 2.5rem;"></i>
+                </div>
+
+                <!-- Infos -->
+                <div class="whatsapp-proof-info">
+                    <div class="whatsapp-proof-header">
+                        <strong>{{ payment.reservation.user.full_name }}</strong>
+                        <span class="reservation-status status-{{ payment.reservation.status }}">
+                            {{ payment.reservation.get_status_display }}
+                        </span>
+                    </div>
+                    <div class="whatsapp-proof-meta">
+                        <span><i class="bi bi-hash"></i> {{ payment.reservation.reference }}</span>
+                        <span><i class="bi bi-people-fill"></i> {{ payment.reservation.seats }} place{{ payment.reservation.seats|pluralize }}</span>
+                        <span><i class="bi bi-cash-coin"></i> {{ payment.amount }} {{ payment.currency }}</span>
+                        <span><i class="bi bi-clock"></i> {{ payment.created_at|date:"d M Y à H:i" }}</span>
+                        <span><i class="bi bi-phone"></i> {{ payment.reservation.user.whatsapp_number }}</span>
+                    </div>
+                </div>
+
+                <!-- Statut -->
+                <div class="whatsapp-proof-status">
+                    {% if payment.status == 'pending' %}
+                        <span class="badge-warning">⏳ {% trans "À valider" %}</span>
+                    {% elif payment.status == 'confirmed' %}
+                        <span class="badge-success">✓ {% trans "Confirmé" %}</span>
+                    {% elif payment.status == 'rejected' %}
+                        <span class="badge-danger">✕ {% trans "Rejeté" %}</span>
+                    {% endif %}
+                </div>
+
+                <!-- Actions directes -->
+                <div class="whatsapp-proof-actions" style="display: flex; gap: .5rem; flex-wrap: wrap; align-items: center;">
+
+                    {# --- Paiement EN ATTENTE --- #}
+                    {% if payment.status == 'pending' %}
+
+                        {# Bouton VALIDER #}
+                        <form method="post"
+                              action="{% url 'dashboard:whatsapp_proof_validate' payment.id %}"
+                              style="display: inline-block;"
+                              onsubmit="return confirm('{% trans "Confirmer ce paiement ? Les billets seront générés et l\'email envoyé." %}')">
+                            {% csrf_token %}
+                            <button type="submit"
+                                    class="btn btn-sm"
+                                    style="background: #10b981; color: #fff; border: none; font-weight: 700;">
+                                <i class="bi bi-check-circle-fill"></i>
+                                {% trans "Valider" %}
+                            </button>
+                        </form>
+
+                        {# Bouton REJETER #}
+                        <form method="post"
+                              action="{% url 'dashboard:whatsapp_proof_reject' payment.id %}"
+                              style="display: inline-block;"
+                              onsubmit="return confirm('{% trans "Rejeter ce paiement ?" %}')">
+                            {% csrf_token %}
+                            <button type="submit"
+                                    class="btn btn-sm"
+                                    style="background: transparent; color: #dc2626; border: 1px solid #dc2626; font-weight: 700;">
+                                <i class="bi bi-x-circle-fill"></i>
+                                {% trans "Rejeter" %}
+                            </button>
+                        </form>
+
+                        {# Bouton CONTACTER #}
+                        <a href="{{ item.contact_url }}"
+                           target="_blank"
+                           class="btn btn-sm"
+                           style="background: #25D366; color: #fff; border: none; font-weight: 700;">
+                            <i class="bi bi-whatsapp"></i>
+                            {% trans "Contacter" %}
+                        </a>
+
+                    {# --- Paiement CONFIRMÉ --- #}
+                    {% elif payment.status == 'confirmed' %}
+
+                        {# Bouton ENVOYER LE BILLET #}
+                        <a href="{{ item.send_ticket_url }}"
+                           target="_blank"
+                           class="btn btn-sm"
+                           style="background: #25D366; color: #fff; border: none; font-weight: 700;">
+                            <i class="bi bi-send-fill"></i>
+                            {% trans "Envoyer le billet" %}
+                        </a>
+
+                        {# Bouton VOIR BILLET #}
+                        <a href="{% url 'tickets:reservation_tickets' payment.reservation.reference %}"
+                           target="_blank"
+                           class="btn btn-sm btn-outline-dark">
+                            <i class="bi bi-ticket-perforated-fill"></i>
+                            {% trans "Voir billet" %}
+                        </a>
+
+                    {# --- Paiement REJETÉ --- #}
+                    {% elif payment.status == 'rejected' %}
+
+                        <span style="color: #991b1b; font-size: .85rem; font-weight: 600;">
+                            <i class="bi bi-x-circle-fill"></i>
+                            {% trans "Rejeté" %}
+                        </span>
+
+                    {% endif %}
+
+                    {# Bouton VOIR DÉTAIL (toujours) #}
+                    <a href="{% url 'dashboard:whatsapp_proof_detail' payment.id %}"
+                       class="btn btn-sm btn-outline-dark"
+                       title="{% trans 'Voir les détails' %}">
+                        <i class="bi bi-eye"></i>
+                    </a>
+
+                </div>
+
+            </div>
+            {% endwith %}
+            {% endfor %}
+        </div>
+
+        {% else %}
+
+        <div class="empty-state">
+            <div class="empty-state-icon">
+                <i class="bi bi-inbox"></i>
+            </div>
+            <h2>
+                {% if status_filter == 'pending' %}
+                    {% trans "Aucun paiement en attente" %}
+                {% else %}
+                    {% trans "Aucun paiement" %}
+                {% endif %}
+            </h2>
+            <p>{% trans "Les paiements WhatsApp apparaîtront ici." %}</p>
+        </div>
+
+        {% endif %}
+
+    </div>
+</section>
+
+{% endblock %}

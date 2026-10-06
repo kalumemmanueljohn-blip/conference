@@ -1,0 +1,10 @@
+from django.apps import AppConfig
+
+
+class ConferenceConfig(AppConfig):
+    default_auto_field = 'django.db.models.BigAutoField'
+    name = 'conference'
+    verbose_name = 'Conférences'
+
+    def ready(self):
+        from . import translation  # noqa: F401

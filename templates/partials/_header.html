@@ -1,0 +1,104 @@
+{% load static i18n %}
+<header class="site-header">
+    <nav class="navbar navbar-expand-lg">
+        <div class="container">
+
+            <!-- Logo + nom organisation -->
+            <a class="navbar-brand" href="{% url 'conference:home' %}">
+                <img src="{% static 'images/logo.png' %}"
+                     alt="Bantondo's Génération ASBL"
+                     class="brand-logo"
+                     onerror="this.style.display='none'">
+                <span class="brand-text">
+                    <span class="brand-name">Bantondo's</span>
+                    <span class="brand-sub">Génération ASBL</span>
+                </span>
+            </a>
+
+            <!-- Bouton burger mobile -->
+            <button class="navbar-toggler" type="button"
+                    data-bs-toggle="collapse" data-bs-target="#mainNav"
+                    aria-controls="mainNav" aria-expanded="false"
+                    aria-label="{% trans 'Menu' %}">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <!-- Menu -->
+            <div class="collapse navbar-collapse" id="mainNav">
+                <ul class="navbar-nav ms-auto align-items-lg-center">
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'conference:home' %}">
+                            {% trans "Accueil" %}
+                        </a>
+                    </li>
+
+                    {% if user.is_authenticated %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'reservations:list' %}">
+                                {% trans "Mes réservations" %}
+                            </a>
+                        </li>
+
+                        {% if user.is_staff %}
+                            <li class="nav-item">
+                                <a class="nav-link" href="{% url 'dashboard:home' %}">
+                                    <i class="bi bi-speedometer2"></i>
+                                    {% trans "Dashboard" %}
+                                </a>
+                            </li>
+                        {% endif %}
+
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button"
+                               data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="bi bi-person-circle"></i>
+                                {{ user.first_name|default:user.email }}
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-end">
+                                <li>
+                                    <a class="dropdown-item" href="{% url 'accounts:dashboard' %}">
+                                        <i class="bi bi-person"></i> {% trans "Mon espace" %}
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href="{% url 'accounts:profile' %}">
+                                        <i class="bi bi-gear"></i> {% trans "Profil" %}
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href="{% url 'accounts:password_change' %}">
+                                        <i class="bi bi-shield-lock"></i> {% trans "Mot de passe" %}
+                                    </a>
+                                </li>
+                                <li><hr class="dropdown-divider"></li>
+                                <li>
+                                    <a class="dropdown-item text-danger" href="{% url 'accounts:logout' %}">
+                                        <i class="bi bi-box-arrow-right"></i> {% trans "Déconnexion" %}
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                    {% else %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'accounts:login' %}">
+                                {% trans "Connexion" %}
+                            </a>
+                        </li>
+                        <li class="nav-item ms-lg-3">
+                            <a class="btn btn-primary btn-reserve" href="{% url 'accounts:register' %}">
+                                <i class="bi bi-ticket-perforated"></i>
+                                {% trans "Réserver ma place" %}
+                            </a>
+                        </li>
+                    {% endif %}
+
+                    <!-- Switch de langue -->
+                    {% include 'partials/_language_switcher.html' %}
+
+                </ul>
+            </div>
+
+        </div>
+    </nav>
+</header>

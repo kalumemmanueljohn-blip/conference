@@ -1,0 +1,144 @@
+{% load i18n %}
+<footer class="site-footer">
+    <div class="container">
+        <div class="row g-4">
+
+            <!-- ============================================
+                 Colonne 1 : Organisation
+                 ============================================ -->
+            <div class="col-12 col-md-6 col-lg-4">
+                <h5 class="footer-title">Bantondo's Génération ASBL</h5>
+                <p class="footer-text">
+                    {% trans "Organisation dédiée à l'autonomisation des jeunes en République Démocratique du Congo." %}
+                </p>
+
+                {% if conference.social_facebook or conference.social_instagram or conference.social_twitter or conference.social_tiktok %}
+                <div class="footer-socials">
+                    {% if conference.social_facebook %}
+                        <a href="{{ conference.social_facebook }}" target="_blank" rel="noopener" aria-label="Facebook">
+                            <i class="bi bi-facebook"></i>
+                        </a>
+                    {% endif %}
+                    {% if conference.social_instagram %}
+                        <a href="{{ conference.social_instagram }}" target="_blank" rel="noopener" aria-label="Instagram">
+                            <i class="bi bi-instagram"></i>
+                        </a>
+                    {% endif %}
+                    {% if conference.social_twitter %}
+                        <a href="{{ conference.social_twitter }}" target="_blank" rel="noopener" aria-label="X">
+                            <i class="bi bi-twitter-x"></i>
+                        </a>
+                    {% endif %}
+                    {% if conference.social_tiktok %}
+                        <a href="{{ conference.social_tiktok }}" target="_blank" rel="noopener" aria-label="TikTok">
+                            <i class="bi bi-tiktok"></i>
+                        </a>
+                    {% endif %}
+                    {% if conference.social_linkedin %}
+                        <a href="{{ conference.social_linkedin }}" target="_blank" rel="noopener" aria-label="LinkedIn">
+                            <i class="bi bi-linkedin"></i>
+                        </a>
+                    {% endif %}
+                    {% if conference.social_youtube %}
+                        <a href="{{ conference.social_youtube }}" target="_blank" rel="noopener" aria-label="YouTube">
+                            <i class="bi bi-youtube"></i>
+                        </a>
+                    {% endif %}
+                </div>
+                {% endif %}
+            </div>
+
+            <!-- ============================================
+                 Colonne 2 : Liens utiles
+                 ============================================ -->
+            <div class="col-12 col-md-6 col-lg-3">
+                <h5 class="footer-title">{% trans "Liens utiles" %}</h5>
+                <ul class="footer-links">
+                    <li><a href="{% url 'conference:home' %}">{% trans "Accueil" %}</a></li>
+                    <li><a href="{% url 'conference:contact' %}">{% trans "Contact" %}</a></li>
+                    <li><a href="{% url 'reservations:create' %}">{% trans "Réserver ma place" %}</a></li>
+                    <li><a href="{% url 'accounts:login' %}">{% trans "Connexion" %}</a></li>
+                    <li><a href="{% url 'accounts:register' %}">{% trans "Inscription" %}</a></li>
+                </ul>
+            </div>
+
+            <!-- ============================================
+                 Colonne 3 : Contact
+                 ============================================ -->
+            <div class="col-12 col-lg-5">
+                <h5 class="footer-title">{% trans "Contact" %}</h5>
+
+                <ul class="footer-contact">
+
+                    {% if conference.contact_address %}
+                    <li>
+                        <i class="bi bi-geo-alt-fill"></i>
+                        <span>{{ conference.contact_address }}</span>
+                    </li>
+                    {% endif %}
+
+                    {% if conference.contact_phone %}
+                    <li>
+                        <i class="bi bi-telephone-fill"></i>
+                        <a href="tel:{{ conference.contact_phone }}">{{ conference.contact_phone }}</a>
+                    </li>
+                    {% endif %}
+
+                    {% if conference.contact_email %}
+                    <li>
+                        <i class="bi bi-envelope-fill"></i>
+                        <a href="mailto:{{ conference.contact_email }}">{{ conference.contact_email }}</a>
+                    </li>
+                    {% endif %}
+
+                </ul>
+
+                <!-- Réseaux avec libellé texte (pour la visibilité) -->
+                {% if conference.social_facebook or conference.social_instagram or conference.social_twitter or conference.social_tiktok %}
+                <ul class="footer-contact footer-contact-social">
+                    {% if conference.social_facebook %}
+                    <li>
+                        <i class="bi bi-facebook"></i>
+                        <a href="{{ conference.social_facebook }}" target="_blank" rel="noopener">
+                            Facebook : BG/Ab sl
+                        </a>
+                    </li>
+                    {% endif %}
+                    {% if conference.social_instagram %}
+                    <li>
+                        <i class="bi bi-instagram"></i>
+                        <a href="{{ conference.social_instagram }}" target="_blank" rel="noopener">
+                            Instagram : BG/Ab sl
+                        </a>
+                    </li>
+                    {% endif %}
+                    {% if conference.social_twitter %}
+                    <li>
+                        <i class="bi bi-twitter-x"></i>
+                        <a href="{{ conference.social_twitter }}" target="_blank" rel="noopener">
+                            X : @Bantondo'sGeneration
+                        </a>
+                    </li>
+                    {% endif %}
+                    {% if conference.social_tiktok %}
+                    <li>
+                        <i class="bi bi-tiktok"></i>
+                        <a href="{{ conference.social_tiktok }}" target="_blank" rel="noopener">
+                            TikTok : Bantondo's Generation
+                        </a>
+                    </li>
+                    {% endif %}
+                </ul>
+                {% endif %}
+            </div>
+
+        </div>
+
+        <div class="footer-bottom">
+            <p>
+                &copy; {% now "Y" %} Bantondo's Génération ASBL.
+                {% trans "Tous droits réservés." %}
+            </p>
+        </div>
+    </div>
+</footer>

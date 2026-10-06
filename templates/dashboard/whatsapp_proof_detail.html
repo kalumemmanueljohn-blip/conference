@@ -1,0 +1,194 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block title %}{% trans "Détail preuve WhatsApp" %}{% endblock %}
+
+{% block content %}
+
+<section class="admin-section">
+    <div class="container">
+
+        <!-- Header -->
+        <div class="admin-header">
+            <div>
+                <span class="dashboard-label">{% trans "Preuve WhatsApp" %}</span>
+                <h1>{{ proof.payment.reservation.user.full_name }}</h1>
+                <p>{% trans "Référence :" %} <code>{{ proof.payment.reservation.reference }}</code></p>
+            </div>
+            <div class="admin-header-actions">
+                <a href="{% url 'dashboard:whatsapp_proofs' %}" class="btn btn-outline-dark">
+                    <i class="bi bi-arrow-left"></i>
+                    {% trans "Retour" %}
+                </a>
+            </div>
+        </div>
+
+        <div class="row g-4">
+
+            <!-- Preuve (image/PDF) -->
+            <div class="col-lg-7">
+                <div class="admin-card">
+                    <h2>{% trans "Preuve envoyée" %}</h2>
+
+                    {% if proof.proof_file %}
+                        {% if proof.proof_file.name|lower|slice:"-4:" in ".jpg.jpeg.png.gif" or proof.proof_file.name|lower|slice:"-5:" in ".webp" %}
+                            <div style="text-align: center; margin-top: 1rem;">
+                                <a href="{{ proof.proof_file.url }}" target="_blank">
+                                    <img src="{{ proof.proof_file.url }}"
+                                         alt="Preuve"
+                                         style="max-width: 100%; max-height: 600px; border-radius: 12px; border: 2px solid #d6a63a;">
+                                </a>
+                            </div>
+                        {% else %}
+                            <div style="text-align: center; padding: 3rem 1rem;">
+                                <i class="bi bi-file-earmark-pdf-fill" style="font-size: 4rem; color: #dc2626;"></i>
+                                <p style="margin-top: 1rem;">
+                                    <a href="{{ proof.proof_file.url }}" target="_blank" class="btn btn-primary">
+                                        <i class="bi bi-download"></i>
+                                        {% trans "Télécharger le fichier" %}
+                                    </a>
+                                </p>
+                            </div>
+                        {% endif %}
+                    {% else %}
+                        <p>{% trans "Aucune preuve" %}</p>
+                    {% endif %}
+
+                    <p style="margin-top: 1rem; color: #687386; font-size: .85rem;">
+                        <i class="bi bi-clock"></i>
+                        {% trans "Envoyée le" %} {{ proof.uploaded_at|date:"d F Y à H:i" }}
+                    </p>
+                </div>
+            </div>
+
+            <!-- Infos + Actions -->
+            <div class="col-lg-5">
+
+                <!-- Infos participant -->
+                <div class="admin-card">
+                    <h2>{% trans "Participant" %}</h2>
+
+                    <div style="display: flex; gap: 1rem; align-items: center; margin-bottom: 1rem;">
+                        <div class="admin-list-item-avatar" style="width: 56px; height: 56px; font-size: 1.2rem;">
+                            {{ proof.payment.reservation.user.first_name|first|upper }}{{ proof.payment.reservation.user.last_name|first|upper }}
+                        </div>
+                        <div>
+                            <strong style="display: block; color: #0b1324;">
+                                {{ proof.payment.reservation.user.full_name }}
+                            </strong>
+                            <span style="color: #687386; font-size: .85rem;">
+                                {{ proof.payment.reservation.user.email }}
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="dashboard-info-grid" style="grid-template-columns: 1fr;">
+                        <div class="dashboard-info-item">
+                            <span>{% trans "WhatsApp" %}</span>
+                            <strong>{{ proof.payment.reservation.user.whatsapp_number }}</strong>
+                        </div>
+                        <div class="dashboard-info-item">
+                            <span>{% trans "Places réservées" %}</span>
+                            <strong>{{ proof.payment.reservation.seats }}</strong>
+                        </div>
+                        <div class="dashboard-info-item">
+                            <span>{% trans "Montant" %}</span>
+                            <strong>{{ proof.payment.amount }} {{ proof.payment.currency }}</strong>
+                        </div>
+                        <div class="dashboard-info-item">
+                            <span>{% trans "Statut réservation" %}</span>
+                            <strong>{{ proof.payment.reservation.get_status_display }}</strong>
+                        </div>
+                    </div>
+
+                    <a href="{{ whatsapp_client_url }}"
+                       target="_blank"
+                       class="btn btn-primary w-100 mt-3"
+                       style="background: #25D366; border-color: #25D366;">
+                        <i class="bi bi-whatsapp"></i>
+                        {% trans "Contacter sur WhatsApp" %}
+                    </a>
+                </div>
+
+                <!-- Actions -->
+                {% if proof.status == 'pending' or proof.status == 'new_proof_requested' %}
+
+                <div class="admin-card mt-4">
+                    <h2>{% trans "Actions" %}</h2>
+
+                    <!-- Valider -->
+                    <form method="post"
+                          action="{% url 'dashboard:whatsapp_proof_validate' proof.id %}"
+                          style="margin-bottom: 1rem;">
+                        {% csrf_token %}
+                        <button type="submit"
+                                class="btn btn-primary w-100 btn-lg"
+                                style="background: #10b981; border-color: #10b981;"
+                                onclick="return confirm('{% trans "Confirmer la validation ? Les billets seront générés et un email envoyé au participant." %}')">
+                            <i class="bi bi-check-circle-fill"></i>
+                            {% trans "Valider le paiement" %}
+                        </button>
+                    </form>
+
+                    <!-- Rejeter -->
+                    <form method="post"
+                          action="{% url 'dashboard:whatsapp_proof_reject' proof.id %}">
+                        {% csrf_token %}
+                        <div class="mb-2">
+                            <label class="form-label" style="font-size: .85rem;">
+                                {% trans "Motif du rejet (optionnel)" %}
+                            </label>
+                            <textarea name="reason"
+                                      class="form-control"
+                                      rows="2"
+                                      placeholder="{% trans 'Ex: Preuve illisible, montant incorrect...' %}"></textarea>
+                        </div>
+                        <button type="submit"
+                                class="btn btn-outline-dark w-100"
+                                style="color: #dc2626; border-color: #dc2626;"
+                                onclick="return confirm('{% trans "Confirmer le rejet ?" %}')">
+                            <i class="bi bi-x-circle-fill"></i>
+                            {% trans "Rejeter la preuve" %}
+                        </button>
+                    </form>
+
+                </div>
+
+                {% else %}
+
+                <div class="admin-card mt-4">
+                    <h2>{% trans "Statut" %}</h2>
+                    <div style="text-align: center; padding: 1rem;">
+                        {% if proof.status == 'validated' %}
+                            <i class="bi bi-check-circle-fill" style="font-size: 3rem; color: #10b981;"></i>
+                            <p style="margin-top: 1rem; font-weight: 700; color: #0b1324;">
+                                {% trans "Paiement validé" %}
+                            </p>
+                            <p style="color: #687386; font-size: .85rem;">
+                                {% trans "Par" %} {{ proof.validated_by.full_name }}<br>
+                                {{ proof.validated_at|date:"d F Y à H:i" }}
+                            </p>
+                        {% elif proof.status == 'rejected' %}
+                            <i class="bi bi-x-circle-fill" style="font-size: 3rem; color: #dc2626;"></i>
+                            <p style="margin-top: 1rem; font-weight: 700; color: #0b1324;">
+                                {% trans "Preuve rejetée" %}
+                            </p>
+                            {% if proof.rejection_reason %}
+                                <p style="color: #687386; font-size: .85rem;">
+                                    <em>{{ proof.rejection_reason }}</em>
+                                </p>
+                            {% endif %}
+                        {% endif %}
+                    </div>
+                </div>
+
+                {% endif %}
+
+            </div>
+
+        </div>
+
+    </div>
+</section>
+
+{% endblock %}

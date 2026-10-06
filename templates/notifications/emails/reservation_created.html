@@ -1,0 +1,71 @@
+{% extends 'notifications/emails/base_email.html' %}
+
+{% block title %}Réservation créée{% endblock %}
+{% block header_subtitle %}Réservation{% endblock %}
+
+{% block content %}
+
+<h2 style="margin:0 0 20px; color:#0b1324; font-size:22px; font-weight:900;">
+    Réservation enregistrée
+</h2>
+
+<p style="margin:0 0 20px; color:#475569; font-size:15px;">
+    Bonjour {{ user.first_name }}, votre réservation a bien été enregistrée.
+</p>
+
+<!-- Référence -->
+<div style="background:#0b1324; padding:20px; border-radius:10px; text-align:center; margin:0 0 24px; border:1px dashed #d6a63a;">
+    <p style="margin:0 0 6px; color:#8a94a8; font-size:11px; font-weight:800; letter-spacing:2px; text-transform:uppercase;">
+        Référence de réservation
+    </p>
+    <p style="margin:0; color:#f0c866; font-size:20px; font-weight:900; letter-spacing:2px; font-family:'Courier New', monospace;">
+        {{ reservation.reference }}
+    </p>
+</div>
+
+<!-- Détails -->
+<table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="background:#f7f8fb; border-radius:10px; padding:0; margin:0 0 24px;">
+    <tr>
+        <td style="padding:18px 20px; border-bottom:1px solid #e3e7ed;">
+            <span style="color:#8892a0; font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase;">Conférence</span><br>
+            <strong style="color:#0b1324; font-size:14px;">{{ conference.title }}</strong>
+        </td>
+    </tr>
+    <tr>
+        <td style="padding:18px 20px; border-bottom:1px solid #e3e7ed;">
+            <span style="color:#8892a0; font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase;">Date et lieu</span><br>
+            <strong style="color:#0b1324; font-size:14px;">{{ conference.date|date:"d F Y à H:i" }} — {{ conference.location }}</strong>
+        </td>
+    </tr>
+    <tr>
+        <td style="padding:18px 20px; border-bottom:1px solid #e3e7ed;">
+            <span style="color:#8892a0; font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase;">Nombre de places</span><br>
+            <strong style="color:#0b1324; font-size:14px;">{{ reservation.seats }} place{{ reservation.seats|pluralize }}</strong>
+        </td>
+    </tr>
+    <tr>
+        <td style="padding:18px 20px;">
+            <span style="color:#8892a0; font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase;">Montant total</span><br>
+            <strong style="color:#d6a63a; font-size:18px; font-weight:900;">
+                {% if reservation.total_amount == 0 %}
+                    Gratuit
+                {% else %}
+                    {{ reservation.total_amount }} {{ reservation.currency }}
+                {% endif %}
+            </strong>
+        </td>
+    </tr>
+</table>
+
+<!-- Info prochaine étape -->
+<div style="background:#fef3c7; border-left:4px solid #f59e0b; padding:16px 20px; border-radius:8px; margin:0 0 24px;">
+    <p style="margin:0; color:#92400e; font-size:14px; line-height:1.6;">
+        <strong>Prochaine étape :</strong> effectuez le paiement pour confirmer définitivement votre place.
+    </p>
+</div>
+
+<p style="margin:0; color:#8892a0; font-size:13px; text-align:center;">
+    Merci de votre confiance.
+</p>
+
+{% endblock %}
