@@ -80,6 +80,7 @@ TEMPLATES = [
                 'django.contrib.messages.context_processors.messages',
                 'django.template.context_processors.i18n',
                 'django.template.context_processors.static',
+                'config.context_processors.whatsapp_contact',
               ],
         },
     },

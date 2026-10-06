@@ -55,10 +55,18 @@
                 <h5 class="footer-title">{% trans "Liens utiles" %}</h5>
                 <ul class="footer-links">
                     <li><a href="{% url 'conference:home' %}">{% trans "Accueil" %}</a></li>
+                    {% if conference %}
+                        <li><a href="{% url 'conference:detail' conference.slug %}">{% trans "Détails de la conférence" %}</a></li>
+                    {% endif %}
                     <li><a href="{% url 'conference:contact' %}">{% trans "Contact" %}</a></li>
                     <li><a href="{% url 'reservations:create' %}">{% trans "Réserver ma place" %}</a></li>
-                    <li><a href="{% url 'accounts:login' %}">{% trans "Connexion" %}</a></li>
-                    <li><a href="{% url 'accounts:register' %}">{% trans "Inscription" %}</a></li>
+                    {% if user.is_authenticated %}
+                        <li><a href="{% url 'reservations:list' %}">{% trans "Mes réservations" %}</a></li>
+                        <li><a href="{% url 'accounts:dashboard' %}">{% trans "Mon espace" %}</a></li>
+                    {% else %}
+                        <li><a href="{% url 'accounts:register' %}">{% trans "Créer un compte" %}</a></li>
+                        <li><a href="{% url 'accounts:login' %}">{% trans "Connexion" %}</a></li>
+                    {% endif %}
                 </ul>
             </div>
 
@@ -88,6 +96,18 @@
                     <li>
                         <i class="bi bi-envelope-fill"></i>
                         <a href="mailto:{{ conference.contact_email }}">{{ conference.contact_email }}</a>
+                    </li>
+                    {% endif %}
+
+                    {% if whatsapp_contact_url %}
+                    <li>
+                        <i class="bi bi-whatsapp" aria-hidden="true"></i>
+                        <a href="{{ whatsapp_contact_url }}"
+                           target="_blank"
+                           rel="noopener noreferrer">
+                            {% trans "Demander les méthodes de paiement sur WhatsApp" %}
+                            <span class="d-block">{{ whatsapp_contact_number }}</span>
+                        </a>
                     </li>
                     {% endif %}
 
