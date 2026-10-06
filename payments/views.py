@@ -1,10 +1,11 @@
-from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404, redirect, render
 from django.utils.translation import gettext_lazy as _
 
 from reservations.models import Reservation
+
+from config.context_processors import get_whatsapp_contact_digits
 
 from .services import (
     PaymentError,
@@ -76,6 +77,6 @@ def whatsapp_init_view(request, reference):
     return render(request, 'payments/whatsapp_instructions.html', {
         'reservation': reservation,
         'payment': payment,
-        'whatsapp_admin_number': settings.WHATSAPP_ADMIN_NUMBER,
+        'whatsapp_admin_number': get_whatsapp_contact_digits(),
         'whatsapp_message': whatsapp_message,
     })
