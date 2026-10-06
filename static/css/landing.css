@@ -13,9 +13,10 @@
   padding:7rem 0 5.5rem;
   color:#fff;
   background:
+    linear-gradient(180deg,rgba(0,0,0,.56),rgba(0,0,0,.72)),
     radial-gradient(circle at 78% 18%,rgba(255,208,0,.16),transparent 28%),
     radial-gradient(circle at 12% 80%,rgba(37,99,235,.12),transparent 30%),
-    linear-gradient(135deg,#000 0%,#111 52%,#1a1a1a 100%);
+    url("../images/hero.jpg") center 42% / cover no-repeat;
 }
 
 .hero-section::before{
