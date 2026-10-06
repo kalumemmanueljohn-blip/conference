@@ -313,9 +313,7 @@
   position:relative;
   overflow:hidden;
   padding:4.5rem 0;
-  background:
-    radial-gradient(circle at 15% 50%,rgba(255,255,255,.20),transparent 30%),
-    linear-gradient(135deg, #fbe9a8 0%, #f7dc8e 50%, #f0c866 100%);
+  background:linear-gradient(135deg,var(--surface) 0%,var(--surface-2) 100%);
 }
 
 .countdown-section::after{
@@ -340,7 +338,7 @@
   justify-content:center;
   gap:.7rem;
   margin-bottom:2rem;
-  color:#3a2c0f;
+  color:var(--navy-2);
   font-size:.78rem;
   font-weight:900;
   letter-spacing:2.5px;
@@ -351,7 +349,7 @@
   content:"";
   width:28px;
   height:2px;
-  background:#3a2c0f;
+  background:var(--navy-2);
   opacity:.55;
   flex:0 0 28px;
 }
@@ -434,7 +432,7 @@
 
 .countdown-sep{
   display:block;
-  color:#3a2c0f;
+  color:var(--navy-2);
   font-size:2rem;
   font-weight:900;
   line-height:1;
