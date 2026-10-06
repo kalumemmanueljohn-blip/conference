@@ -22,7 +22,6 @@
                     <!-- Badge date + live -->
                     <div class="hero-badge-wrap fade-in-up">
                         <span class="hero-badge">
-                            <span class="live-dot"></span>
                             <i class="bi bi-broadcast"></i>
                             {{ conference.date|date:"d F Y" }}
                         </span>
@@ -60,17 +59,17 @@
                     <!-- Statistiques avec séparateurs -->
                     <div class="hero-stats fade-in-up delay-4">
                         <div class="hero-stat">
-                            <div class="hero-stat-value">{{ conference.price_per_seat }} $</div>
+                            <div class="hero-stat-value">
+                                {% if conference.is_free %}{% trans "Gratuit" %}{% else %}{{ conference.price_per_seat }} {{ conference.currency }}{% endif %}
+                            </div>
                             <div class="hero-stat-label">{% trans "par place" %}</div>
                         </div>
                         {% if conference.total_seats > 0 %}
-                        <div class="hero-stat-sep"></div>
                         <div class="hero-stat">
                             <div class="hero-stat-value">{{ conference.seats_remaining }}</div>
                             <div class="hero-stat-label">{% trans "places" %}</div>
                         </div>
                         {% endif %}
-                        <div class="hero-stat-sep"></div>
                         <div class="hero-stat">
                             <div class="hero-stat-value">{{ conference.date|date:"d M" }}</div>
                             <div class="hero-stat-label">{{ conference.date|date:"Y" }}</div>
@@ -279,7 +278,12 @@
                         <div class="speaker-card">
                             <div class="speaker-photo">
                                 {% if speaker.photo %}
-                                    <img src="{{ speaker.photo.url }}" alt="{{ speaker.name }}">
+                                    <img src="{{ speaker.photo.url }}"
+                                         alt="{{ speaker.name }}"
+                                         width="132"
+                                         height="132"
+                                         loading="lazy"
+                                         decoding="async">
                                 {% else %}
                                     <div class="speaker-placeholder">
                                         <i class="bi bi-person-fill"></i>
@@ -404,13 +408,19 @@
     <!-- ============================================================
          CTA FINAL
          ============================================================ -->
-    <section class="cta-section">
-        <div class="container text-center">
-            <h2 class="cta-title fade-in-up">{% trans "Prêt à rejoindre la conversation ?" %}</h2>
-            <p class="cta-text fade-in-up delay-1">
-                {% trans "Réservez votre place maintenant. Les places sont limitées." %}
+    <section class="cta-section-premium">
+        <div class="cta-decoration-1" aria-hidden="true"></div>
+        <div class="cta-decoration-2" aria-hidden="true"></div>
+        <div class="container text-center position-relative">
+            <h2 class="cta-title-premium fade-in-up">{% trans "Prêt à rejoindre la conversation ?" %}</h2>
+            <p class="cta-text-premium fade-in-up delay-1">
+                {% if conference.total_seats > 0 %}
+                    {% trans "Réservez votre place maintenant. Les places sont limitées." %}
+                {% else %}
+                    {% trans "Réservez votre place pour participer à la conférence." %}
+                {% endif %}
             </p>
-            <div class="fade-in-up delay-2">
+            <div class="cta-actions fade-in-up delay-2">
                 {% if user.is_authenticated %}
                     <a href="{% url 'reservations:create' %}" class="btn btn-primary btn-lg">
                         <i class="bi bi-ticket-perforated-fill"></i>

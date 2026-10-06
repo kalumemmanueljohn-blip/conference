@@ -12,35 +12,35 @@
                     {% trans "Organisation dédiée à l'autonomisation des jeunes en République Démocratique du Congo." %}
                 </p>
 
-                {% if conference.social_facebook or conference.social_instagram or conference.social_twitter or conference.social_tiktok %}
+                {% if conference.social_facebook or conference.social_instagram or conference.social_twitter or conference.social_tiktok or conference.social_linkedin or conference.social_youtube %}
                 <div class="footer-socials">
                     {% if conference.social_facebook %}
-                        <a href="{{ conference.social_facebook }}" target="_blank" rel="noopener" aria-label="Facebook">
+                        <a href="{{ conference.social_facebook }}" target="_blank" rel="noopener noreferrer" aria-label="{% trans 'Facebook' %}">
                             <i class="bi bi-facebook"></i>
                         </a>
                     {% endif %}
                     {% if conference.social_instagram %}
-                        <a href="{{ conference.social_instagram }}" target="_blank" rel="noopener" aria-label="Instagram">
+                        <a href="{{ conference.social_instagram }}" target="_blank" rel="noopener noreferrer" aria-label="{% trans 'Instagram' %}">
                             <i class="bi bi-instagram"></i>
                         </a>
                     {% endif %}
                     {% if conference.social_twitter %}
-                        <a href="{{ conference.social_twitter }}" target="_blank" rel="noopener" aria-label="X">
+                        <a href="{{ conference.social_twitter }}" target="_blank" rel="noopener noreferrer" aria-label="X">
                             <i class="bi bi-twitter-x"></i>
                         </a>
                     {% endif %}
                     {% if conference.social_tiktok %}
-                        <a href="{{ conference.social_tiktok }}" target="_blank" rel="noopener" aria-label="TikTok">
+                        <a href="{{ conference.social_tiktok }}" target="_blank" rel="noopener noreferrer" aria-label="TikTok">
                             <i class="bi bi-tiktok"></i>
                         </a>
                     {% endif %}
                     {% if conference.social_linkedin %}
-                        <a href="{{ conference.social_linkedin }}" target="_blank" rel="noopener" aria-label="LinkedIn">
+                        <a href="{{ conference.social_linkedin }}" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
                             <i class="bi bi-linkedin"></i>
                         </a>
                     {% endif %}
                     {% if conference.social_youtube %}
-                        <a href="{{ conference.social_youtube }}" target="_blank" rel="noopener" aria-label="YouTube">
+                        <a href="{{ conference.social_youtube }}" target="_blank" rel="noopener noreferrer" aria-label="YouTube">
                             <i class="bi bi-youtube"></i>
                         </a>
                     {% endif %}
@@ -93,43 +93,6 @@
 
                 </ul>
 
-                <!-- Réseaux avec libellé texte (pour la visibilité) -->
-                {% if conference.social_facebook or conference.social_instagram or conference.social_twitter or conference.social_tiktok %}
-                <ul class="footer-contact footer-contact-social">
-                    {% if conference.social_facebook %}
-                    <li>
-                        <i class="bi bi-facebook"></i>
-                        <a href="{{ conference.social_facebook }}" target="_blank" rel="noopener">
-                            Facebook : BG/Ab sl
-                        </a>
-                    </li>
-                    {% endif %}
-                    {% if conference.social_instagram %}
-                    <li>
-                        <i class="bi bi-instagram"></i>
-                        <a href="{{ conference.social_instagram }}" target="_blank" rel="noopener">
-                            Instagram : BG/Ab sl
-                        </a>
-                    </li>
-                    {% endif %}
-                    {% if conference.social_twitter %}
-                    <li>
-                        <i class="bi bi-twitter-x"></i>
-                        <a href="{{ conference.social_twitter }}" target="_blank" rel="noopener">
-                            X : @Bantondo'sGeneration
-                        </a>
-                    </li>
-                    {% endif %}
-                    {% if conference.social_tiktok %}
-                    <li>
-                        <i class="bi bi-tiktok"></i>
-                        <a href="{{ conference.social_tiktok }}" target="_blank" rel="noopener">
-                            TikTok : Bantondo's Generation
-                        </a>
-                    </li>
-                    {% endif %}
-                </ul>
-                {% endif %}
             </div>
 
         </div>

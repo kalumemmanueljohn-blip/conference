@@ -181,43 +181,15 @@
 }
 
 /* =========================================================
-   INTERVENANTS — Rotation + zoom spectaculaire
+   INTERVENANTS — Mouvement discret, sans déformer les portraits
    ========================================================= */
 
 .speaker-card{
-  transition:transform .5s cubic-bezier(.34,1.56,.64,1);
-}
-
-@media (hover:hover) and (pointer:fine){
-  .speaker-card:hover{
-    transform:translateY(-16px) rotate(-2deg) scale(1.02);
-  }
+  transition:transform .22s ease,box-shadow .22s ease;
 }
 
 .speaker-photo{
-  transition:
-    transform .6s cubic-bezier(.34,1.56,.64,1),
-    box-shadow .6s ease,
-    border-color .6s ease;
-}
-
-@media (hover:hover) and (pointer:fine){
-  .speaker-card:hover .speaker-photo{
-    transform:scale(1.12) rotate(5deg);
-    box-shadow:
-      0 30px 60px rgba(214,166,58,.4),
-      0 0 0 8px rgba(214,166,58,.15);
-  }
-}
-
-.speaker-photo img{
-  transition:transform .8s cubic-bezier(.2,.9,.2,1);
-}
-
-@media (hover:hover) and (pointer:fine){
-  .speaker-card:hover .speaker-photo img{
-    transform:scale(1.2);
-  }
+  transition:border-color .22s ease;
 }
 
 /* =========================================================
