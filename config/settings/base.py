@@ -81,6 +81,7 @@ TEMPLATES = [
                 'django.template.context_processors.i18n',
                 'django.template.context_processors.static',
                 'config.context_processors.whatsapp_contact',
+                'config.context_processors.footer_contact',
               ],
         },
     },

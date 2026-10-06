@@ -12,35 +12,35 @@
                     {% trans "Organisation dédiée à l'autonomisation des jeunes en République Démocratique du Congo." %}
                 </p>
 
-                {% if conference.social_facebook or conference.social_instagram or conference.social_twitter or conference.social_tiktok or conference.social_linkedin or conference.social_youtube %}
+                {% if footer_social_facebook or footer_social_instagram or footer_social_twitter or footer_social_tiktok or footer_social_linkedin or footer_social_youtube %}
                 <div class="footer-socials">
-                    {% if conference.social_facebook %}
-                        <a href="{{ conference.social_facebook }}" target="_blank" rel="noopener noreferrer" aria-label="{% trans 'Facebook' %}">
+                    {% if footer_social_facebook %}
+                        <a href="{{ footer_social_facebook }}" target="_blank" rel="noopener noreferrer" aria-label="{% trans 'Facebook' %}">
                             <i class="bi bi-facebook"></i>
                         </a>
                     {% endif %}
-                    {% if conference.social_instagram %}
-                        <a href="{{ conference.social_instagram }}" target="_blank" rel="noopener noreferrer" aria-label="{% trans 'Instagram' %}">
+                    {% if footer_social_instagram %}
+                        <a href="{{ footer_social_instagram }}" target="_blank" rel="noopener noreferrer" aria-label="{% trans 'Instagram' %}">
                             <i class="bi bi-instagram"></i>
                         </a>
                     {% endif %}
-                    {% if conference.social_twitter %}
-                        <a href="{{ conference.social_twitter }}" target="_blank" rel="noopener noreferrer" aria-label="X">
+                    {% if footer_social_twitter %}
+                        <a href="{{ footer_social_twitter }}" target="_blank" rel="noopener noreferrer" aria-label="X">
                             <i class="bi bi-twitter-x"></i>
                         </a>
                     {% endif %}
-                    {% if conference.social_tiktok %}
-                        <a href="{{ conference.social_tiktok }}" target="_blank" rel="noopener noreferrer" aria-label="TikTok">
+                    {% if footer_social_tiktok %}
+                        <a href="{{ footer_social_tiktok }}" target="_blank" rel="noopener noreferrer" aria-label="TikTok">
                             <i class="bi bi-tiktok"></i>
                         </a>
                     {% endif %}
-                    {% if conference.social_linkedin %}
-                        <a href="{{ conference.social_linkedin }}" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+                    {% if footer_social_linkedin %}
+                        <a href="{{ footer_social_linkedin }}" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
                             <i class="bi bi-linkedin"></i>
                         </a>
                     {% endif %}
-                    {% if conference.social_youtube %}
-                        <a href="{{ conference.social_youtube }}" target="_blank" rel="noopener noreferrer" aria-label="YouTube">
+                    {% if footer_social_youtube %}
+                        <a href="{{ footer_social_youtube }}" target="_blank" rel="noopener noreferrer" aria-label="YouTube">
                             <i class="bi bi-youtube"></i>
                         </a>
                     {% endif %}
@@ -55,8 +55,8 @@
                 <h5 class="footer-title">{% trans "Liens utiles" %}</h5>
                 <ul class="footer-links">
                     <li><a href="{% url 'conference:home' %}">{% trans "Accueil" %}</a></li>
-                    {% if conference %}
-                        <li><a href="{% url 'conference:detail' conference.slug %}">{% trans "Détails de la conférence" %}</a></li>
+                    {% if footer_conference %}
+                        <li><a href="{% url 'conference:detail' footer_conference.slug %}">{% trans "Détails de la conférence" %}</a></li>
                     {% endif %}
                     <li><a href="{% url 'conference:contact' %}">{% trans "Contact" %}</a></li>
                     <li><a href="{% url 'reservations:create' %}">{% trans "Réserver ma place" %}</a></li>
@@ -78,24 +78,22 @@
 
                 <ul class="footer-contact">
 
-                    {% if conference.contact_address %}
                     <li>
                         <i class="bi bi-geo-alt-fill"></i>
-                        <span>{{ conference.contact_address }}</span>
+                        <span>{{ footer_contact_address }}</span>
                     </li>
-                    {% endif %}
 
-                    {% if conference.contact_phone %}
+                    {% if footer_contact_phone %}
                     <li>
                         <i class="bi bi-telephone-fill"></i>
-                        <a href="tel:{{ conference.contact_phone }}">{{ conference.contact_phone }}</a>
+                        <a href="tel:{{ footer_contact_phone }}">{{ footer_contact_phone }}</a>
                     </li>
                     {% endif %}
 
-                    {% if conference.contact_email %}
+                    {% if footer_contact_email %}
                     <li>
                         <i class="bi bi-envelope-fill"></i>
-                        <a href="mailto:{{ conference.contact_email }}">{{ conference.contact_email }}</a>
+                        <a href="mailto:{{ footer_contact_email }}">{{ footer_contact_email }}</a>
                     </li>
                     {% endif %}
 
