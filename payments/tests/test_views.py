@@ -75,6 +75,8 @@ def test_payment_choice_is_fully_translated_in_english(client, reservation):
     assert 'Useful links' in content
     assert 'Ask for payment methods on WhatsApp' in content
     assert 'Hello%2C%20I%20would%20like%20to%20know' in content
+    assert 'Français' in content
+    assert 'franasais' not in content.lower()
 
 
 @pytest.mark.django_db
