@@ -1,0 +1,268 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: conference\n"
+"PO-Revision-Date: 2026-10-13 11:00+0100\n"
+"Last-Translator: Copilot\n"
+"Language-Team: English\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: en\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+msgid "paiements/"
+msgstr "payments/"
+
+msgid "Conférence"
+msgstr "Conference"
+
+msgid "Plateforme officielle de réservation de la conférence"
+msgstr "Official conference booking platform"
+
+msgid "Menu"
+msgstr "Menu"
+
+msgid "Accueil"
+msgstr "Home"
+
+msgid "Mes réservations"
+msgstr "My reservations"
+
+msgid "Dashboard"
+msgstr "Dashboard"
+
+msgid "Mon espace"
+msgstr "My account"
+
+msgid "Profil"
+msgstr "Profile"
+
+msgid "Mot de passe"
+msgstr "Password"
+
+msgid "Déconnexion"
+msgstr "Log out"
+
+msgid "Connexion"
+msgstr "Log in"
+
+msgid "Réserver ma place"
+msgstr "Book a seat"
+
+msgid "Organisation dédiée à l'autonomisation des jeunes en République Démocratique du Congo."
+msgstr "An organization dedicated to empowering young people in the Democratic Republic of the Congo."
+
+msgid "Liens utiles"
+msgstr "Useful links"
+
+msgid "Détails de la conférence"
+msgstr "Conference details"
+
+msgid "Contact"
+msgstr "Contact"
+
+msgid "Créer un compte"
+msgstr "Create an account"
+
+msgid "Demander les méthodes de paiement sur WhatsApp"
+msgstr "Ask for payment methods on WhatsApp"
+
+msgid "Tous droits réservés."
+msgstr "All rights reserved."
+
+msgid "Bonjour, je souhaite connaître les méthodes de paiement pour la conférence."
+msgstr "Hello, I would like to know the available payment methods for the conference."
+
+msgid ""
+"Bonjour, je souhaite payer ma réservation.\n"
+"Référence : %(reference)s\n"
+"Montant : %(amount)s %(currency)s\n"
+"Nombre de places : %(seats)s\n"
+"Nom : %(name)s\n"
+"\n"
+"Merci de m'envoyer les instructions de paiement."
+msgstr ""
+"Hello, I would like to pay for my reservation.\n"
+"Reference: %(reference)s\n"
+"Amount: %(amount)s %(currency)s\n"
+"Number of seats: %(seats)s\n"
+"Name: %(name)s\n"
+"\n"
+"Please send me the payment instructions."
+
+msgid "Impossible d'initier un paiement sur une réservation au statut « %(status)s »."
+msgstr "Payment cannot be started for a reservation with status “%(status)s”."
+
+msgid "Ce paiement n'est pas de type WhatsApp."
+msgstr "This is not a WhatsApp payment."
+
+msgid "Ce paiement n'est plus en attente."
+msgstr "This payment is no longer pending."
+
+msgid "Preuve déjà traitée (statut : %(status)s)."
+msgstr "This proof has already been processed (status: %(status)s)."
+
+msgid "Créée"
+msgstr "Created"
+
+msgid "Paiement en attente"
+msgstr "Payment pending"
+
+msgid "Paiement confirmé"
+msgstr "Payment confirmed"
+
+msgid "Confirmée"
+msgstr "Confirmed"
+
+msgid "Billet généré"
+msgstr "Ticket generated"
+
+msgid "Présent"
+msgstr "Present"
+
+msgid "Annulée"
+msgstr "Cancelled"
+
+msgid "En attente"
+msgstr "Pending"
+
+msgid "Confirmé"
+msgstr "Confirmed"
+
+msgid "Rejeté"
+msgstr "Rejected"
+
+msgid "Expiré"
+msgstr "Expired"
+
+msgid "En attente de validation"
+msgstr "Awaiting verification"
+
+msgid "Validée"
+msgstr "Verified"
+
+msgid "Rejetée"
+msgstr "Rejected"
+
+msgid "Nouvelle preuve demandée"
+msgstr "New proof requested"
+
+msgid "Choisir le paiement"
+msgstr "Choose a payment method"
+
+msgid "Places"
+msgstr "Seats"
+
+msgid "Paiement"
+msgstr "Payment"
+
+msgid "Confirmation"
+msgstr "Confirmation"
+
+msgid "Référence"
+msgstr "Reference"
+
+msgid "Total à payer"
+msgstr "Total due"
+
+msgid "Payez par WhatsApp"
+msgstr "Pay with WhatsApp"
+
+msgid "Contactez-nous sur WhatsApp pour recevoir les instructions, puis envoyez votre preuve de paiement. Un administrateur vérifiera votre paiement."
+msgstr "Contact us on WhatsApp for payment instructions, then send your proof of payment. An administrator will verify your payment."
+
+msgid "Continuer avec WhatsApp"
+msgstr "Continue with WhatsApp"
+
+msgid "Retour à ma réservation"
+msgstr "Back to my reservation"
+
+msgid "Paiement WhatsApp"
+msgstr "WhatsApp payment"
+
+msgid "Paiement via WhatsApp"
+msgstr "Pay via WhatsApp"
+
+msgid "Suivez ces 3 étapes pour valider votre réservation."
+msgstr "Follow these three steps to confirm your reservation."
+
+msgid "Montant à payer"
+msgstr "Amount due"
+
+msgid "Référence à mentionner :"
+msgstr "Reference to include:"
+
+msgid "Contactez-nous sur WhatsApp"
+msgstr "Contact us on WhatsApp"
+
+msgid "Cliquez sur le bouton ci-dessous pour ouvrir WhatsApp avec un message pré-rempli contenant votre référence."
+msgstr "Select the button below to open WhatsApp with a pre-filled message that includes your reservation reference."
+
+msgid "OUVRIR WHATSAPP"
+msgstr "OPEN WHATSAPP"
+
+msgid "Numéro WhatsApp non configuré."
+msgstr "The WhatsApp number has not been configured."
+
+msgid "Effectuez le paiement et envoyez la capture"
+msgstr "Complete the payment and send a screenshot"
+
+msgid "Une fois sur WhatsApp :"
+msgstr "Once you are on WhatsApp:"
+
+msgid "Nous vous enverrons les instructions de paiement (M-Pesa, Airtel, Orange, carte bancaire)"
+msgstr "We will send you payment instructions (M-Pesa, Airtel, Orange, or bank card)."
+
+msgid "Effectuez le paiement"
+msgstr "Complete the payment."
+
+msgid "Envoyez la CAPTURE D'ÉCRAN du paiement sur WhatsApp"
+msgstr "Send a SCREENSHOT of your payment on WhatsApp."
+
+msgid "Attendez la validation"
+msgstr "Wait for verification"
+
+msgid "Un administrateur va vérifier votre paiement et valider votre réservation."
+msgstr "An administrator will verify your payment and confirm your reservation."
+
+msgid "Dès la validation, vous recevrez :"
+msgstr "Once it is confirmed, you will receive:"
+
+msgid "Un email avec votre billet PDF"
+msgstr "An email with your PDF ticket"
+
+msgid "Un message WhatsApp avec le lien de téléchargement"
+msgstr "A WhatsApp message with a download link"
+
+msgid "Délai de validation : quelques minutes à quelques heures. Vous pouvez vérifier votre statut à tout moment."
+msgstr "Verification may take a few minutes or a few hours. You can check your status at any time."
+
+msgid "Vérifier le statut"
+msgstr "Check status"
+
+msgid "Retour à l'accueil"
+msgstr "Back to home"
+
+msgid "Envoyer ma preuve"
+msgstr "Submit my proof"
+
+msgid "Envoyer ma preuve de paiement"
+msgstr "Submit my payment proof"
+
+msgid "Capture d'écran ou PDF du paiement effectué"
+msgstr "Screenshot or PDF of your completed payment"
+
+msgid "Référence :"
+msgstr "Reference:"
+
+msgid "Montant :"
+msgstr "Amount:"
+
+msgid "Fichier de preuve"
+msgstr "Proof file"
+
+msgid "Formats acceptés : JPG, PNG, PDF (max 5 Mo)"
+msgstr "Accepted formats: JPG, PNG, PDF (up to 5 MB)"
+
+msgid "Retour aux instructions"
+msgstr "Back to instructions"

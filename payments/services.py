@@ -5,6 +5,7 @@ from decimal import Decimal
 from django.conf import settings
 from django.db import transaction
 from django.utils import timezone
+from django.utils.translation import gettext as _
 
 from reservations.models import Reservation
 from reservations.services import confirm_reservation
@@ -32,8 +33,9 @@ def initiate_saspay_payment(reservation: Reservation) -> Payment:
     """
     if reservation.status not in ['created', 'payment_pending']:
         raise PaymentError(
-            f"Impossible d'initier un paiement sur une réservation "
-            f"au statut « {reservation.get_status_display()} »."
+            _("Impossible d'initier un paiement sur une réservation au statut « %(status)s ».") % {
+                'status': reservation.get_status_display(),
+            }
         )
 
     # Vérifier qu'il n'y a pas déjà un paiement SASPAY en cours
@@ -168,8 +170,9 @@ def initiate_whatsapp_payment(reservation: Reservation) -> Payment:
     """
     if reservation.status not in ['created', 'payment_pending']:
         raise PaymentError(
-            f"Impossible d'initier un paiement sur une réservation "
-            f"au statut « {reservation.get_status_display()} »."
+            _("Impossible d'initier un paiement sur une réservation au statut « %(status)s ».") % {
+                'status': reservation.get_status_display(),
+            }
         )
 
     # Réutiliser un paiement pending existant
@@ -200,9 +203,9 @@ def initiate_whatsapp_payment(reservation: Reservation) -> Payment:
 def submit_whatsapp_proof(payment: Payment, proof_file) -> WhatsappProof:
     """Enregistre la preuve WhatsApp envoyée par le participant."""
     if payment.method != 'whatsapp':
-        raise PaymentError("Ce paiement n'est pas de type WhatsApp.")
+        raise PaymentError(_("Ce paiement n'est pas de type WhatsApp."))
     if payment.status != 'pending':
-        raise PaymentError("Ce paiement n'est plus en attente.")
+        raise PaymentError(_("Ce paiement n'est plus en attente."))
 
     # Une seule preuve active à la fois
     WhatsappProof.objects.filter(payment=payment, status='pending').delete()
@@ -220,7 +223,9 @@ def validate_whatsapp_payment(proof: WhatsappProof, admin_user) -> Payment:
     """Valide manuellement une preuve WhatsApp → confirme le paiement."""
     if proof.status not in ['pending', 'new_proof_requested']:
         raise PaymentError(
-            f"Preuve déjà traitée (statut : {proof.get_status_display()})."
+            _("Preuve déjà traitée (statut : %(status)s).") % {
+                'status': proof.get_status_display(),
+            }
         )
 
     proof.status = 'validated'

@@ -2,6 +2,7 @@ from email.utils import parseaddr
 from urllib.parse import quote
 
 from django.conf import settings
+from django.utils.translation import gettext as _
 
 from conference.services import get_active_conference
 
@@ -22,7 +23,7 @@ def whatsapp_contact(request):
         }
 
     message = quote(
-        "Bonjour, je souhaite connaître les méthodes de paiement pour la conférence."
+        _("Bonjour, je souhaite connaître les méthodes de paiement pour la conférence.")
     )
     return {
         'whatsapp_contact_number': number,

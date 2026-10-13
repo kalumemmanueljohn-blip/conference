@@ -42,51 +42,9 @@
                     </div>
                 </div>
 
-                <h2 class="payment-title">{% trans "Choisissez votre méthode de paiement" %}</h2>
+                <h2 class="payment-title">{% trans "Payez par WhatsApp" %}</h2>
 
                 <div class="payment-methods">
-
-                    <!-- SASPAY -->
-                    <div class="payment-method-card" style="cursor:default;">
-                        <div class="payment-method-icon" style="background: linear-gradient(135deg, #2563eb, #1e40af);">
-                            <i class="bi bi-credit-card-2-front-fill"></i>
-                        </div>
-                        <div class="payment-method-content">
-                            <h3>SASPAY</h3>
-                            <p>{% trans "Paiement mobile money en USD. Vous recevez une notification sur votre téléphone." %}</p>
-                            <span class="payment-method-badge">
-                                <i class="bi bi-lightning-charge-fill"></i>
-                                {% trans "Recommandé" %}
-                            </span>
-
-                            <form method="post"
-                                  action="{% url 'payments:saspay_init' reservation.reference %}"
-                                  class="mt-3">
-                                {% csrf_token %}
-                                <div class="mb-2">
-                                    <label class="form-label" style="font-size:.85rem;">
-                                        {% trans "Votre opérateur mobile money" %}
-                                    </label>
-                                    <select name="saspay_network" class="form-select" required>
-                                        <option value="vodacom_cd_usd">
-                                            {% trans "Vodacom Congo (M-Pesa USD)" %}
-                                        </option>
-                                        <option value="airtel_cd_usd">
-                                            {% trans "Airtel Congo (USD)" %}
-                                        </option>
-                                        <option value="orange_cd_usd">
-                                            {% trans "Orange Congo (USD)" %}
-                                        </option>
-                                    </select>
-                                </div>
-                                <button type="submit" class="btn btn-primary w-100">
-                                    <i class="bi bi-arrow-right-circle-fill"></i>
-                                    {% trans "Payer avec SASPAY" %}
-                                </button>
-                            </form>
-                        </div>
-                    </div>
-
                     <!-- WhatsApp -->
                     <a href="{% url 'payments:whatsapp_init' reservation.reference %}" class="payment-method-card">
                         <div class="payment-method-icon" style="background: linear-gradient(135deg, #10b981, #059669);">
@@ -94,7 +52,11 @@
                         </div>
                         <div class="payment-method-content">
                             <h3>WhatsApp</h3>
-                            <p>{% trans "Payez via WhatsApp et envoyez votre preuve. Validation manuelle par un administrateur." %}</p>
+                            <p>{% trans "Contactez-nous sur WhatsApp pour recevoir les instructions, puis envoyez votre preuve de paiement. Un administrateur vérifiera votre paiement." %}</p>
+                            <span class="text-success fw-bold">
+                                {% trans "Continuer avec WhatsApp" %}
+                                <i class="bi bi-arrow-right"></i>
+                            </span>
                         </div>
                         <i class="bi bi-arrow-right payment-method-arrow"></i>
                     </a>

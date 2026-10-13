@@ -1,7 +1,7 @@
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404, redirect, render
-from django.utils.translation import gettext_lazy as _
+from django.utils.translation import gettext as _
 
 from reservations.models import Reservation
 
@@ -65,14 +65,20 @@ def whatsapp_init_view(request, reference):
         return redirect('payments:choose', reference=reference)
 
     # Message WhatsApp pré-rempli
-    whatsapp_message = (
-        f"Bonjour, je souhaite payer ma réservation.\n"
-        f"Référence : {reservation.reference}\n"
-        f"Montant : {payment.amount} {payment.currency}\n"
-        f"Nombre de places : {reservation.seats}\n"
-        f"Nom : {reservation.user.full_name}\n"
-        f"\nMerci de m'envoyer les instructions de paiement."
-    )
+    whatsapp_message = _(
+        "Bonjour, je souhaite payer ma réservation.\n"
+        "Référence : %(reference)s\n"
+        "Montant : %(amount)s %(currency)s\n"
+        "Nombre de places : %(seats)s\n"
+        "Nom : %(name)s\n"
+        "\nMerci de m'envoyer les instructions de paiement."
+    ) % {
+        'reference': reservation.reference,
+        'amount': payment.amount,
+        'currency': payment.currency,
+        'seats': reservation.seats,
+        'name': reservation.user.full_name,
+    }
 
     return render(request, 'payments/whatsapp_instructions.html', {
         'reservation': reservation,
