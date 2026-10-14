@@ -2,9 +2,13 @@ import logging
 
 from django.contrib import messages
 from django.contrib.admin.views.decorators import staff_member_required
+from django.core.paginator import Paginator
+from django.db.models import Count, Q
 from django.shortcuts import get_object_or_404, redirect, render
+from django.urls import reverse
 from django.utils.translation import gettext_lazy as _
 
+from conference.services import get_active_conference
 from tickets.models import Ticket
 from tickets.services import TicketError, mark_participant_present, validate_ticket
 
@@ -68,20 +72,66 @@ def dashboard_search_view(request):
 
 @staff_member_required
 def checkin_view(request):
-    """Page de contrôle à l'entrée (recherche + scan)."""
+    """Page de contrôle à l'entrée avec recherche et liste de présence."""
     query = request.GET.get('q', '').strip()
     ticket = None
     error = None
 
+    active_conference = get_active_conference()
+    all_tickets = Ticket.objects.select_related(
+        'reservation',
+        'reservation__user',
+        'reservation__conference',
+        'checked_by',
+    )
+    if active_conference:
+        all_tickets = all_tickets.filter(
+            reservation__conference=active_conference,
+        )
+
     if query:
         ticket = validate_ticket(query)
-        if not ticket:
+        if (
+            ticket
+            and active_conference
+            and ticket.reservation.conference_id != active_conference.id
+        ):
+            ticket = None
+
+        if ticket:
+            tickets = all_tickets.filter(pk=ticket.pk)
+        else:
+            tickets = search_tickets(query)
+            if active_conference:
+                tickets = tickets.filter(
+                    reservation__conference=active_conference,
+                )
+
+        if not ticket and not tickets.exists():
             error = _("Aucun billet trouvé pour « %(q)s ».") % {'q': query}
+    else:
+        tickets = all_tickets.order_by(
+            'reservation__user__last_name',
+            'reservation__user__first_name',
+            'ticket_reference',
+        )
+
+    attendance = all_tickets.aggregate(
+        total=Count('id'),
+        used=Count('id', filter=Q(status='used')),
+        awaiting=Count('id', filter=Q(status='generated')),
+        cancelled=Count('id', filter=Q(status='cancelled')),
+    )
+    page_obj = Paginator(tickets, 50).get_page(request.GET.get('page'))
 
     return render(request, 'dashboard/checkin.html', {
         'query': query,
         'ticket': ticket,
         'error': error,
+        'active_conference': active_conference,
+        'attendance': attendance,
+        'page_obj': page_obj,
+        'tickets': page_obj.object_list,
     })
 
 
@@ -92,6 +142,9 @@ def checkin_confirm_view(request, reference):
         return redirect('dashboard:checkin')
 
     ticket = get_object_or_404(Ticket, ticket_reference=reference)
+    active_conference = get_active_conference()
+    if active_conference and ticket.reservation.conference_id != active_conference.id:
+        return redirect('dashboard:checkin')
 
     try:
         mark_participant_present(ticket, request.user)
@@ -102,7 +155,7 @@ def checkin_confirm_view(request, reference):
     except TicketError as e:
         messages.error(request, str(e))
 
-    return redirect('dashboard:checkin')
+    return redirect(f"{reverse('dashboard:checkin')}?q={ticket.ticket_reference}")
 
 
 # ============================================================

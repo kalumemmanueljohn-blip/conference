@@ -258,6 +258,129 @@ msgstr "Reference:"
 msgid "Montant :"
 msgstr "Amount:"
 
+msgid "Contrôle à l'entrée"
+msgstr "Entrance check-in"
+
+msgid "Contrôle"
+msgstr "Check-in"
+
+msgid "Retour"
+msgstr "Back"
+
+msgid "Valide"
+msgstr "Valid"
+
+msgid "Utilisé"
+msgstr "Used"
+
+msgid "Scannez un billet ou recherchez un participant dans la liste."
+msgstr "Scan a ticket or find a participant in the list."
+
+msgid "Scanner un QR, ou chercher par nom, référence, email, WhatsApp..."
+msgstr "Scan a QR code or search by name, reference, email, or WhatsApp..."
+
+msgid "Rechercher / vérifier"
+msgstr "Search / verify"
+
+msgid "Billet introuvable"
+msgstr "Ticket not found"
+
+msgid "Aucun billet trouvé pour « %(q)s »."
+msgstr "No ticket found for “%(q)s”."
+
+msgid "Billet valide"
+msgstr "Valid ticket"
+
+msgid "Billet déjà utilisé"
+msgstr "Ticket already used"
+
+msgid "Billet annulé"
+msgstr "Cancelled ticket"
+
+msgid "Place"
+msgstr "Seat"
+
+msgid "WhatsApp"
+msgstr "WhatsApp"
+
+msgid "Statut"
+msgstr "Status"
+
+msgid "Utilisé le"
+msgstr "Used on"
+
+msgid "Contrôlé par"
+msgstr "Checked by"
+
+msgid "Valider la présence"
+msgstr "Confirm attendance"
+
+msgid "Ce billet a déjà été scanné. Entrée refusée."
+msgstr "This ticket has already been scanned. Entry denied."
+
+msgid "Billets enregistrés"
+msgstr "Tickets issued"
+
+msgid "Entrées validées"
+msgstr "Entries confirmed"
+
+msgid "En attente d'entrée"
+msgstr "Awaiting entry"
+
+msgid "Billets annulés"
+msgstr "Cancelled tickets"
+
+msgid "Résultats de recherche"
+msgstr "Search results"
+
+msgid "Liste de présence"
+msgstr "Attendance list"
+
+msgid "Afficher toute la liste"
+msgstr "Show full list"
+
+msgid "Billet"
+msgstr "Ticket"
+
+msgid "Statut / entrée"
+msgstr "Status / entry"
+
+msgid "Action"
+msgstr "Action"
+
+msgid "Valide · entrée à confirmer"
+msgstr "Valid · entry not yet confirmed"
+
+msgid "Annulé"
+msgstr "Cancelled"
+
+msgid "Confirmer l'entrée"
+msgstr "Confirm entry"
+
+msgid "Entrée déjà confirmée"
+msgstr "Entry already confirmed"
+
+msgid "Non admissible"
+msgstr "Not eligible"
+
+msgid "Pagination de la liste de présence"
+msgstr "Attendance list pagination"
+
+msgid "Précédent"
+msgstr "Previous"
+
+msgid "Page %(current)s sur %(total)s"
+msgstr "Page %(current)s of %(total)s"
+
+msgid "Suivant"
+msgstr "Next"
+
+msgid "Aucun billet ne correspond à cette recherche."
+msgstr "No tickets match this search."
+
+msgid "Aucun billet à afficher pour le moment."
+msgstr "There are no tickets to show yet."
+
 msgid "Fichier de preuve"
 msgstr "Proof file"
 

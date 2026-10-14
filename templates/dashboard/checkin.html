@@ -13,7 +13,12 @@
             <div>
                 <span class="dashboard-label">{% trans "Contrôle" %}</span>
                 <h1>{% trans "Contrôle à l'entrée" %}</h1>
-                <p>{% trans "Scannez un QR code ou recherchez manuellement" %}</p>
+                <p>
+                    {% if active_conference %}
+                        {{ active_conference.title }} ·
+                    {% endif %}
+                    {% trans "Scannez un billet ou recherchez un participant dans la liste." %}
+                </p>
             </div>
             <a href="{% url 'dashboard:home' %}" class="btn btn-outline-dark">
                 <i class="bi bi-arrow-left"></i>
@@ -28,11 +33,11 @@
                 <input type="text"
                        name="q"
                        value="{{ query }}"
-                       placeholder="{% trans 'Scanner QR, référence, email, WhatsApp...' %}"
+                       placeholder="{% trans 'Scanner un QR, ou chercher par nom, référence, email, WhatsApp...' %}"
                        class="checkin-input"
                        autofocus>
                 <button type="submit" class="btn btn-primary">
-                    {% trans "Vérifier" %}
+                    {% trans "Rechercher / vérifier" %}
                 </button>
             </div>
         </form>
@@ -98,7 +103,7 @@
                     </div>
                     <div class="checkin-info-item">
                         <span>{% trans "Statut" %}</span>
-                        <span class="reservation-status status-{{ ticket.status }}">
+                        <span class="reservation-status {% if ticket.status == 'generated' %}status-ticket_generated{% elif ticket.status == 'used' %}status-present{% else %}status-cancelled{% endif %}">
                             {% if ticket.status == 'generated' %}{% trans "Valide" %}
                             {% elif ticket.status == 'used' %}{% trans "Utilisé" %}
                             {% else %}{{ ticket.get_status_display }}{% endif %}
@@ -108,6 +113,12 @@
                     <div class="checkin-info-item">
                         <span>{% trans "Utilisé le" %}</span>
                         <strong>{{ ticket.used_at|date:"d F Y à H:i" }}</strong>
+                    </div>
+                    {% endif %}
+                    {% if ticket.checked_by %}
+                    <div class="checkin-info-item">
+                        <span>{% trans "Contrôlé par" %}</span>
+                        <strong>{{ ticket.checked_by.full_name|default:ticket.checked_by.email }}</strong>
                     </div>
                     {% endif %}
                 </div>
@@ -136,15 +147,125 @@
         </div>
         {% endif %}
 
-        {% if not query and not ticket %}
-        <div class="empty-state mt-4">
-            <div class="empty-state-icon">
-                <i class="bi bi-qr-code-scan"></i>
+        <div class="stats-grid mt-4 mb-4">
+            <div class="stat-card">
+                <span class="stat-card-label">{% trans "Billets enregistrés" %}</span>
+                <strong class="stat-card-value">{{ attendance.total }}</strong>
             </div>
-            <h2>{% trans "Prêt pour le contrôle" %}</h2>
-            <p>{% trans "Scannez un QR code ou tapez une référence pour valider la présence." %}</p>
+            <div class="stat-card">
+                <span class="stat-card-label">{% trans "Entrées validées" %}</span>
+                <strong class="stat-card-value">{{ attendance.used }}</strong>
+            </div>
+            <div class="stat-card">
+                <span class="stat-card-label">{% trans "En attente d'entrée" %}</span>
+                <strong class="stat-card-value">{{ attendance.awaiting }}</strong>
+            </div>
+            <div class="stat-card">
+                <span class="stat-card-label">{% trans "Billets annulés" %}</span>
+                <strong class="stat-card-value">{{ attendance.cancelled }}</strong>
+            </div>
         </div>
-        {% endif %}
+
+        <div class="admin-card">
+            <div class="admin-card-header">
+                <h2>
+                    {% if query %}{% trans "Résultats de recherche" %}{% else %}{% trans "Liste de présence" %}{% endif %}
+                    ({{ page_obj.paginator.count }})
+                </h2>
+                {% if query %}
+                <a href="{% url 'dashboard:checkin' %}" class="btn btn-sm btn-outline-dark">
+                    {% trans "Afficher toute la liste" %}
+                </a>
+                {% endif %}
+            </div>
+
+            {% if tickets %}
+            <div class="table-responsive">
+                <table class="admin-table">
+                    <thead>
+                        <tr>
+                            <th>{% trans "Billet" %}</th>
+                            <th>{% trans "Participant" %}</th>
+                            <th>{% trans "Place" %}</th>
+                            <th>{% trans "Statut / entrée" %}</th>
+                            <th>{% trans "Contrôlé par" %}</th>
+                            <th>{% trans "Action" %}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for listed_ticket in tickets %}
+                        <tr>
+                            <td><code>{{ listed_ticket.ticket_reference }}</code></td>
+                            <td>
+                                <strong>{{ listed_ticket.reservation.user.full_name }}</strong><br>
+                                <small>{{ listed_ticket.reservation.user.email }}</small><br>
+                                <small>{{ listed_ticket.reservation.user.whatsapp_number }}</small>
+                            </td>
+                            <td>{{ listed_ticket.seat_number }} / {{ listed_ticket.reservation.seats }}</td>
+                            <td>
+                                {% if listed_ticket.status == 'generated' %}
+                                <span class="reservation-status status-ticket_generated">{% trans "Valide · entrée à confirmer" %}</span>
+                                {% elif listed_ticket.status == 'used' %}
+                                <span class="reservation-status status-present">{% trans "Déjà utilisé" %}</span><br>
+                                <small>{{ listed_ticket.used_at|date:"d/m/Y H:i" }}</small>
+                                {% else %}
+                                <span class="reservation-status status-cancelled">{% trans "Annulé" %}</span>
+                                {% endif %}
+                            </td>
+                            <td>
+                                {% if listed_ticket.checked_by %}
+                                    {{ listed_ticket.checked_by.full_name|default:listed_ticket.checked_by.email }}
+                                {% else %}
+                                    <span class="text-muted">—</span>
+                                {% endif %}
+                            </td>
+                            <td>
+                                {% if listed_ticket.status == 'generated' %}
+                                <form method="post" action="{% url 'dashboard:checkin_confirm' listed_ticket.ticket_reference %}">
+                                    {% csrf_token %}
+                                    <button type="submit" class="btn btn-sm btn-primary">
+                                        {% trans "Confirmer l'entrée" %}
+                                    </button>
+                                </form>
+                                {% elif listed_ticket.status == 'used' %}
+                                <span class="text-muted">{% trans "Entrée déjà confirmée" %}</span>
+                                {% else %}
+                                <span class="text-muted">{% trans "Non admissible" %}</span>
+                                {% endif %}
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+
+            {% if page_obj.has_other_pages %}
+            <nav class="d-flex justify-content-between align-items-center mt-3" aria-label="{% trans 'Pagination de la liste de présence' %}">
+                {% if page_obj.has_previous %}
+                <a class="btn btn-outline-dark btn-sm" href="?{% if query %}q={{ query|urlencode }}&amp;{% endif %}page={{ page_obj.previous_page_number }}">
+                    {% trans "Précédent" %}
+                </a>
+                {% else %}
+                <span></span>
+                {% endif %}
+                <span class="text-muted">
+                    {% blocktrans with current=page_obj.number total=page_obj.paginator.num_pages %}Page {{ current }} sur {{ total }}{% endblocktrans %}
+                </span>
+                {% if page_obj.has_next %}
+                <a class="btn btn-outline-dark btn-sm" href="?{% if query %}q={{ query|urlencode }}&amp;{% endif %}page={{ page_obj.next_page_number }}">
+                    {% trans "Suivant" %}
+                </a>
+                {% else %}
+                <span></span>
+                {% endif %}
+            </nav>
+            {% endif %}
+            {% else %}
+            <p class="text-muted text-center py-4">
+                {% if query %}{% trans "Aucun billet ne correspond à cette recherche." %}{% else %}{% trans "Aucun billet à afficher pour le moment." %}{% endif %}
+            </p>
+            {% endif %}
+        </div>
 
     </div>
 </section>
