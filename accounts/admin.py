@@ -8,15 +8,15 @@ from .models import Profile, User
 @admin.register(User)
 class UserAdmin(BaseUserAdmin):
     list_display = (
-        'email', 'last_name', 'postnom', 'first_name',
+        'username', 'email', 'last_name', 'postnom', 'first_name',
         'whatsapp_number', 'is_participant', 'is_staff', 'is_active',
     )
     list_filter = ('is_participant', 'is_staff', 'is_active', 'date_joined')
-    search_fields = ('email', 'last_name', 'postnom', 'first_name', 'whatsapp_number')
+    search_fields = ('username', 'email', 'last_name', 'postnom', 'first_name', 'whatsapp_number')
     ordering = ('-date_joined',)
 
     fieldsets = (
-        (None, {'fields': ('email', 'password')}),
+        (None, {'fields': ('username', 'email', 'password')}),
         (_('Identité'), {'fields': ('last_name', 'postnom', 'first_name', 'whatsapp_number')}),
         (_('Permissions'), {
             'fields': ('is_active', 'is_staff', 'is_superuser', 'is_participant', 'groups', 'user_permissions'),
@@ -28,7 +28,7 @@ class UserAdmin(BaseUserAdmin):
         (None, {
             'classes': ('wide',),
             'fields': (
-                'email', 'last_name', 'postnom', 'first_name',
+                'username', 'email', 'last_name', 'postnom', 'first_name',
                 'whatsapp_number', 'password1', 'password2',
             ),
         }),

@@ -56,6 +56,14 @@
                             </div>
 
                             <div class="col-md-6">
+                                <label for="{{ form.username.id_for_label }}" class="form-label">
+                                    {% trans "Nom d'utilisateur" %} <span class="text-danger">*</span>
+                                </label>
+                                {{ form.username }}
+                                {% if form.username.errors %}<div class="field-error">{{ form.username.errors.0 }}</div>{% endif %}
+                            </div>
+
+                            <div class="col-md-6">
                                 <label for="{{ form.whatsapp_number.id_for_label }}" class="form-label">
                                     {% trans "WhatsApp" %} <span class="text-danger">*</span>
                                 </label>
@@ -65,10 +73,13 @@
 
                             <div class="col-12">
                                 <label for="{{ form.email.id_for_label }}" class="form-label">
-                                    {% trans "Adresse email" %} <span class="text-danger">*</span>
+                                    {% trans "Adresse email" %} <span class="text-muted">({% trans "facultatif" %})</span>
                                 </label>
                                 {{ form.email }}
                                 {% if form.email.errors %}<div class="field-error">{{ form.email.errors.0 }}</div>{% endif %}
+                                <small class="form-text text-muted">
+                                    {% trans "Sans email, vous ne pourrez pas recevoir les notifications ni réinitialiser votre mot de passe par email." %}
+                                </small>
                             </div>
 
                             <div class="col-md-6">

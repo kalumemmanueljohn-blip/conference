@@ -24,9 +24,21 @@ class RegistrationForm(UserCreationForm):
         label=_("Postnom"), max_length=100,
         widget=forms.TextInput(attrs={'class': 'form-control'}),
     )
+    username = forms.CharField(
+        label=_("Nom d'utilisateur"),
+        max_length=150,
+        widget=forms.TextInput(attrs={
+            'class': 'form-control',
+            'autocomplete': 'username',
+        }),
+    )
     email = forms.EmailField(
         label=_("Adresse email"),
-        widget=forms.EmailInput(attrs={'class': 'form-control', 'autocomplete': 'email'}),
+        required=False,
+        widget=forms.EmailInput(attrs={
+            'class': 'form-control',
+            'autocomplete': 'email',
+        }),
     )
     whatsapp_number = forms.CharField(
         label=_("Numéro WhatsApp"), max_length=20,
@@ -44,36 +56,49 @@ class RegistrationForm(UserCreationForm):
 
     class Meta:
         model = User
-        fields = ('last_name', 'postnom', 'first_name', 'email', 'whatsapp_number')
+        fields = (
+            'username',
+            'last_name',
+            'postnom',
+            'first_name',
+            'email',
+            'whatsapp_number',
+        )
 
     def clean_email(self):
-        email = self.cleaned_data['email'].lower()
+        email = self.cleaned_data.get('email')
+        if not email:
+            return None
+        email = email.strip().lower()
         if User.objects.filter(email__iexact=email).exists():
             raise forms.ValidationError(_("Cet email est déjà utilisé."))
         return email
 
     def save(self, commit=True):
         user = super().save(commit=False)
-        user.email = self.cleaned_data['email'].lower()
+        user.email = self.cleaned_data.get('email') or None
         user.postnom = self.cleaned_data['postnom']
         user.whatsapp_number = self.cleaned_data['whatsapp_number']
-        user.username = user.email   # username = email
         if commit:
             user.save()
         return user
 
 
 class LoginForm(AuthenticationForm):
-    """Formulaire de connexion par email."""
+    """Formulaire de connexion par nom d'utilisateur."""
 
-    username = forms.EmailField(
-        label=_("Adresse email"),
-        widget=forms.EmailInput(attrs={'class': 'form-control', 'autocomplete': 'email'}),
-    )
     password = forms.CharField(
         label=_("Mot de passe"),
         widget=forms.PasswordInput(attrs={'class': 'form-control', 'autocomplete': 'current-password'}),
     )
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['username'].label = _("Nom d'utilisateur")
+        self.fields['username'].widget.attrs.update({
+            'class': 'form-control',
+            'autocomplete': 'username',
+        })
 
 
 class ProfileUpdateForm(forms.ModelForm):

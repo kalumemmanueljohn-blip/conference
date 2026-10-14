@@ -11,7 +11,6 @@ from django.shortcuts import redirect, render
 from django.urls import reverse_lazy
 from django.utils.translation import gettext_lazy as _
 from django.views.generic import CreateView
-from notifications.services import send_welcome_email
 from .forms import (
     CustomPasswordChangeForm,
     LoginForm,
@@ -31,19 +30,15 @@ class RegisterView(CreateView):
         login(self.request, self.object)
         messages.success(self.request, _("Votre compte a été créé avec succès."))
 
-        # Envoi email de bienvenue (silencieux en cas d'erreur)
-        try:
+        if self.object.email:
             from notifications.services import send_welcome_email
             send_welcome_email(self.object)
-        except Exception:
-            pass
 
         return response
 
 
-
 def login_view(request):
-    """Connexion par email."""
+    """Connexion par nom d'utilisateur."""
     if request.user.is_authenticated:
         return redirect('accounts:dashboard')
 

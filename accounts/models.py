@@ -9,13 +9,15 @@ from .managers import UserManager
 class User(AbstractUser):
     """
     Utilisateur custom.
-    Connexion par email. Champs spécifiques RDC : postnom + WhatsApp.
+    Connexion par nom d'utilisateur. Champs spécifiques RDC : postnom + WhatsApp.
     """
 
     email = models.EmailField(
         _("Adresse email"),
         unique=True,
-        help_text=_("Utilisée comme identifiant de connexion."),
+        blank=True,
+        null=True,
+        help_text=_("Facultative. Utilisée pour recevoir les emails et réinitialiser le mot de passe."),
     )
     postnom = models.CharField(
         _("Postnom"),
@@ -37,8 +39,8 @@ class User(AbstractUser):
         default=True,
     )
 
-    USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = ['username', 'first_name', 'last_name', 'postnom', 'whatsapp_number']
+    USERNAME_FIELD = 'username'
+    REQUIRED_FIELDS = ['first_name', 'last_name', 'postnom', 'whatsapp_number']
 
     objects = UserManager()
 

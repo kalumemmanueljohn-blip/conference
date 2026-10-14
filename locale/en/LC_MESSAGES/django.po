@@ -64,6 +64,15 @@ msgstr "Contact"
 msgid "Créer un compte"
 msgstr "Create an account"
 
+msgid "Nom d'utilisateur"
+msgstr "Username"
+
+msgid "facultatif"
+msgstr "optional"
+
+msgid "Sans email, vous ne pourrez pas recevoir les notifications ni réinitialiser votre mot de passe par email."
+msgstr "Without an email address, you cannot receive notifications or reset your password by email."
+
 msgid "Demander les méthodes de paiement sur WhatsApp"
 msgstr "Ask for payment methods on WhatsApp"
 
