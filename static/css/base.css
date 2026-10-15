@@ -269,10 +269,56 @@ p{margin-top:0}
 .footer-credit a{color:var(--gold-2);overflow-wrap:anywhere}
 .footer-credit a:hover{color:var(--gold)}
 
+/* ========== CONFERENCE DETAIL CONTENT ========== */
+
+.conference-detail-hero{
+  background:
+    radial-gradient(ellipse at 50% 0%,rgba(214,166,58,.15),transparent 55%),
+    linear-gradient(145deg,#101a2d 0%,#080e19 100%);
+}
+.conference-detail-content{max-width:850px}
+.conference-detail-block{
+  padding:0 0 2rem;
+  margin:0 0 2rem;
+  border-bottom:1px solid #e5e7eb;
+}
+.conference-detail-block:last-child{border-bottom:0;margin-bottom:0}
+.conference-detail-block h2{
+  display:flex;
+  align-items:center;
+  gap:.75rem;
+  margin-bottom:1rem;
+  color:var(--navy);
+  font-size:clamp(1.35rem,2.5vw,1.7rem);
+}
+.conference-detail-block h2 i{
+  display:grid;
+  flex:0 0 42px;
+  width:42px;
+  height:42px;
+  place-items:center;
+  border-radius:13px;
+  background:#fff5d9;
+  color:#8a681e;
+  font-size:1.1rem;
+}
+.conference-detail-copy{
+  padding:1.5rem 1.65rem;
+  border:1px solid #e7e3d8;
+  border-radius:18px;
+  background:linear-gradient(145deg,#fff 0%,#fcfaf5 100%);
+  box-shadow:0 12px 30px rgba(11,19,36,.055);
+  color:#465267;
+  font-size:1rem;
+  line-height:1.9;
+}
+.conference-detail-copy p:last-child{margin-bottom:0}
+
 @media (max-width:767px){
   .site-footer{padding:3rem 0 1.2rem}
   .site-footer .row{row-gap:1.5rem}
   .footer-bottom{margin-top:1.75rem}
+  .conference-detail-copy{padding:1.2rem 1.1rem;line-height:1.8}
 }
 
 /* ========== SECTIONS ========== */
@@ -2634,14 +2680,16 @@ body .whatsapp-step p {
 
 @media (max-width:576px){
   .container{padding-inline:16px}
-  .main-content{padding-top:72px}
-  .site-header .navbar{min-height:68px}
+  .main-content{padding-top:86px}
+  .site-header .navbar{min-height:82px;padding:.4rem 0}
   .brand-text{display:none}
-  .brand-logo{height:46px}
+  .brand-logo{height:60px}
   .section-padding{padding:3.3rem 0}
   .section-padding-lg{padding:4rem 0}
   .btn{width:100%}
   .btn-reserve{width:100%}
+  .conference-detail-block{margin-bottom:1.6rem;padding-bottom:1.6rem}
+  .conference-detail-copy{padding:1.05rem .95rem;font-size:.95rem}
 }
 
 @media (max-width:380px){
