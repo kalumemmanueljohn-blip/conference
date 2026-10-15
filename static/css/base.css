@@ -57,7 +57,7 @@ h1,h2,h3,h4,h5,h6{margin-top:0;color:var(--navy);font-weight:800;line-height:1.1
 p{margin-top:0}
 .container{width:100%;margin-inline:auto;padding-inline:20px}
 
-.main-content{flex:1;padding-top:78px}
+.main-content{flex:1;padding-top:90px}
 
 /* ========== HEADER ========== */
 
@@ -73,7 +73,7 @@ p{margin-top:0}
 }
 
 .site-header .navbar{
-  min-height:76px;
+  min-height:88px;
   padding:.65rem 0;
   background:transparent;
 }
@@ -86,7 +86,7 @@ p{margin-top:0}
   font-weight:800;
 }
 
-.brand-logo{width:auto;height:44px;object-fit:contain;transition:transform var(--ease)}
+.brand-logo{width:auto;height:58px;object-fit:contain;transition:transform var(--ease)}
 .navbar-brand:hover .brand-logo{transform:scale(1.04)}
 
 .brand-text{display:flex;flex-direction:column;line-height:1.1}
@@ -254,7 +254,7 @@ p{margin-top:0}
 .footer-links li,.footer-contact li{margin-bottom:.55rem;color:rgba(255,255,255,.76);font-size:.9rem}
 .footer-links a,.footer-contact a{color:rgba(255,255,255,.76);overflow-wrap:anywhere}
 .footer-links a:hover,.footer-contact a:hover{color:var(--gold-2)}
-.footer-links a:focus-visible,.footer-contact a:focus-visible,.footer-socials a:focus-visible{
+.footer-links a:focus-visible,.footer-contact a:focus-visible,.footer-socials a:focus-visible,.footer-credit a:focus-visible{
   outline:2px solid var(--gold-2);
   outline-offset:3px;
 }
@@ -265,6 +265,9 @@ p{margin-top:0}
 .footer-socials a:hover{background:var(--gold);color:var(--navy);transform:translateY(-2px)}
 .footer-bottom{margin-top:2.4rem;padding-top:1.2rem;border-top:1px solid rgba(255,255,255,.14);text-align:center;color:rgba(255,255,255,.68);font-size:.82rem}
 .footer-bottom p{margin:0}
+.footer-bottom .footer-credit{margin-top:.55rem}
+.footer-credit a{color:var(--gold-2);overflow-wrap:anywhere}
+.footer-credit a:hover{color:var(--gold)}
 
 @media (max-width:767px){
   .site-footer{padding:3rem 0 1.2rem}
@@ -2382,9 +2385,9 @@ body .whatsapp-step p {
    ========================================================= */
 
 @media (max-width:991px){
-  .main-content{padding-top:70px}
-  .site-header .navbar{min-height:68px}
-  .brand-logo{height:38px}
+  .main-content{padding-top:82px}
+  .site-header .navbar{min-height:76px}
+  .brand-logo{height:50px}
   .site-header .navbar-collapse{
     margin-top:.65rem;
     padding:.6rem;
@@ -2631,9 +2634,10 @@ body .whatsapp-step p {
 
 @media (max-width:576px){
   .container{padding-inline:16px}
-  .main-content{padding-top:64px}
+  .main-content{padding-top:72px}
+  .site-header .navbar{min-height:68px}
   .brand-text{display:none}
-  .brand-logo{height:36px}
+  .brand-logo{height:46px}
   .section-padding{padding:3.3rem 0}
   .section-padding-lg{padding:4rem 0}
   .btn{width:100%}

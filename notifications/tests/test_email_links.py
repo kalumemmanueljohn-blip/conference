@@ -1,11 +1,16 @@
 from datetime import datetime, timezone as datetime_timezone
+from html import unescape
 from types import SimpleNamespace
+from unittest.mock import patch
 
+from django.contrib.auth.models import AnonymousUser
 from django.core import mail
+from django.template.loader import render_to_string
 from django.test import SimpleTestCase, override_settings
+from django.test.client import RequestFactory
 from django.urls import reverse
 
-from config.context_processors import whatsapp_contact
+from config.context_processors import footer_contact, whatsapp_contact
 from notifications.services import (
     send_ticket_ready_email,
     send_welcome_email,
@@ -95,3 +100,31 @@ class _TicketCollection:
 
     def __iter__(self):
         return iter(())
+
+
+class FooterContactTests(SimpleTestCase):
+    @override_settings(
+        WHATSAPP_ADMIN_NUMBER='+243830360200',
+        WHATSAPP_PAYMENT_NUMBER='+243830360200',
+    )
+    def test_footer_renders_the_provided_organization_contacts_and_developer(self):
+        request = RequestFactory().get('/')
+
+        with patch('config.context_processors.get_active_conference', return_value=None):
+            context = footer_contact(request)
+            context.update(whatsapp_contact(request))
+            context['user'] = AnonymousUser()
+            html = render_to_string('partials/_footer.html', context)
+
+        for contact in (
+            'Kinshasa, RDC',
+            '+243986698720',
+            'bantondosgeneration@gmail.com',
+            'Facebook : BG/Absl',
+            'Instagram : BG/Asbl',
+            "@Bantondo'sGeneration",
+            "TikTok : Bantondo's Generation",
+            'Développé par Kalume Emmanuel John',
+            'WhatsApp : +243830360200',
+        ):
+            self.assertIn(contact, unescape(html))

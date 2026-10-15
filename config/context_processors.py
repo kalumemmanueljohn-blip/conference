@@ -1,4 +1,3 @@
-from email.utils import parseaddr
 from urllib.parse import quote
 
 from django.conf import settings
@@ -33,7 +32,6 @@ def whatsapp_contact(request):
 
 def footer_contact(request):
     conference = get_active_conference()
-    sender_email = parseaddr(settings.DEFAULT_FROM_EMAIL)[1]
 
     return {
         'footer_conference': conference,
@@ -41,15 +39,22 @@ def footer_contact(request):
             conference.contact_address if conference and conference.contact_address
             else 'Kinshasa, RDC'
         ),
-        'footer_contact_phone': conference.contact_phone if conference else '',
+        'footer_contact_phone': (
+            conference.contact_phone if conference and conference.contact_phone
+            else '+243986698720'
+        ),
         'footer_contact_email': (
             conference.contact_email if conference and conference.contact_email
-            else sender_email
+            else 'bantondosgeneration@gmail.com'
         ),
         'footer_social_facebook': conference.social_facebook if conference else '',
+        'footer_social_facebook_label': 'BG/Absl',
         'footer_social_instagram': conference.social_instagram if conference else '',
+        'footer_social_instagram_label': 'BG/Asbl',
         'footer_social_twitter': conference.social_twitter if conference else '',
+        'footer_social_twitter_label': "@Bantondo'sGeneration",
         'footer_social_tiktok': conference.social_tiktok if conference else '',
+        'footer_social_tiktok_label': "Bantondo's Generation",
         'footer_social_linkedin': conference.social_linkedin if conference else '',
         'footer_social_youtube': conference.social_youtube if conference else '',
     }

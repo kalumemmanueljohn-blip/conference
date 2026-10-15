@@ -97,6 +97,50 @@
                     </li>
                     {% endif %}
 
+                    <li>
+                        <i class="bi bi-facebook"></i>
+                        {% if footer_social_facebook %}
+                            <a href="{{ footer_social_facebook }}" target="_blank" rel="noopener noreferrer">
+                                {% trans "Facebook" %} : {{ footer_social_facebook_label }}
+                            </a>
+                        {% else %}
+                            <span>{% trans "Facebook" %} : {{ footer_social_facebook_label }}</span>
+                        {% endif %}
+                    </li>
+
+                    <li>
+                        <i class="bi bi-instagram"></i>
+                        {% if footer_social_instagram %}
+                            <a href="{{ footer_social_instagram }}" target="_blank" rel="noopener noreferrer">
+                                {% trans "Instagram" %} : {{ footer_social_instagram_label }}
+                            </a>
+                        {% else %}
+                            <span>{% trans "Instagram" %} : {{ footer_social_instagram_label }}</span>
+                        {% endif %}
+                    </li>
+
+                    <li>
+                        <i class="bi bi-twitter-x"></i>
+                        {% if footer_social_twitter %}
+                            <a href="{{ footer_social_twitter }}" target="_blank" rel="noopener noreferrer">
+                                {% trans "X (Twitter)" %} : {{ footer_social_twitter_label }}
+                            </a>
+                        {% else %}
+                            <span>{% trans "X (Twitter)" %} : {{ footer_social_twitter_label }}</span>
+                        {% endif %}
+                    </li>
+
+                    <li>
+                        <i class="bi bi-tiktok"></i>
+                        {% if footer_social_tiktok %}
+                            <a href="{{ footer_social_tiktok }}" target="_blank" rel="noopener noreferrer">
+                                {% trans "TikTok" %} : {{ footer_social_tiktok_label }}
+                            </a>
+                        {% else %}
+                            <span>{% trans "TikTok" %} : {{ footer_social_tiktok_label }}</span>
+                        {% endif %}
+                    </li>
+
                     {% if whatsapp_contact_url %}
                     <li>
                         <i class="bi bi-whatsapp" aria-hidden="true"></i>
@@ -119,6 +163,14 @@
             <p>
                 &copy; {% now "Y" %} Bantondo's Génération ASBL.
                 {% trans "Tous droits réservés." %}
+            </p>
+            <p class="footer-credit">
+                {% trans "Développé par" %} Kalume Emmanuel John ·
+                <a href="https://wa.me/243830360200"
+                   target="_blank"
+                   rel="noopener noreferrer">
+                    WhatsApp : +243830360200
+                </a>
             </p>
         </div>
     </div>

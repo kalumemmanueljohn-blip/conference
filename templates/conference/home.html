@@ -159,7 +159,7 @@
                         {% trans "La conférence" %}
                     </h2>
 
-                    <div class="about-lead">
+                    <div class="about-lead about-description-panel">
                         {{ conference.description|linebreaks }}
                     </div>
 
@@ -218,13 +218,16 @@
     <!-- ============================================================
          OBJECTIF
          ============================================================ -->
-    <section class="section-padding bg-black text-white">
+    <section class="section-padding objective-section text-white">
         <div class="container">
             <div class="row">
                 <div class="col-lg-8 mx-auto text-center">
                     <span class="section-label text-yellow">{% trans "Notre objectif" %}</span>
                     <h2 class="section-title text-white">{% trans "Pourquoi cette conférence ?" %}</h2>
-                    <div class="objective-text text-white-50">{{ conference.objective|linebreaks }}</div>
+                    <div class="objective-panel">
+                        <i class="bi bi-quote objective-quote" aria-hidden="true"></i>
+                        <div class="objective-text">{{ conference.objective|linebreaks }}</div>
+                    </div>
                 </div>
             </div>
 
