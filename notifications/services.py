@@ -6,9 +6,14 @@ import logging
 from django.conf import settings
 from django.core.mail import EmailMultiAlternatives
 from django.template.loader import render_to_string
+from django.urls import reverse
 from django.utils.html import strip_tags
 
 logger = logging.getLogger('notifications')
+
+
+def _site_url(route_name, *args):
+    return f"{settings.SITE_URL.rstrip('/')}{reverse(route_name, args=args)}"
 
 
 def _send_email(subject, template_name, context, recipient_list, reply_to=None):
@@ -54,7 +59,7 @@ def send_welcome_email(user):
         template_name='welcome',
         context={
             'user': user,
-            'login_url': f"{settings.SITE_URL}/compte/connexion/" if hasattr(settings, 'SITE_URL') else None,
+            'login_url': _site_url('accounts:login'),
         },
         recipient_list=[user.email],
     )
@@ -114,6 +119,10 @@ def send_whatsapp_rejected_email(proof):
             'reservation': proof.payment.reservation,
             'payment': proof.payment,
             'reason': proof.rejection_reason,
+            'reservation_url': _site_url(
+                'reservations:detail',
+                proof.payment.reservation.reference,
+            ),
         },
         recipient_list=[proof.payment.reservation.user.email],
     )
@@ -129,6 +138,10 @@ def send_ticket_ready_email(reservation):
             'reservation': reservation,
             'tickets': reservation.tickets.all(),
             'conference': reservation.conference,
+            'tickets_url': _site_url(
+                'tickets:reservation_tickets',
+                reservation.reference,
+            ),
         },
         recipient_list=[reservation.user.email],
     )

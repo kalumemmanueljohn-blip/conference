@@ -163,6 +163,10 @@ EMAIL_HOST_USER = config('EMAIL_HOST_USER', default='kalumemmanueljohn@gmail.com
 EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD', default='')
 EMAIL_USE_TLS = config('EMAIL_USE_TLS', default=True, cast=bool)
 DEFAULT_FROM_EMAIL = config('DEFAULT_FROM_EMAIL', default=EMAIL_HOST_USER)
+SITE_URL = config(
+    'SITE_URL',
+    default='https://www.bantondos.site',
+).rstrip('/')
 
 # ============================================================
 # VARIABLES MÃ‰TIER (Bantondo's GÃ©nÃ©ration ASBL)
@@ -185,10 +189,14 @@ SASPAY_DEFAULT_COUNTRY = config('SASPAY_DEFAULT_COUNTRY', default='XC')
 SASPAY_DEFAULT_CURRENCY = config('SASPAY_DEFAULT_CURRENCY', default='USD')
 
 # WhatsApp
-WHATSAPP_PAYMENT_NUMBER = config('WHATSAPP_PAYMENT_NUMBER', default='+243830360200')
-
-WHATSAPP_PAYMENT_NUMBER = config('WHATSAPP_PAYMENT_NUMBER', default='')
-WHATSAPP_ADMIN_NUMBER = config('WHATSAPP_ADMIN_NUMBER', default='')
+WHATSAPP_PAYMENT_NUMBER = config(
+    'WHATSAPP_PAYMENT_NUMBER',
+    default='+243830360200',
+).strip() or '+243830360200'
+WHATSAPP_ADMIN_NUMBER = config(
+    'WHATSAPP_ADMIN_NUMBER',
+    default='+243830360200',
+).strip()
 
 # ============================================================
 # LOGGING (sÃ©parÃ© par domaine)
