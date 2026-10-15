@@ -594,14 +594,49 @@
 }
 .practical-card small{color:#596477;font-size:.82rem}
 .practical-info-box{
-  padding:1.35rem 1.5rem;
-  border:1px solid var(--border);
-  border-radius:var(--radius);
-  background:#fff;
-  color:#4b5565;
-  line-height:1.75;
+  max-width:900px;
+  margin-inline:auto;
+  padding:clamp(1.25rem,3vw,2rem);
+  border:1px solid rgba(240,200,102,.32);
+  border-radius:22px;
+  background:
+    radial-gradient(ellipse at 100% 0%,rgba(214,166,58,.14),transparent 42%),
+    linear-gradient(145deg,#14213a 0%,#09111f 100%);
+  box-shadow:0 22px 48px rgba(11,19,36,.16);
+  color:rgba(255,255,255,.88);
 }
-.practical-info-box p:last-child{margin-bottom:0}
+.practical-info-heading{
+  display:flex;
+  align-items:center;
+  gap:.8rem;
+  margin-bottom:1.1rem;
+}
+.practical-info-icon{
+  width:42px;
+  height:42px;
+  flex:0 0 42px;
+  display:grid;
+  place-items:center;
+  border:1px solid rgba(240,200,102,.32);
+  border-radius:13px;
+  background:rgba(240,200,102,.12);
+  color:#f0c866;
+  font-size:1.2rem;
+}
+.practical-info-heading h3{
+  margin:0;
+  color:#f0c866;
+  font-size:clamp(1rem,2vw,1.15rem);
+  font-weight:800;
+}
+.practical-info-content{
+  color:rgba(255,255,255,.9);
+  font-size:1rem;
+  line-height:1.85;
+  overflow-wrap:anywhere;
+}
+.practical-info-content p{margin:0 0 .85rem}
+.practical-info-content p:last-child{margin-bottom:0}
 
 /* =========================================================
    INFORMATIONS PRATIQUES — Design premium
@@ -964,6 +999,8 @@
   .objective-text{font-size:.96rem;line-height:1.8}
   .about-lead p:first-child{font-size:.98rem;line-height:1.75}
   .about-lead p{font-size:.91rem;line-height:1.8}
+  .practical-info-box{padding:1.2rem 1rem;border-radius:17px}
+  .practical-info-content{font-size:.96rem;line-height:1.8}
 
   .countdown-section{padding:3.5rem 0}
   .countdown-section::after{display:none}

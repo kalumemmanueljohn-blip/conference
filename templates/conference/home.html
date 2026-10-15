@@ -403,7 +403,15 @@
             <div class="row mt-5">
                 <div class="col-lg-8 mx-auto fade-in-up">
                     <div class="practical-info-box">
-                        {{ conference.practical_info|linebreaks }}
+                        <div class="practical-info-heading">
+                            <span class="practical-info-icon" aria-hidden="true">
+                                <i class="bi bi-info-lg"></i>
+                            </span>
+                            <h3>{% trans "Détails de la conférence" %}</h3>
+                        </div>
+                        <div class="practical-info-content">
+                            {{ conference.practical_info|linebreaks }}
+                        </div>
                     </div>
                 </div>
             </div>
