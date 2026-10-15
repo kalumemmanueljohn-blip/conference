@@ -113,13 +113,8 @@
                         <!-- Bloc QR -->
                         <div class="ticket-card-qr-section">
                             <div class="ticket-card-qr-frame">
-                                {% if ticket.qr_image %}
-                                    <img src="{{ ticket.qr_image.url }}" alt="QR Code">
-                                {% else %}
-                                    <div class="ticket-card-qr-placeholder">
-                                        <i class="bi bi-qr-code"></i>
-                                    </div>
-                                {% endif %}
+                                <img src="{% url 'tickets:qr_image' ticket.ticket_reference %}"
+                                     alt="{% trans 'QR code du billet' %}">
                             </div>
                             <div class="ticket-card-qr-label">
                                 {% trans "Scannez ce code à l'entrée" %}

@@ -101,11 +101,8 @@
 
                 <!-- QR -->
                 <div class="ticket-grid-qr">
-                    {% if ticket.qr_image %}
-                        <img src="{{ ticket.qr_image.url }}" alt="QR">
-                    {% else %}
-                        <i class="bi bi-qr-code"></i>
-                    {% endif %}
+                    <img src="{% url 'tickets:qr_image' ticket.ticket_reference %}"
+                         alt="{% trans 'QR code du billet' %}">
                 </div>
 
                 <!-- Infos -->

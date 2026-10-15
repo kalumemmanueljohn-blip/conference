@@ -47,7 +47,12 @@
 
                 <section class="conference-detail-block">
                     <h2><i class="bi bi-chat-square-text" aria-hidden="true"></i>{% trans "Description" %}</h2>
-                    <div class="conference-detail-copy">{{ conference.description|linebreaks }}</div>
+                    <div class="about-lead about-description-panel">
+                        <span class="about-description-mark" aria-hidden="true">“</span>
+                        <div class="about-description-content">
+                            {{ conference.description|linebreaks }}
+                        </div>
+                    </div>
                 </section>
 
                 <section class="conference-detail-block">

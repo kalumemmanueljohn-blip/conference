@@ -6,6 +6,7 @@ app_name = 'tickets'
 
 urlpatterns = [
     # Billet individuel
+    path('billet/<str:reference>/qr/', views.ticket_qr_image_view, name='qr_image'),
     path('billet/<str:reference>/', views.ticket_detail_view, name='detail'),
     path('billet/<str:reference>/pdf/', views.ticket_download_pdf_view, name='download_pdf'),
 

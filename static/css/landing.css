@@ -168,20 +168,12 @@
   font-size:1rem;
   line-height:1.85;
 }
-.about-description-panel{
-  max-width:720px;
-  padding:1.35rem 1.5rem;
-  border:1px solid #e7e3d8;
-  border-radius:18px;
-  background:linear-gradient(145deg,#fff 0%,#fcfaf5 100%);
-  box-shadow:0 14px 36px rgba(11,19,36,.055);
-}
 .about-lead p:first-child{
-  font-size:1.04rem;
-  color:#334155;
+  font-size:1rem;
+  color:rgba(255,255,255,.94);
   font-weight:500;
   margin-bottom:1.25rem;
-  line-height:1.75;
+  line-height:1.85;
 }
 .about-lead p{margin-bottom:1rem}
 .about-lead p:last-child{margin-bottom:0}
@@ -968,7 +960,6 @@
   .hero-stat-label{font-size:.52rem;line-height:1.35}
 
   .about-section{padding:4.2rem 0}
-  .about-description-panel{padding:1.1rem 1rem}
   .objective-panel{padding:1.35rem 1rem;border-radius:16px}
   .objective-text{font-size:.96rem;line-height:1.8}
   .about-lead p:first-child{font-size:.98rem;line-height:1.75}

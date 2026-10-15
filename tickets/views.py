@@ -8,7 +8,24 @@ from django.shortcuts import get_object_or_404, redirect, render
 from django.utils.translation import gettext_lazy as _
 
 from .models import Ticket
+from .qr import generate_qr_image
 from .services import get_grouped_pdf_bytes
+
+
+@login_required
+def ticket_qr_image_view(request, reference):
+    """Génère le QR du billet à la demande, sans exposer le stockage média."""
+    ticket = get_object_or_404(
+        Ticket.objects.only('qr_token'),
+        ticket_reference=reference,
+        reservation__user=request.user,
+    )
+    response = HttpResponse(
+        generate_qr_image(ticket.qr_token).read(),
+        content_type='image/png',
+    )
+    response['Cache-Control'] = 'private, max-age=300'
+    return response
 
 
 @login_required
