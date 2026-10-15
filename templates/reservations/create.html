@@ -54,8 +54,12 @@
                         {{ conference.location }}
                     </p>
                     <div class="booking-price">
-                        <span class="booking-price-value">{{ conference.price_per_seat }} {{ conference.currency }}</span>
-                        <span class="booking-price-label">{% trans "par place" %}</span>
+                        {% if conference.is_free %}
+                            <span class="booking-price-value">{% trans "Gratuit" %}</span>
+                        {% else %}
+                            <span class="booking-price-value">{{ conference.price_per_seat }} {{ conference.currency }}</span>
+                            <span class="booking-price-label">{% trans "par place" %}</span>
+                        {% endif %}
                     </div>
                 </div>
 
@@ -77,6 +81,7 @@
                             </div>
                         </div>
 
+                        {% if not conference.is_free %}
                         <div class="booking-seats-selector mt-3">
                             <label for="{{ form.payment_phone_number.id_for_label }}" class="form-label">
                                 <i class="bi bi-phone-fill text-warning"></i>
@@ -90,6 +95,7 @@
                                 {% trans "Ce numéro recevra la demande de paiement SASPAY ou WhatsApp. Par défaut : votre numéro WhatsApp." %}
                             </div>
                         </div>
+                        {% endif %}
 
                         <div class="booking-info mt-3">
                             <div class="booking-info-row">
@@ -98,14 +104,24 @@
                             </div>
                             <div class="booking-info-row">
                                 <span>{% trans "Prix unitaire" %}</span>
-                                <strong>{{ conference.price_per_seat }} {{ conference.currency }}</strong>
+                                <strong>
+                                    {% if conference.is_free %}
+                                        {% trans "Gratuit" %}
+                                    {% else %}
+                                        {{ conference.price_per_seat }} {{ conference.currency }}
+                                    {% endif %}
+                                </strong>
                             </div>
                         </div>
 
                         <div class="d-flex gap-2 mt-4">
                             <button type="submit" class="btn btn-primary btn-lg flex-fill">
                                 <i class="bi bi-arrow-right-circle-fill"></i>
-                                {% trans "Continuer vers le paiement" %}
+                                {% if conference.is_free %}
+                                    {% trans "Réserver gratuitement" %}
+                                {% else %}
+                                    {% trans "Continuer vers le paiement" %}
+                                {% endif %}
                             </button>
                             <a href="{% url 'conference:home' %}" class="btn btn-outline-dark">
                                 {% trans "Annuler" %}

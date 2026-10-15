@@ -58,11 +58,19 @@
 </table>
 
 <!-- Info prochaine étape -->
-<div style="background:#fef3c7; border-left:4px solid #f59e0b; padding:16px 20px; border-radius:8px; margin:0 0 24px;">
+{% if conference.is_free %}
+<div style="background:#ecfdf5; border:1px solid #a7f3d0; padding:16px 20px; border-radius:8px; margin:0 0 24px;">
+    <p style="margin:0; color:#065f46; font-size:14px; line-height:1.6;">
+        <strong>Votre place est gratuite.</strong> Votre réservation sera confirmée automatiquement et vos billets vous seront envoyés par e-mail.
+    </p>
+</div>
+{% else %}
+<div style="background:#fef3c7; border:1px solid #fcd34d; padding:16px 20px; border-radius:8px; margin:0 0 24px;">
     <p style="margin:0; color:#92400e; font-size:14px; line-height:1.6;">
         <strong>Prochaine étape :</strong> effectuez le paiement pour confirmer définitivement votre place.
     </p>
 </div>
+{% endif %}
 
 <p style="margin:0; color:#8892a0; font-size:13px; text-align:center;">
     Merci de votre confiance.

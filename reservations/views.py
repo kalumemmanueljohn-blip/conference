@@ -13,6 +13,7 @@ from .services import (
     ReservationError,
     cancel_reservation,
     count_user_active_reservations,
+    confirm_reservation,
     create_reservation,
 )
 
@@ -61,6 +62,20 @@ def create_reservation_view(request):
                 seats=form.cleaned_data['seats'],
                 payment_phone_number=form.cleaned_data['payment_phone_number'],
             )
+            if conference.is_free:
+                confirm_reservation(reservation)
+                from tickets.services import generate_tickets_for_reservation
+                generate_tickets_for_reservation(reservation)
+                messages.success(
+                    request,
+                    _("Votre réservation gratuite est confirmée. "
+                      "Vos billets sont prêts."),
+                )
+                return redirect(
+                    'tickets:reservation_tickets',
+                    reference=reservation.reference,
+                )
+
             messages.success(
                 request,
                 _("Réservation créée : %(ref)s") % {'ref': reservation.reference},
