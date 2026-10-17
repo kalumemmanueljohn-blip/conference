@@ -6,6 +6,8 @@
 (() => {
     "use strict";
 
+    document.documentElement.classList.replace("no-js", "js");
+
     const reducedMotion = window.matchMedia(
         "(prefers-reduced-motion: reduce)"
     ).matches;

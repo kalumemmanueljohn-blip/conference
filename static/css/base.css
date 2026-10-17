@@ -205,16 +205,21 @@ p{margin-top:0}
 .form-control:focus,.form-select:focus{border-color:var(--gold);box-shadow:0 0 0 4px rgba(214,166,58,.13);outline:0}
 .form-text{font-size:.82rem;color:var(--muted)}
 .form-check-input:checked{background-color:var(--gold);border-color:var(--gold)}
-.password-input-wrapper{position:relative}
-.password-input-wrapper .form-control{padding-inline-end:3.25rem}
+.password-input-wrapper{position:relative;width:100%}
+.password-input-wrapper .form-control{padding-inline-end:3.5rem}
 .password-visibility-toggle{
+  appearance:none;
+  -webkit-appearance:none;
   position:absolute;
   inset-inline-end:.35rem;
   top:50%;
+  z-index:2;
   width:44px;
   height:44px;
   display:grid;
   place-items:center;
+  margin:0;
+  padding:0;
   transform:translateY(-50%);
   border:0;
   border-radius:9px;
@@ -222,9 +227,13 @@ p{margin-top:0}
   color:#566174;
   cursor:pointer;
   font-size:1.1rem;
+  line-height:1;
+  transition:background-color .2s ease,color .2s ease;
 }
-.password-visibility-toggle:hover{background:#f1f3f7;color:var(--navy)}
+.password-visibility-toggle:hover{background:rgba(214,166,58,.14);color:var(--navy)}
+.password-visibility-toggle:active{background:rgba(214,166,58,.22)}
 .password-visibility-toggle:focus-visible{outline:2px solid var(--gold);outline-offset:1px}
+.no-js .password-visibility-toggle{display:none}
 
 /* ========== MESSAGES — Flottants sous le header ========== */
 
@@ -481,6 +490,7 @@ p{margin-top:0}
   font-size:.95rem;
   transition:border-color .25s,box-shadow .25s;
 }
+.auth-form .password-input-wrapper .form-control{padding-inline-end:3.5rem}
 .auth-form .form-control:focus{
   border-color:var(--gold);
   box-shadow:0 0 0 4px rgba(214,166,58,.13);
