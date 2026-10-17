@@ -17,14 +17,22 @@
                         <input name="next" type="hidden" value="{% translated_current_url lang_code %}">
                         <input name="language" type="hidden" value="{{ lang_code }}">
                         <button type="submit" class="dropdown-item">
-                            {% if lang_code == 'fr' %}Français{% else %}{{ lang_name }}{% endif %}
+                            {% if CURRENT_LANG == 'en' %}
+                                {% if lang_code == 'fr' %}French{% else %}English{% endif %}
+                            {% else %}
+                                {% if lang_code == 'fr' %}Français{% else %}Anglais{% endif %}
+                            {% endif %}
                         </button>
                     </form>
                 </li>
             {% else %}
                 <li>
                     <span class="dropdown-item active">
-                        {% if lang_code == 'fr' %}Français{% else %}{{ lang_name }}{% endif %}
+                        {% if CURRENT_LANG == 'en' %}
+                            {% if lang_code == 'fr' %}French{% else %}English{% endif %}
+                        {% else %}
+                            {% if lang_code == 'fr' %}Français{% else %}Anglais{% endif %}
+                        {% endif %}
                         <i class="bi bi-check2 ms-2"></i>
                     </span>
                 </li>

@@ -23,7 +23,7 @@
                     <div class="hero-badge-wrap fade-in-up">
                         <span class="hero-badge">
                             <i class="bi bi-broadcast"></i>
-                            {{ conference.date|date:"d F Y" }}
+                            {{ conference.date|date:"DATE_FORMAT" }}
                         </span>
                     </div>
 
@@ -137,7 +137,7 @@
 
             <div class="countdown-footer fade-in-up delay-4">
                 <i class="bi bi-calendar-event"></i>
-                {{ conference.date|date:"d F Y à H:i" }}
+                {{ conference.date|date:"DATETIME_FORMAT" }}
             </div>
         </div>
     </section>
@@ -362,7 +362,7 @@
                     <div class="practical-card">
                         <div class="practical-icon"><i class="bi bi-calendar3"></i></div>
                         <h5>{% trans "Date" %}</h5>
-                        <p>{{ conference.date|date:"d F Y" }}</p>
+                        <p>{{ conference.date|date:"DATE_FORMAT" }}</p>
                         <small>{{ conference.date|date:"H:i" }}</small>
                     </div>
                 </div>

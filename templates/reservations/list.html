@@ -71,7 +71,7 @@
                 <div class="reservation-item-meta">
                     <span>
                         <i class="bi bi-calendar3"></i>
-                        {{ reservation.conference.date|date:"d F Y" }}
+                        {{ reservation.conference.date|date:"DATE_FORMAT" }}
                     </span>
                     <span>
                         <i class="bi bi-geo-alt-fill"></i>
@@ -79,7 +79,7 @@
                     </span>
                     <span>
                         <i class="bi bi-people-fill"></i>
-                        {{ reservation.seats }} place{{ reservation.seats|pluralize }}
+                        {% blocktrans count seat_count=reservation.seats %}{{ seat_count }} place{% plural %}{{ seat_count }} places{% endblocktrans %}
                     </span>
                 </div>
 

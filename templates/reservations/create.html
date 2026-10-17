@@ -46,7 +46,7 @@
                 <div class="booking-conference-card">
                     <div class="booking-conference-badge">
                         <i class="bi bi-calendar-event"></i>
-                        {{ conference.date|date:"d F Y à H:i" }}
+                        {{ conference.date|date:"DATETIME_FORMAT" }}
                     </div>
                     <h1>{{ conference.title }}</h1>
                     <p class="booking-location">

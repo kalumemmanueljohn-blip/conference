@@ -67,6 +67,27 @@
 
     const counters = document.querySelectorAll("[data-counter]");
 
+    document.addEventListener("click", (event) => {
+        const toggle = event.target.closest("[data-password-toggle]");
+        if (!toggle) return;
+
+        const input = document.getElementById(toggle.dataset.passwordToggle);
+        if (!input) return;
+
+        const isVisible = input.type === "text";
+        input.type = isVisible ? "password" : "text";
+        toggle.setAttribute("aria-pressed", String(!isVisible));
+        toggle.setAttribute(
+            "aria-label",
+            isVisible ? toggle.dataset.showLabel : toggle.dataset.hideLabel
+        );
+        const icon = toggle.querySelector("i");
+        if (icon) {
+            icon.classList.toggle("bi-eye", isVisible);
+            icon.classList.toggle("bi-eye-slash", !isVisible);
+        }
+    });
+
     const animateCounter = (element) => {
         const target = Number(element.dataset.counter);
         if (!Number.isFinite(target)) return;

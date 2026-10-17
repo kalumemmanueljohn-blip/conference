@@ -15,7 +15,7 @@
                 <h1>{{ reservation.reference }}</h1>
                 <p class="reservation-detail-date">
                     <i class="bi bi-clock"></i>
-                    {% trans "Créée le" %} {{ reservation.created_at|date:"d F Y à H:i" }}
+                    {% trans "Créée le" %} {{ reservation.created_at|date:"DATETIME_FORMAT" }}
                 </p>
             </div>
             <span class="reservation-status status-{{ reservation.status }} status-large">
@@ -61,7 +61,7 @@
                             </div>
                             <div>
                                 <span>{% trans "Date et heure" %}</span>
-                                <strong>{{ reservation.conference.date|date:"d F Y à H:i" }}</strong>
+                                <strong>{{ reservation.conference.date|date:"DATETIME_FORMAT" }}</strong>
                             </div>
                         </div>
 
@@ -81,7 +81,9 @@
                             </div>
                             <div>
                                 <span>{% trans "Places réservées" %}</span>
-                                <strong>{{ reservation.seats }} place{{ reservation.seats|pluralize }}</strong>
+                                <strong>
+                                    {% blocktrans count seat_count=reservation.seats %}{{ seat_count }} place réservée{% plural %}{{ seat_count }} places réservées{% endblocktrans %}
+                                </strong>
                             </div>
                         </div>
 

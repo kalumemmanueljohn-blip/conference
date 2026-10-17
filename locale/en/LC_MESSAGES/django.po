@@ -1,87 +1,776 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: conference\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-10-17 04:42+0100\n"
 "PO-Revision-Date: 2026-10-13 11:00+0100\n"
 "Last-Translator: Copilot\n"
 "Language-Team: English\n"
+"Language: en\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: en\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-msgid "paiements/"
-msgstr "payments/"
+#: .\accounts\admin.py:20
+msgid "Identité"
+msgstr "Identity"
 
-msgid "Conférence"
-msgstr "Conference"
+#: .\accounts\admin.py:21
+msgid "Permissions"
+msgstr "Permissions"
 
-msgid "Plateforme officielle de réservation de la conférence"
-msgstr "Official conference booking platform"
+#: .\accounts\admin.py:24
+msgid "Dates importantes"
+msgstr "Important dates"
 
-msgid "Menu"
-msgstr "Menu"
+#: .\accounts\forms.py:16 .\templates\accounts\profile.html:44
+#: .\templates\accounts\register.html:52
+msgid "Prénom"
+msgstr "First name"
 
-msgid "Accueil"
-msgstr "Home"
+#: .\accounts\forms.py:20 .\templates\accounts\profile.html:28
+#: .\templates\accounts\register.html:36
+msgid "Nom"
+msgstr "Last name"
 
-msgid "Mes réservations"
-msgstr "My reservations"
+#: .\accounts\forms.py:24 .\accounts\models.py:23
+#: .\templates\accounts\profile.html:36 .\templates\accounts\register.html:44
+msgid "Postnom"
+msgstr "Post-name"
 
-msgid "Dashboard"
-msgstr "Dashboard"
-
-msgid "Mon espace"
-msgstr "My account"
-
-msgid "Profil"
-msgstr "Profile"
-
-msgid "Mot de passe"
-msgstr "Password"
-
-msgid "Déconnexion"
-msgstr "Log out"
-
-msgid "Connexion"
-msgstr "Log in"
-
-msgid "Réserver ma place"
-msgstr "Book a seat"
-
-msgid "Organisation dédiée à l'autonomisation des jeunes en République Démocratique du Congo."
-msgstr "An organization dedicated to empowering young people in the Democratic Republic of the Congo."
-
-msgid "Liens utiles"
-msgstr "Useful links"
-
-msgid "Détails de la conférence"
-msgstr "Conference details"
-
-msgid "Contact"
-msgstr "Contact"
-
-msgid "Créer un compte"
-msgstr "Create an account"
-
+#: .\accounts\forms.py:28 .\accounts\forms.py:97
+#: .\templates\accounts\login.html:35 .\templates\accounts\register.html:60
 msgid "Nom d'utilisateur"
 msgstr "Username"
 
-msgid "facultatif"
-msgstr "optional"
+#: .\accounts\forms.py:36 .\accounts\models.py:16
+#: .\templates\accounts\password_reset.html:37
+#: .\templates\accounts\register.html:76
+msgid "Adresse email"
+msgstr "Email address"
 
-msgid "Sans email, vous ne pourrez pas recevoir les notifications ni réinitialiser votre mot de passe par email."
-msgstr "Without an email address, you cannot receive notifications or reset your password by email."
+#: .\accounts\forms.py:44 .\accounts\models.py:28
+msgid "Numéro WhatsApp"
+msgstr "WhatsApp number"
 
-msgid "Demander les méthodes de paiement sur WhatsApp"
-msgstr "Ask for payment methods on WhatsApp"
+#: .\accounts\forms.py:48 .\accounts\forms.py:91
+#: .\templates\accounts\login.html:43 .\templates\accounts\register.html:87
+#: .\templates\partials\_header.html:71
+msgid "Mot de passe"
+msgstr "Password"
 
-msgid "Tous droits réservés."
-msgstr "All rights reserved."
+#: .\accounts\forms.py:50
+msgid "Minimum 8 caractères, non trivial."
+msgstr "At least 8 characters; avoid common or easily guessed passwords."
 
+#: .\accounts\forms.py:53
+msgid "Confirmation du mot de passe"
+msgstr "Confirm password"
+
+#: .\accounts\forms.py:74
+msgid "Cet email est déjà utilisé."
+msgstr "This email address is already in use."
+
+#: .\accounts\forms.py:122 .\templates\accounts\password_change.html:33
+msgid "Mot de passe actuel"
+msgstr "Current password"
+
+#: .\accounts\forms.py:126 .\templates\accounts\password_change.html:41
+#: .\templates\accounts\password_reset_confirm.html:4
+#: .\templates\accounts\password_reset_confirm.html:18
+#: .\templates\accounts\password_reset_confirm.html:28
+msgid "Nouveau mot de passe"
+msgstr "New password"
+
+#: .\accounts\forms.py:130
+msgid "Confirmation du nouveau mot de passe"
+msgstr "Confirm new password"
+
+#: .\accounts\models.py:20
+msgid "Facultative. Utilisée pour recevoir les emails et réinitialiser le mot de passe."
+msgstr "Optional. Used to receive emails and reset your password."
+
+#: .\accounts\models.py:25
+msgid "Postnom tel qu'il apparaît sur la pièce d'identité."
+msgstr "Enter your post-name as it appears on your identity document."
+
+#: .\accounts\models.py:33 .\reservations\models.py:78
+msgid "Format international requis (ex: +243812345678)."
+msgstr "Use international format (e.g. +243812345678)."
+
+#: .\accounts\models.py:38
+msgid "Est participant"
+msgstr "Is a participant"
+
+#: .\accounts\models.py:48 .\reservations\admin.py:39
+#: .\reservations\models.py:51
+msgid "Utilisateur"
+msgstr "User"
+
+#: .\accounts\models.py:49
+msgid "Utilisateurs"
+msgstr "Users"
+
+#: .\accounts\models.py:69 .\conference\models.py:284 .\payments\models.py:64
+msgid "Créé le"
+msgstr "Created on"
+
+#: .\accounts\models.py:70 .\payments\models.py:65
+msgid "Mis à jour le"
+msgstr "Last updated"
+
+#: .\accounts\models.py:71
+msgid "Email vérifié"
+msgstr "Email verified"
+
+#: .\accounts\models.py:73
+msgid "Dernière IP de connexion"
+msgstr "Last login IP"
+
+#: .\accounts\models.py:79 .\templates\partials\_header.html:66
+msgid "Profil"
+msgstr "Profile"
+
+#: .\accounts\models.py:80
+msgid "Profils"
+msgstr "Profiles"
+
+#: .\accounts\views.py:31
+msgid "Votre compte a été créé avec succès."
+msgstr "Your account has been created successfully."
+
+#: .\accounts\views.py:48
+msgid "Connexion réussie."
+msgstr "You are now logged in."
+
+#: .\accounts\views.py:57
+msgid "Vous êtes déconnecté."
+msgstr "You have been logged out."
+
+#: .\accounts\views.py:73
+msgid "Profil mis à jour."
+msgstr "Your profile has been updated."
+
+#: .\accounts\views.py:84
+msgid "Mot de passe modifié."
+msgstr "Your password has been changed."
+
+#: .\conference\admin.py:20 .\payments\admin.py:82
+msgid "Aperçu"
+msgstr "Preview"
+
+#: .\conference\admin.py:44 .\conference\admin.py:132
+msgid "Informations principales"
+msgstr "Main information"
+
+#: .\conference\admin.py:47 .\conference\admin.py:135
+msgid "Date et lieu"
+msgstr "Date and location"
+
+#: .\conference\admin.py:50 .\conference\admin.py:138
+msgid "Contenu éditorial"
+msgstr "Editorial content"
+
+#: .\conference\admin.py:53 .\conference\admin.py:141
+msgid "Affiche"
+msgstr "Poster"
+
+#: .\conference\admin.py:56 .\conference\admin.py:156
+msgid "Tarification"
+msgstr "Pricing"
+
+#: .\conference\admin.py:59 .\conference\admin.py:159
+msgid "Capacité"
+msgstr "Capacity"
+
+#: .\conference\admin.py:62 .\conference\admin.py:162
+msgid "Métadonnées"
+msgstr "Metadata"
+
+#: .\conference\admin.py:70 .\conference\models.py:288
+#: .\templates\conference\home.html:272
+msgid "Intervenants"
+msgstr "Speakers"
+
+#: .\conference\admin.py:77 .\templates\conference\home.html:391
+#: .\templates\payments\choose.html:17 .\templates\payments\choose.html:36
+#: .\templates\reservations\create.html:17
+#: .\templates\reservations\detail.html:184
+msgid "Places"
+msgstr "Seats"
+
+#: .\conference\admin.py:80 .\templates\conference\home.html:393
+msgid "Illimité"
+msgstr "Unlimited"
+
+#: .\conference\admin.py:83
+msgid "Prix"
+msgstr "Price"
+
+#: .\conference\admin.py:86 .\conference\models.py:130
+#: .\reservations\admin.py:46 .\reservations\models.py:210
+#: .\templates\conference\detail.html:82 .\templates\conference\home.html:63
+#: .\templates\conference\home.html:381 .\templates\reservations\create.html:58
+#: .\templates\reservations\create.html:109
+#: .\templates\reservations\detail.html:98
+#: .\templates\reservations\detail.html:192
+#: .\templates\reservations\list.html:90
+msgid "Gratuit"
+msgstr "Free"
+
+#: .\conference\admin.py:89
+msgid "À venir"
+msgstr "Upcoming"
+
+#: .\conference\admin.py:93
+msgid "Activer la conférence sélectionnée"
+msgstr "Activate selected conference"
+
+#: .\conference\admin.py:98
+msgid "Veuillez sélectionner exactement une conférence."
+msgstr "Select exactly one conference."
+
+#: .\conference\admin.py:106
+#, python-format
+msgid "Conférence « %(title)s » activée."
+msgstr "Conference “%(title)s” has been activated."
+
+#: .\conference\admin.py:110
+msgid "Archiver la conférence sélectionnée"
+msgstr "Archive selected conference"
+
+#: .\conference\admin.py:116
+#, python-format
+msgid "%(count)s conférence(s) archivée(s)."
+msgstr "%(count)s conference(s) archived."
+
+#: .\conference\admin.py:144
+msgid "Contacts"
+msgstr "Contacts"
+
+#: .\conference\admin.py:148
+msgid "Réseaux sociaux"
+msgstr "Social media"
+
+#: .\conference\admin.py:170 .\conference\models.py:269
+msgid "Photo"
+msgstr "Photo"
+
+#: .\conference\forms.py:9
+msgid "Votre nom complet"
+msgstr "Your full name"
+
+#: .\conference\forms.py:13 .\conference\models.py:256
+msgid "Ex: Jean KABILA"
+msgstr "e.g. Jean KABILA"
+
+#: .\conference\forms.py:17
+msgid "Votre email"
+msgstr "Your email"
+
+#: .\conference\forms.py:20
+msgid "vous@example.com"
+msgstr "you@example.com"
+
+#: .\conference\forms.py:24
+msgid "Téléphone (optionnel)"
+msgstr "Phone (optional)"
+
+#: .\conference\forms.py:29
+msgid "+243..."
+msgstr "+243..."
+
+#: .\conference\forms.py:33
+msgid "Sujet"
+msgstr "Subject"
+
+#: .\conference\forms.py:37
+msgid "Objet de votre message"
+msgstr "Subject of your message"
+
+#: .\conference\forms.py:41
+msgid "Message"
+msgstr "Message"
+
+#: .\conference\forms.py:45
+msgid "Votre message..."
+msgstr "Your message..."
+
+#: .\conference\forms.py:63
+msgid "Erreur de validation."
+msgstr "Validation error."
+
+#: .\conference\models.py:23
+msgid "Titre"
+msgstr "Title"
+
+#: .\conference\models.py:25
+msgid "Ex: L'entrepreneuriat des jeunes à Kinshasa, Mythe ou Réalité ?"
+msgstr "e.g. Youth Entrepreneurship in Kinshasa: Myth or Reality?"
+
+#: .\conference\models.py:28
+msgid "Slug URL"
+msgstr "URL slug"
+
+#: .\conference\models.py:32
+msgid "Généré automatiquement depuis le titre si laissé vide."
+msgstr "Automatically generated from the title if left blank."
+
+#: .\conference\models.py:35
+msgid "Nom de l'organisation"
+msgstr "Organization name"
+
+#: .\conference\models.py:42 .\templates\reservations\detail.html:63
+#: .\templates\tickets\detail.html:63
+msgid "Date et heure"
+msgstr "Date and time"
+
+#: .\conference\models.py:43
+msgid "Ex: 27 novembre 2026 à 14h00"
+msgstr "e.g. November 27, 2026 at 2:00 PM"
+
+#: .\conference\models.py:46 .\templates\conference\home.html:372
+#: .\templates\reservations\detail.html:73 .\templates\tickets\detail.html:73
+msgid "Lieu"
+msgstr "Location"
+
+#: .\conference\models.py:48
+msgid "Ex: Auditorium du CHESD GOMBE"
+msgstr "e.g. CHESD Auditorium, Gombe"
+
+#: .\conference\models.py:53 .\templates\conference\detail.html:49
+msgid "Description"
+msgstr "Description"
+
+#: .\conference\models.py:58 .\templates\conference\detail.html:59
+msgid "Objectif"
+msgstr "Objective"
+
+#: .\conference\models.py:63 .\templates\conference\detail.html:64
+#: .\templates\conference\home.html:355
+msgid "Informations pratiques"
+msgstr "Practical information"
+
+#: .\conference\models.py:70 .\templates\conference\home.html:339
+msgid "Affiche de la conférence"
+msgstr "Conference poster"
+
+#: .\conference\models.py:74
+msgid "Affiche officielle (JPG, PNG). Format portrait recommandé."
+msgstr "Official poster (JPG, PNG). Portrait orientation recommended."
+
+#: .\conference\models.py:79
+msgid "Téléphone"
+msgstr "Phone"
+
+#: .\conference\models.py:82
+msgid "Ex: +243986698720"
+msgstr "e.g. +243986698720"
+
+#: .\conference\models.py:85
+msgid "Email de contact"
+msgstr "Contact email"
+
+#: .\conference\models.py:87
+msgid "Ex: contact@bantondos.cd"
+msgstr "e.g. contact@bantondos.cd"
+
+#: .\conference\models.py:90
+msgid "Adresse physique"
+msgstr "Physical address"
+
+#: .\conference\models.py:93
+msgid "Ex: Avenue X, Gombe, Kinshasa"
+msgstr "e.g. Avenue X, Gombe, Kinshasa"
+
+#: .\conference\models.py:98 .\templates\partials\_footer.html:18
+#: .\templates\partials\_footer.html:104 .\templates\partials\_footer.html:107
+msgid "Facebook"
+msgstr "Facebook"
+
+#: .\conference\models.py:100
+msgid "URL complète : https://facebook.com/..."
+msgstr "Full URL: https://facebook.com/..."
+
+#: .\conference\models.py:103 .\templates\partials\_footer.html:23
+#: .\templates\partials\_footer.html:115 .\templates\partials\_footer.html:118
+msgid "Instagram"
+msgstr "Instagram"
+
+#: .\conference\models.py:105
+msgid "URL complète : https://instagram.com/..."
+msgstr "Full URL: https://instagram.com/..."
+
+#: .\conference\models.py:108 .\templates\partials\_footer.html:126
+#: .\templates\partials\_footer.html:129
+msgid "X (Twitter)"
+msgstr "X (Twitter)"
+
+#: .\conference\models.py:110
+msgid "URL complète : https://x.com/..."
+msgstr "Full URL: https://x.com/..."
+
+#: .\conference\models.py:113 .\templates\partials\_footer.html:137
+#: .\templates\partials\_footer.html:140
+msgid "TikTok"
+msgstr "TikTok"
+
+#: .\conference\models.py:115
+msgid "URL complète : https://tiktok.com/@..."
+msgstr "Full URL: https://tiktok.com/@..."
+
+#: .\conference\models.py:118
+msgid "LinkedIn"
+msgstr "LinkedIn"
+
+#: .\conference\models.py:120
+msgid "URL complète : https://linkedin.com/..."
+msgstr "Full URL: https://linkedin.com/..."
+
+#: .\conference\models.py:123
+msgid "YouTube"
+msgstr "YouTube"
+
+#: .\conference\models.py:125
+msgid "URL complète : https://youtube.com/..."
+msgstr "Full URL: https://youtube.com/..."
+
+#: .\conference\models.py:132
+msgid "Décocher pour une conférence payante."
+msgstr "Uncheck for a paid conference."
+
+#: .\conference\models.py:135
+msgid "Prix par place"
+msgstr "Price per seat"
+
+#: .\conference\models.py:140
+msgid "Montant en USD par place."
+msgstr "Amount in USD per seat."
+
+#: .\conference\models.py:143 .\payments\models.py:53
+#: .\reservations\models.py:123
+msgid "Devise"
+msgstr "Currency"
+
+#: .\conference\models.py:151
+msgid "Nombre total de places"
+msgstr "Total number of seats"
+
+#: .\conference\models.py:153
+msgid "Laisser à 0 si la capacité est illimitée."
+msgstr "Leave at 0 for unlimited capacity."
+
+#: .\conference\models.py:158
+msgid "Active"
+msgstr "Active"
+
+#: .\conference\models.py:161
+msgid "Une seule conférence peut être active à la fois. Activer celle-ci désactivera automatiquement les autres."
+msgstr "Only one conference can be active at a time. Activating this one will automatically deactivate the others."
+
+#: .\conference\models.py:167 .\reservations\models.py:130
+#: .\templates\reservations\detail.html:18
+msgid "Créée le"
+msgstr "Created on"
+
+#: .\conference\models.py:168 .\reservations\models.py:131
+msgid "Mise à jour le"
+msgstr "Updated on"
+
+#: .\conference\models.py:173 .\conference\models.py:251
+#: .\reservations\models.py:57 .\templates\base.html:9 .\tickets\admin.py:54
+msgid "Conférence"
+msgstr "Conference"
+
+#: .\conference\models.py:174
+msgid "Conférences"
+msgstr "Conferences"
+
+#: .\conference\models.py:254 .\templates\accounts\dashboard.html:135
+msgid "Nom complet"
+msgstr "Full name"
+
+#: .\conference\models.py:259
+msgid "Fonction / Titre"
+msgstr "Role / Title"
+
+#: .\conference\models.py:261
+msgid "Ex: Entrepreneur social, Fondateur de XYZ"
+msgstr "e.g. Social entrepreneur, Founder of XYZ"
+
+#: .\conference\models.py:264
+msgid "Biographie"
+msgstr "Biography"
+
+#: .\conference\models.py:266
+msgid "Courte biographie (optionnelle)."
+msgstr "Short biography (optional)."
+
+#: .\conference\models.py:273
+msgid "Format carré recommandé (min 400x400px)."
+msgstr "Square image recommended (minimum 400 × 400 px)."
+
+#: .\conference\models.py:276
+msgid "Ordre d'affichage"
+msgstr "Display order"
+
+#: .\conference\models.py:278
+msgid "Les plus petits nombres apparaissent en premier."
+msgstr "Lower numbers appear first."
+
+#: .\conference\models.py:281
+msgid "Visible sur le site"
+msgstr "Visible on the website"
+
+#: .\conference\models.py:287
+msgid "Intervenant"
+msgstr "Speaker"
+
+#: .\conference\views.py:29 .\templates\conference\home.html:4
+#: .\templates\home_placeholder.html:4 .\templates\partials\_footer.html:57
+#: .\templates\partials\_header.html:32
+msgid "Accueil"
+msgstr "Home"
+
+#: .\conference\views.py:71
+msgid "Votre message a bien été envoyé. Nous vous répondrons bientôt."
+msgstr "Your message has been sent. We will get back to you soon."
+
+#: .\conference\views.py:77
+msgid "Une erreur est survenue. Veuillez réessayer ou nous contacter directement."
+msgstr "An error occurred. Please try again or contact us directly."
+
+#: .\conference\views.py:85 .\templates\conference\contact.html:4
+#: .\templates\conference\contact.html:92 .\templates\partials\_footer.html:61
+#: .\templates\partials\_footer.html:77
+msgid "Contact"
+msgstr "Contact"
+
+#: .\config\context_processors.py:25
 msgid "Bonjour, je souhaite connaître les méthodes de paiement pour la conférence."
 msgstr "Hello, I would like to know the available payment methods for the conference."
 
+#: .\config\urls.py:25
+msgid "compte/"
+msgstr "account/"
+
+#: .\config\urls.py:26
+msgid "reservations/"
+msgstr "reservations/"
+
+#: .\config\urls.py:27
+msgid "paiements/"
+msgstr "payments/"
+
+#: .\config\urls.py:28
+msgid "billets/"
+msgstr "tickets/"
+
+#: .\config\urls.py:29
+msgid "dashboard/"
+msgstr "dashboard/"
+
+#: .\payments\admin.py:31 .\payments\models.py:32 .\reservations\models.py:136
+#: .\templates\conference\detail.html:76
+#: .\templates\reservations\detail.html:14 .\tickets\models.py:29
+msgid "Réservation"
+msgstr "Reservation"
+
+#: .\payments\admin.py:35 .\payments\models.py:47 .\reservations\admin.py:43
+msgid "Montant"
+msgstr "Amount"
+
+#: .\payments\admin.py:66
+msgid "Informations"
+msgstr "Information"
+
+#: .\payments\admin.py:69
+msgid "Preuve"
+msgstr "Proof"
+
+#: .\payments\admin.py:72
+msgid "Rejet"
+msgstr "Rejection"
+
+#: .\payments\admin.py:78 .\tickets\admin.py:50
+msgid "Participant"
+msgstr "Participant"
+
+#: .\payments\admin.py:95
+msgid "Valider les preuves sélectionnées"
+msgstr "Approve selected proofs"
+
+#: .\payments\admin.py:107
+#, python-format
+msgid "%(count)s preuve(s) validée(s). Billets générés et emails envoyés."
+msgstr "%(count)s proof(s) approved. Tickets generated and emails sent."
+
+#: .\payments\admin.py:111
+msgid "Rejeter les preuves sélectionnées"
+msgstr "Reject selected proofs"
+
+#: .\payments\admin.py:123
+#, python-format
+msgid "%(count)s preuve(s) rejetée(s)."
+msgstr "%(count)s proof(s) rejected."
+
+#: .\payments\admin.py:127
+msgid "Demander une nouvelle preuve"
+msgstr "Request new proof"
+
+#: .\payments\admin.py:139
+#, python-format
+msgid "%(count)s nouvelle(s) preuve(s) demandée(s)."
+msgstr "%(count)s new proof(s) requested."
+
+#: .\payments\models.py:22
+msgid "En attente"
+msgstr "Pending"
+
+#: .\payments\models.py:23
+msgid "Confirmé"
+msgstr "Confirmed"
+
+#: .\payments\models.py:24
+msgid "Rejeté"
+msgstr "Rejected"
+
+#: .\payments\models.py:25
+msgid "Expiré"
+msgstr "Expired"
+
+#: .\payments\models.py:35
+msgid "Méthode"
+msgstr "Method"
+
+#: .\payments\models.py:40 .\payments\models.py:174 .\reservations\models.py:88
+#: .\templates\reservations\detail.html:172 .\tickets\models.py:63
+msgid "Statut"
+msgstr "Status"
+
+#: .\payments\models.py:59
+msgid "Référence interne"
+msgstr "Internal reference"
+
+#: .\payments\models.py:66
+msgid "Confirmé le"
+msgstr "Confirmed on"
+
+#: .\payments\models.py:69 .\payments\models.py:105 .\payments\models.py:165
+#: .\templates\payments\choose.html:21 .\templates\reservations\create.html:21
+#: .\templates\reservations\detail.html:178
+msgid "Paiement"
+msgstr "Payment"
+
+#: .\payments\models.py:70
+msgid "Paiements"
+msgstr "Payments"
+
+#: .\payments\models.py:108
+msgid "ID transaction SASPAY"
+msgstr "SASPAY transaction ID"
+
+#: .\payments\models.py:115
+msgid "Référence SASPAY"
+msgstr "SASPAY reference"
+
+#: .\payments\models.py:121
+msgid "Requête brute"
+msgstr "Raw request"
+
+#: .\payments\models.py:126
+msgid "Réponse brute"
+msgstr "Raw response"
+
+#: .\payments\models.py:131
+msgid "Signature vérifiée"
+msgstr "Signature verified"
+
+#: .\payments\models.py:135
+msgid "Vérifié le"
+msgstr "Verified on"
+
+#: .\payments\models.py:141
+msgid "Transaction SASPAY"
+msgstr "SASPAY transaction"
+
+#: .\payments\models.py:142
+msgid "Transactions SASPAY"
+msgstr "SASPAY transactions"
+
+#: .\payments\models.py:155
+msgid "En attente de validation"
+msgstr "Awaiting verification"
+
+#: .\payments\models.py:156
+msgid "Validée"
+msgstr "Verified"
+
+#: .\payments\models.py:157
+msgid "Rejetée"
+msgstr "Rejected"
+
+#: .\payments\models.py:158
+msgid "Nouvelle preuve demandée"
+msgstr "New proof requested"
+
+#: .\payments\models.py:168 .\templates\payments\whatsapp_proof.html:37
+msgid "Fichier de preuve"
+msgstr "Proof file"
+
+#: .\payments\models.py:170
+msgid "Capture d'écran ou PDF du paiement."
+msgstr "Screenshot or PDF of the payment."
+
+#: .\payments\models.py:172
+msgid "Envoyé le"
+msgstr "Submitted on"
+
+#: .\payments\models.py:186
+msgid "Validé par"
+msgstr "Approved by"
+
+#: .\payments\models.py:188
+msgid "Validé le"
+msgstr "Approved on"
+
+#: .\payments\models.py:189
+msgid "Motif de rejet"
+msgstr "Reason for rejection"
+
+#: .\payments\models.py:192
+msgid "Preuve WhatsApp"
+msgstr "WhatsApp proof"
+
+#: .\payments\models.py:193
+msgid "Preuves WhatsApp"
+msgstr "WhatsApp proofs"
+
+#: .\payments\services.py:36 .\payments\services.py:173
+#, python-format
+msgid "Impossible d'initier un paiement sur une réservation au statut « %(status)s »."
+msgstr "Payment cannot be started for a reservation with status “%(status)s”."
+
+#: .\payments\services.py:206
+msgid "Ce paiement n'est pas de type WhatsApp."
+msgstr "This is not a WhatsApp payment."
+
+#: .\payments\services.py:208
+msgid "Ce paiement n'est plus en attente."
+msgstr "This payment is no longer pending."
+
+#: .\payments\services.py:226
+#, python-format
+msgid "Preuve déjà traitée (statut : %(status)s)."
+msgstr "This proof has already been processed (status: %(status)s)."
+
+#: .\payments\views.py:45
+msgid "Demande de paiement envoyée."
+msgstr "Payment request sent."
+
+#: .\payments\views.py:69
+#, python-format
 msgid ""
 "Bonjour, je souhaite payer ma réservation.\n"
 "Référence : %(reference)s\n"
@@ -99,302 +788,1171 @@ msgstr ""
 "\n"
 "Please send me the payment instructions."
 
-msgid "Impossible d'initier un paiement sur une réservation au statut « %(status)s »."
-msgstr "Payment cannot be started for a reservation with status “%(status)s”."
+#: .\reservations\admin.py:28 .\tickets\admin.py:32
+msgid "Identification"
+msgstr "Identification"
 
-msgid "Ce paiement n'est pas de type WhatsApp."
-msgstr "This is not a WhatsApp payment."
+#: .\reservations\admin.py:31
+msgid "Détails"
+msgstr "Details"
 
-msgid "Ce paiement n'est plus en attente."
-msgstr "This payment is no longer pending."
+#: .\reservations\admin.py:34
+msgid "Dates"
+msgstr "Dates"
 
-msgid "Preuve déjà traitée (statut : %(status)s)."
-msgstr "This proof has already been processed (status: %(status)s)."
+#: .\reservations\forms.py:11 .\reservations\models.py:62
+#: .\templates\reservations\create.html:75
+msgid "Nombre de places"
+msgstr "Number of seats"
 
+#: .\reservations\forms.py:20 .\reservations\models.py:68
+msgid "Entre 1 et 5 places par réservation."
+msgstr "Between 1 and 5 seats per reservation."
+
+#: .\reservations\forms.py:24 .\templates\reservations\create.html:88
+msgid "Numéro mobile money à débiter"
+msgstr "Mobile money number to charge"
+
+#: .\reservations\forms.py:32
+msgid "Le numéro qui recevra la demande de paiement (Vodacom M-Pesa, Airtel Money, ou Orange Money). Laissez vide pour utiliser votre numéro WhatsApp par défaut."
+msgstr "The number that will receive the payment request (Vodacom M-Pesa, Airtel Money, or Orange Money). Leave blank to use your WhatsApp number by default."
+
+#: .\reservations\forms.py:58
+#, python-format
+msgid "Il ne reste que %(remaining)s place(s) disponible(s)."
+msgstr "Only %(remaining)s seat(s) left."
+
+#: .\reservations\forms.py:71
+msgid "Veuillez renseigner un numéro mobile money."
+msgstr "Please enter a mobile money number."
+
+#: .\reservations\models.py:23
 msgid "Créée"
 msgstr "Created"
 
+#: .\reservations\models.py:24
 msgid "Paiement en attente"
 msgstr "Payment pending"
 
+#: .\reservations\models.py:25
 msgid "Paiement confirmé"
 msgstr "Payment confirmed"
 
+#: .\reservations\models.py:26
 msgid "Confirmée"
 msgstr "Confirmed"
 
+#: .\reservations\models.py:27
 msgid "Billet généré"
 msgstr "Ticket generated"
 
+#: .\reservations\models.py:28
 msgid "Présent"
 msgstr "Present"
 
+#: .\reservations\models.py:29
 msgid "Annulée"
 msgstr "Cancelled"
 
-msgid "En attente"
-msgstr "Pending"
-
-msgid "Confirmé"
-msgstr "Confirmed"
-
-msgid "Rejeté"
-msgstr "Rejected"
-
-msgid "Expiré"
-msgstr "Expired"
-
-msgid "En attente de validation"
-msgstr "Awaiting verification"
-
-msgid "Validée"
-msgstr "Verified"
-
-msgid "Rejetée"
-msgstr "Rejected"
-
-msgid "Nouvelle preuve demandée"
-msgstr "New proof requested"
-
-msgid "Choisir le paiement"
-msgstr "Choose a payment method"
-
-msgid "Places"
-msgstr "Seats"
-
-msgid "Paiement"
-msgstr "Payment"
-
-msgid "Confirmation"
-msgstr "Confirmation"
-
+#: .\reservations\models.py:39 .\templates\payments\choose.html:32
+#: .\templates\reservations\detail.html:167
+#: .\templates\reservations\list.html:34
 msgid "Référence"
 msgstr "Reference"
 
-msgid "Total à payer"
-msgstr "Total due"
+#: .\reservations\models.py:43
+msgid "Format : BGA-2026-XXXXXXX (généré automatiquement si vide)."
+msgstr "Format: BGA-2026-XXXXXXX (generated automatically if left blank)."
 
-msgid "Payez par WhatsApp"
-msgstr "Pay with WhatsApp"
+#: .\reservations\models.py:72
+msgid "Numéro à débiter"
+msgstr "Number to charge"
 
-msgid "Contactez-nous sur WhatsApp pour recevoir les instructions, puis envoyez votre preuve de paiement. Un administrateur vérifiera votre paiement."
-msgstr "Contact us on WhatsApp for payment instructions, then send your proof of payment. An administrator will verify your payment."
+#: .\reservations\models.py:82
+msgid "Numéro mobile money qui recevra la demande de paiement. Par défaut : votre numéro WhatsApp."
+msgstr "The mobile money number that will receive the payment request. Defaults to your WhatsApp number."
 
-msgid "Continuer avec WhatsApp"
-msgstr "Continue with WhatsApp"
+#: .\reservations\models.py:95
+msgid "Méthode de paiement"
+msgstr "Payment method"
 
-msgid "Retour à ma réservation"
-msgstr "Back to my reservation"
+#: .\reservations\models.py:105
+msgid "Réseau SASPAY"
+msgstr "SASPAY network"
 
-msgid "Paiement WhatsApp"
-msgstr "WhatsApp payment"
+#: .\reservations\models.py:113
+msgid "Réseau mobile money pour le paiement SASPAY (USD)."
+msgstr "Mobile money network for SASPAY payments (USD)."
 
-msgid "Paiement via WhatsApp"
-msgstr "Pay via WhatsApp"
+#: .\reservations\models.py:116 .\templates\reservations\detail.html:95
+msgid "Montant total"
+msgstr "Total amount"
 
-msgid "Suivez ces 3 étapes pour valider votre réservation."
-msgstr "Follow these three steps to confirm your reservation."
+#: .\reservations\models.py:120
+msgid "Montant figé au moment de la création."
+msgstr "Amount fixed when the reservation is created."
 
-msgid "Montant à payer"
-msgstr "Amount due"
+#: .\reservations\models.py:132
+msgid "Confirmée le"
+msgstr "Confirmed on"
 
-msgid "Référence à mentionner :"
-msgstr "Reference to include:"
+#: .\reservations\models.py:133
+msgid "Annulée le"
+msgstr "Cancelled on"
 
-msgid "Contactez-nous sur WhatsApp"
-msgstr "Contact us on WhatsApp"
+#: .\reservations\models.py:137 .\templates\accounts\dashboard.html:31
+msgid "Réservations"
+msgstr "Reservations"
 
-msgid "Cliquez sur le bouton ci-dessous pour ouvrir WhatsApp avec un message pré-rempli contenant votre référence."
-msgstr "Select the button below to open WhatsApp with a pre-filled message that includes your reservation reference."
+#: .\reservations\views.py:27
+msgid "Aucune conférence active pour le moment."
+msgstr "There is no active conference at the moment."
 
-msgid "OUVRIR WHATSAPP"
-msgstr "OPEN WHATSAPP"
+#: .\reservations\views.py:34
+msgid "Il n'y a plus de places disponibles pour cette conférence."
+msgstr "There are no seats left for this conference."
 
-msgid "Numéro WhatsApp non configuré."
-msgstr "The WhatsApp number has not been configured."
+#: .\reservations\views.py:43
+#, python-format
+msgid "Vous avez déjà %(count)s réservations actives. Vous ne pouvez pas en créer d'autres."
+msgstr "You already have %(count)s active reservations. You cannot create any more."
 
-msgid "Effectuez le paiement et envoyez la capture"
-msgstr "Complete the payment and send a screenshot"
+#: .\reservations\views.py:71
+msgid "Votre réservation gratuite est confirmée. Vos billets sont prêts."
+msgstr "Your free reservation is confirmed. Your tickets are ready."
 
-msgid "Une fois sur WhatsApp :"
-msgstr "Once you are on WhatsApp:"
+#: .\reservations\views.py:81
+#, python-format
+msgid "Réservation créée : %(ref)s"
+msgstr "Reservation created: %(ref)s"
 
-msgid "Nous vous enverrons les instructions de paiement (M-Pesa, Airtel, Orange, carte bancaire)"
-msgstr "We will send you payment instructions (M-Pesa, Airtel, Orange, or bank card)."
+#: .\reservations\views.py:140
+msgid "Réservation annulée."
+msgstr "Reservation cancelled."
 
-msgid "Effectuez le paiement"
-msgstr "Complete the payment."
+#: .\templates\accounts\dashboard.html:4 .\templates\accounts\dashboard.html:17
+#: .\templates\partials\_footer.html:65 .\templates\partials\_header.html:61
+msgid "Mon espace"
+msgstr "My account"
 
-msgid "Envoyez la CAPTURE D'ÉCRAN du paiement sur WhatsApp"
-msgstr "Send a SCREENSHOT of your payment on WhatsApp."
+#: .\templates\accounts\dashboard.html:18
+msgid "Bonjour"
+msgstr "Hello"
 
-msgid "Attendez la validation"
-msgstr "Wait for verification"
+#: .\templates\accounts\dashboard.html:19
+msgid "Gérez vos réservations et vos billets"
+msgstr "Manage your reservations and tickets"
 
-msgid "Un administrateur va vérifier votre paiement et valider votre réservation."
-msgstr "An administrator will verify your payment and confirm your reservation."
+#: .\templates\accounts\dashboard.html:45
+msgid "Confirmées"
+msgstr "Confirmed"
 
-msgid "Dès la validation, vous recevrez :"
-msgstr "Once it is confirmed, you will receive:"
-
-msgid "Un email avec votre billet PDF"
-msgstr "An email with your PDF ticket"
-
-msgid "Un message WhatsApp avec le lien de téléchargement"
-msgstr "A WhatsApp message with a download link"
-
-msgid "Délai de validation : quelques minutes à quelques heures. Vous pouvez vérifier votre statut à tout moment."
-msgstr "Verification may take a few minutes or a few hours. You can check your status at any time."
-
-msgid "Vérifier le statut"
-msgstr "Check status"
-
-msgid "Retour à l'accueil"
-msgstr "Back to home"
-
-msgid "Envoyer ma preuve"
-msgstr "Submit my proof"
-
-msgid "Envoyer ma preuve de paiement"
-msgstr "Submit my payment proof"
-
-msgid "Capture d'écran ou PDF du paiement effectué"
-msgstr "Screenshot or PDF of your completed payment"
-
-msgid "Référence :"
-msgstr "Reference:"
-
-msgid "Montant :"
-msgstr "Amount:"
-
-msgid "Contrôle à l'entrée"
-msgstr "Entrance check-in"
-
-msgid "Contrôle"
-msgstr "Check-in"
-
-msgid "Retour"
-msgstr "Back"
-
-msgid "Valide"
-msgstr "Valid"
-
-msgid "Utilisé"
-msgstr "Used"
-
-msgid "Scannez un billet ou recherchez un participant dans la liste."
-msgstr "Scan a ticket or find a participant in the list."
-
-msgid "Scanner un QR, ou chercher par nom, référence, email, WhatsApp..."
-msgstr "Scan a QR code or search by name, reference, email, or WhatsApp..."
-
-msgid "Rechercher / vérifier"
-msgstr "Search / verify"
-
-msgid "Billet introuvable"
-msgstr "Ticket not found"
-
-msgid "Aucun billet trouvé pour « %(q)s »."
-msgstr "No ticket found for “%(q)s”."
-
-msgid "Billet valide"
-msgstr "Valid ticket"
-
-msgid "Billet déjà utilisé"
-msgstr "Ticket already used"
-
-msgid "Billet annulé"
-msgstr "Cancelled ticket"
-
-msgid "Place"
-msgstr "Seat"
-
+#: .\templates\accounts\dashboard.html:55
+#: .\templates\accounts\dashboard.html:155 .\templates\accounts\profile.html:52
+#: .\templates\accounts\register.html:68
 msgid "WhatsApp"
 msgstr "WhatsApp"
 
-msgid "Statut"
-msgstr "Status"
+#: .\templates\accounts\dashboard.html:69 .\templates\partials\_footer.html:64
+#: .\templates\partials\_header.html:39 .\templates\reservations\list.html:4
+#: .\templates\reservations\list.html:14
+msgid "Mes réservations"
+msgstr "My reservations"
 
-msgid "Utilisé le"
-msgstr "Used on"
+#: .\templates\accounts\dashboard.html:70
+msgid "Voir et gérer mes réservations"
+msgstr "View and manage my reservations"
 
-msgid "Contrôlé par"
-msgstr "Checked by"
+#: .\templates\accounts\dashboard.html:83
+#: .\templates\conference\detail.html:110 .\templates\conference\home.html:46
+#: .\templates\conference\home.html:51 .\templates\conference\home.html:441
+#: .\templates\home_placeholder.html:17 .\templates\partials\_footer.html:62
+#: .\templates\partials\_header.html:91 .\templates\reservations\create.html:4
+msgid "Réserver ma place"
+msgstr "Book a seat"
 
-msgid "Valider la présence"
-msgstr "Confirm attendance"
+#: .\templates\accounts\dashboard.html:84
+msgid "Créer une nouvelle réservation"
+msgstr "Create a new reservation"
 
-msgid "Ce billet a déjà été scanné. Entrée refusée."
-msgstr "This ticket has already been scanned. Entry denied."
+#: .\templates\accounts\dashboard.html:97 .\templates\accounts\profile.html:4
+#: .\templates\accounts\profile.html:18
+msgid "Mon profil"
+msgstr "My profile"
 
-msgid "Billets enregistrés"
-msgstr "Tickets issued"
+#: .\templates\accounts\dashboard.html:98
+msgid "Modifier mes informations"
+msgstr "Update my information"
 
-msgid "Entrées validées"
-msgstr "Entries confirmed"
+#: .\templates\accounts\dashboard.html:111
+msgid "Sécurité"
+msgstr "Security"
 
-msgid "En attente d'entrée"
-msgstr "Awaiting entry"
+#: .\templates\accounts\dashboard.html:112
+#: .\templates\accounts\password_change.html:4
+msgid "Changer mon mot de passe"
+msgstr "Change my password"
 
-msgid "Billets annulés"
-msgstr "Cancelled tickets"
+#: .\templates\accounts\dashboard.html:125
+msgid "Informations personnelles"
+msgstr "Personal information"
 
-msgid "Résultats de recherche"
-msgstr "Search results"
+#: .\templates\accounts\dashboard.html:145
+msgid "Email"
+msgstr "Email"
 
-msgid "Liste de présence"
-msgstr "Attendance list"
+#: .\templates\accounts\dashboard.html:165
+msgid "Inscrit le"
+msgstr "Joined on"
 
-msgid "Afficher toute la liste"
-msgstr "Show full list"
+#: .\templates\accounts\login.html:4 .\templates\accounts\login.html:18
+#: .\templates\home_placeholder.html:20 .\templates\partials\_footer.html:68
+#: .\templates\partials\_header.html:85
+msgid "Connexion"
+msgstr "Log in"
 
-msgid "Billet"
-msgstr "Ticket"
+#: .\templates\accounts\login.html:19
+msgid "Accédez à votre espace participant"
+msgstr "Access your participant account"
 
-msgid "Statut / entrée"
-msgstr "Status / entry"
+#: .\templates\accounts\login.html:51
+#: .\templates\accounts\password_reset.html:24
+msgid "Mot de passe oublié ?"
+msgstr "Forgot your password?"
 
-msgid "Action"
-msgstr "Action"
+#: .\templates\accounts\login.html:57
+#: .\templates\accounts\password_reset_complete.html:25
+#: .\templates\conference\detail.html:117
+msgid "Se connecter"
+msgstr "Log in"
 
-msgid "Valide · entrée à confirmer"
-msgstr "Valid · entry not yet confirmed"
+#: .\templates\accounts\login.html:61
+msgid "Pas encore de compte ?"
+msgstr "Don't have an account yet?"
 
-msgid "Annulé"
-msgstr "Cancelled"
+#: .\templates\accounts\login.html:62
+msgid "Inscrivez-vous"
+msgstr "Sign up"
 
-msgid "Confirmer l'entrée"
-msgstr "Confirm entry"
+#: .\templates\accounts\password_change.html:18
+msgid "Changer le mot de passe"
+msgstr "Change password"
 
-msgid "Entrée déjà confirmée"
-msgstr "Entry already confirmed"
+#: .\templates\accounts\password_change.html:19
+msgid "Sécurisez votre compte"
+msgstr "Keep your account secure"
 
-msgid "Non admissible"
-msgstr "Not eligible"
+#: .\templates\accounts\password_change.html:49
+#: .\templates\accounts\password_reset_confirm.html:36
+#: .\templates\accounts\register.html:95 .\templates\payments\choose.html:25
+#: .\templates\reservations\create.html:25
+msgid "Confirmation"
+msgstr "Confirmation"
 
-msgid "Pagination de la liste de présence"
-msgstr "Attendance list pagination"
+#: .\templates\accounts\password_change.html:58
+msgid "Modifier"
+msgstr "Edit"
 
-msgid "Précédent"
-msgstr "Previous"
+#: .\templates\accounts\password_change.html:61
+#: .\templates\accounts\profile.html:70
+#: .\templates\reservations\create.html:127
+#: .\templates\reservations\detail.html:124
+msgid "Annuler"
+msgstr "Cancel"
 
-msgid "Page %(current)s sur %(total)s"
-msgstr "Page %(current)s of %(total)s"
+#: .\templates\accounts\password_reset.html:5
+msgid "Mot de passe oublié"
+msgstr "Forgot password"
 
-msgid "Suivant"
-msgstr "Next"
+#: .\templates\accounts\password_reset.html:26
+msgid "Pas de panique. Saisissez votre email et nous vous enverrons un lien pour créer un nouveau mot de passe."
+msgstr "No worries. Enter your email address and we'll send you a link to create a new password."
 
-msgid "Aucun billet ne correspond à cette recherche."
-msgstr "No tickets match this search."
+#: .\templates\accounts\password_reset.html:54
+msgid "Utilisez l'email avec lequel vous vous êtes inscrit."
+msgstr "Use the email address you registered with."
 
-msgid "Aucun billet à afficher pour le moment."
-msgstr "There are no tickets to show yet."
+#: .\templates\accounts\password_reset.html:60
+msgid "Envoyer le lien"
+msgstr "Send the link"
 
-msgid "Fichier de preuve"
-msgstr "Proof file"
+#: .\templates\accounts\password_reset.html:69
+msgid "Saisissez votre email"
+msgstr "Enter your email"
 
+#: .\templates\accounts\password_reset.html:75
+msgid "Consultez votre boîte"
+msgstr "Check your inbox"
+
+#: .\templates\accounts\password_reset.html:81
+msgid "Créez un nouveau mot de passe"
+msgstr "Create a new password"
+
+#: .\templates\accounts\password_reset.html:90
+#: .\templates\accounts\password_reset_done.html:30
+msgid "Retour à la connexion"
+msgstr "Back to log in"
+
+#: .\templates\accounts\password_reset_complete.html:4
+#: .\templates\accounts\password_reset_complete.html:18
+msgid "Mot de passe modifié"
+msgstr "Password changed"
+
+#: .\templates\accounts\password_reset_complete.html:20
+msgid "Votre mot de passe a été réinitialisé avec succès. Vous pouvez maintenant vous connecter."
+msgstr "Your password has been reset. You can now log in."
+
+#: .\templates\accounts\password_reset_confirm.html:19
+msgid "Choisissez un mot de passe sécurisé"
+msgstr "Choose a secure password"
+
+#: .\templates\accounts\password_reset_confirm.html:44
+msgid "Réinitialiser"
+msgstr "Reset password"
+
+#: .\templates\accounts\password_reset_confirm.html:50
+msgid "Le lien de réinitialisation est invalide ou expiré."
+msgstr "This password reset link is invalid or has expired."
+
+#: .\templates\accounts\password_reset_confirm.html:53
+msgid "Demander un nouveau lien"
+msgstr "Request a new link"
+
+#: .\templates\accounts\password_reset_done.html:4
+#: .\templates\accounts\password_reset_done.html:18
+msgid "Email envoyé"
+msgstr "Email sent"
+
+#: .\templates\accounts\password_reset_done.html:20
+msgid "Consultez votre boîte de réception. Vous y trouverez un lien pour réinitialiser votre mot de passe."
+msgstr "Check your inbox for a link to reset your password."
+
+#: .\templates\accounts\password_reset_done.html:25
+msgid "Pensez à vérifier vos spams si vous ne recevez rien."
+msgstr "If you don't receive it, check your spam folder."
+
+#: .\templates\accounts\profile.html:19
+msgid "Modifiez vos informations personnelles"
+msgstr "Update your personal information"
+
+#: .\templates\accounts\profile.html:61
+msgid "L'adresse email ne peut pas être modifiée. Contactez-nous si nécessaire."
+msgstr "Your email address cannot be changed. Contact us if necessary."
+
+#: .\templates\accounts\profile.html:67
+msgid "Enregistrer"
+msgstr "Save"
+
+#: .\templates\accounts\register.html:4
+msgid "Inscription"
+msgstr "Sign up"
+
+#: .\templates\accounts\register.html:18 .\templates\conference\detail.html:114
+#: .\templates\conference\home.html:461 .\templates\partials\_footer.html:67
+msgid "Créer un compte"
+msgstr "Create an account"
+
+#: .\templates\accounts\register.html:19
+msgid "Rejoignez la communauté Bantondo's Génération"
+msgstr "Join the Bantondo's Génération community"
+
+#: .\templates\accounts\register.html:76
+msgid "facultatif"
+msgstr "optional"
+
+#: .\templates\accounts\register.html:81
+msgid "Sans email, vous ne pourrez pas recevoir les notifications ni réinitialiser votre mot de passe par email."
+msgstr "Without an email address, you cannot receive notifications or reset your password by email."
+
+#: .\templates\accounts\register.html:104 .\templates\conference\home.html:446
+msgid "Créer mon compte"
+msgstr "Create my account"
+
+#: .\templates\accounts\register.html:108
+msgid "Déjà un compte ?"
+msgstr "Already have an account?"
+
+#: .\templates\accounts\register.html:109
+msgid "Connectez-vous"
+msgstr "Log in"
+
+#: .\templates\base.html:10
+msgid "Plateforme officielle de réservation de la conférence"
+msgstr "Official conference booking platform"
+
+#: .\templates\conference\contact.html:94
+msgid "Parlons-en"
+msgstr "Let's talk"
+
+#: .\templates\conference\contact.html:95
+msgid "Une question sur la conférence ? Envie de nous rejoindre ? Écrivez-nous."
+msgstr "Have a question about the conference or want to get involved? Send us a message."
+
+#: .\templates\conference\contact.html:107
+msgid "Nos coordonnées"
+msgstr "Our contact details"
+
+#: .\templates\conference\contact.html:137
+msgid "Suivez-nous"
+msgstr "Follow us"
+
+#: .\templates\conference\contact.html:169
+msgid "Envoyez-nous un message"
+msgstr "Send us a message"
+
+#: .\templates\conference\contact.html:211
+msgid "Envoyer le message"
+msgstr "Send message"
+
+#: .\templates\conference\detail.html:16
+msgid "Conférence active"
+msgstr "Active conference"
+
+#: .\templates\conference\detail.html:87
+msgid "place"
+msgstr "seat"
+
+#: .\templates\conference\detail.html:94
+#, python-format
+msgid "Il reste %(remaining)s place sur %(total)s"
+msgid_plural "Il reste %(remaining)s places sur %(total)s"
+msgstr[0] "%(remaining)s seat remaining out of %(total)s"
+msgstr[1] "%(remaining)s seats remaining out of %(total)s"
+
+#: .\templates\conference\detail.html:100
+msgid "Complet"
+msgstr "Sold out"
+
+#: .\templates\conference\detail.html:104
+msgid "Conférence passée"
+msgstr "Past conference"
+
+#: .\templates\conference\home.html:54
+msgid "J'ai déjà un compte"
+msgstr "I already have an account"
+
+#: .\templates\conference\home.html:65 .\templates\conference\home.html:384
+#: .\templates\reservations\create.html:61
+msgid "par place"
+msgstr "per seat"
+
+#: .\templates\conference\home.html:70
+msgid "places"
+msgstr "seats"
+
+#: .\templates\conference\home.html:103
+msgid "L'événement commence dans"
+msgstr "The event starts in"
+
+#: .\templates\conference\home.html:112
+msgid "Jours"
+msgstr "Days"
+
+#: .\templates\conference\home.html:119
+msgid "Heures"
+msgstr "Hours"
+
+#: .\templates\conference\home.html:126
+msgid "Minutes"
+msgstr "Minutes"
+
+#: .\templates\conference\home.html:133
+msgid "Secondes"
+msgstr "Seconds"
+
+#: .\templates\conference\home.html:156
+msgid "À propos"
+msgstr "About"
+
+#: .\templates\conference\home.html:159
+msgid "La conférence"
+msgstr "The conference"
+
+#: .\templates\conference\home.html:173
+msgid "Entrepreneuriat"
+msgstr "Entrepreneurship"
+
+#: .\templates\conference\home.html:177
+msgid "Jeunesse"
+msgstr "Youth"
+
+#: .\templates\conference\home.html:181
+msgid "Kinshasa"
+msgstr "Kinshasa"
+
+#: .\templates\conference\home.html:197
+msgid "Un débat ouvert"
+msgstr "An open debate"
+
+#: .\templates\conference\home.html:199
+msgid "Mythe ou réalité ? Nous posons la vraie question sur l'entrepreneuriat des jeunes à Kinshasa."
+msgstr "Myth or reality? We ask the real questions about youth entrepreneurship in Kinshasa."
+
+#: .\templates\conference\home.html:206
+msgid "Opportunités"
+msgstr "Opportunities"
+
+#: .\templates\conference\home.html:211
+msgid "Impact réel"
+msgstr "Real impact"
+
+#: .\templates\conference\home.html:228
+msgid "Notre objectif"
+msgstr "Our objective"
+
+#: .\templates\conference\home.html:229
+msgid "Pourquoi cette conférence ?"
+msgstr "Why this conference?"
+
+#: .\templates\conference\home.html:241
+msgid "Inspirer"
+msgstr "Inspire"
+
+#: .\templates\conference\home.html:242
+msgid "Donner aux jeunes des modèles inspirants."
+msgstr "Show young people inspiring role models."
+
+#: .\templates\conference\home.html:248
+msgid "Débattre"
+msgstr "Debate"
+
+#: .\templates\conference\home.html:249
+msgid "Ouvrir un vrai débat : mythe ou réalité ?"
+msgstr "Open an honest debate: myth or reality?"
+
+#: .\templates\conference\home.html:255
+msgid "Agir"
+msgstr "Take action"
+
+#: .\templates\conference\home.html:256
+msgid "Provoquer des vocations et des projets concrets."
+msgstr "Inspire new ambitions and practical projects."
+
+#: .\templates\conference\home.html:273
+msgid "Ils seront présents"
+msgstr "Meet the speakers"
+
+#: .\templates\conference\home.html:275
+msgid "Des voix engagées pour éclairer le débat."
+msgstr "Committed voices bringing insight to the debate."
+
+#: .\templates\conference\home.html:322
+msgid "Affiche officielle"
+msgstr "Official poster"
+
+#: .\templates\conference\home.html:323
+msgid "L'événement en image"
+msgstr "The event in pictures"
+
+#: .\templates\conference\home.html:325
+msgid "Retrouvez l'affiche officielle de la conférence. Partagez-la autour de vous."
+msgstr "See the official conference poster and share it with others."
+
+#: .\templates\conference\home.html:329
+msgid "Télécharger l'affiche"
+msgstr "Download the poster"
+
+#: .\templates\conference\home.html:332
+msgid "Réserver"
+msgstr "Book"
+
+#: .\templates\conference\home.html:356
+msgid "Tout ce qu'il faut savoir"
+msgstr "Everything you need to know"
+
+#: .\templates\conference\home.html:364
+msgid "Date"
+msgstr "Date"
+
+#: .\templates\conference\home.html:379
+msgid "Tarif"
+msgstr "Price"
+
+#: .\templates\conference\home.html:396
+msgid "places restantes"
+msgstr "seats remaining"
+
+#: .\templates\conference\home.html:410 .\templates\partials\_footer.html:59
+msgid "Détails de la conférence"
+msgstr "Conference details"
+
+#: .\templates\conference\home.html:429
+msgid "Prêt à rejoindre la conversation ?"
+msgstr "Ready to join the conversation?"
+
+#: .\templates\conference\home.html:432
+msgid "Réservez votre place maintenant. Les places sont limitées."
+msgstr "Book your seat now. Places are limited."
+
+#: .\templates\conference\home.html:434
+msgid "Réservez votre place pour participer à la conférence."
+msgstr "Book your seat to attend the conference."
+
+#: .\templates\conference\home.html:458
+msgid "Aucune conférence active"
+msgstr "No active conference"
+
+#: .\templates\conference\home.html:459
+msgid "Revenez bientôt pour découvrir notre prochain événement."
+msgstr "Check back soon for our next event."
+
+#: .\templates\home_placeholder.html:10
+msgid "Bienvenue"
+msgstr "Welcome"
+
+#: .\templates\home_placeholder.html:13
+msgid "Le layout global fonctionne. Les vrais templates arrivent au Lot 8.2."
+msgstr "The global layout is working. The production templates are coming in milestone 8.2."
+
+#: .\templates\partials\_footer.html:12
+msgid "Organisation dédiée à l'autonomisation des jeunes en République Démocratique du Congo."
+msgstr "An organization dedicated to empowering young people in the Democratic Republic of the Congo."
+
+#: .\templates\partials\_footer.html:55
+msgid "Liens utiles"
+msgstr "Useful links"
+
+#: .\templates\partials\_footer.html:150
+msgid "Demander les méthodes de paiement sur WhatsApp"
+msgstr "Ask for payment methods on WhatsApp"
+
+#: .\templates\partials\_footer.html:165
+msgid "Tous droits réservés."
+msgstr "All rights reserved."
+
+#: .\templates\partials\_footer.html:168
+msgid "Développé par"
+msgstr "Developed by"
+
+#: .\templates\partials\_header.html:22
+msgid "Menu"
+msgstr "Menu"
+
+#: .\templates\partials\_header.html:47
+msgid "Dashboard"
+msgstr "Dashboard"
+
+#: .\templates\partials\_header.html:77
+msgid "Déconnexion"
+msgstr "Log out"
+
+#: .\templates\payments\choose.html:4
+msgid "Choisir le paiement"
+msgstr "Choose a payment method"
+
+#: .\templates\payments\choose.html:40
+msgid "Total à payer"
+msgstr "Total due"
+
+#: .\templates\payments\choose.html:45
+msgid "Payez par WhatsApp"
+msgstr "Pay with WhatsApp"
+
+#: .\templates\payments\choose.html:55
+msgid "Contactez-nous sur WhatsApp pour recevoir les instructions, puis envoyez votre preuve de paiement. Un administrateur vérifiera votre paiement."
+msgstr "Contact us on WhatsApp for payment instructions, then send your proof of payment. An administrator will verify your payment."
+
+#: .\templates\payments\choose.html:57
+msgid "Continuer avec WhatsApp"
+msgstr "Continue with WhatsApp"
+
+#: .\templates\payments\choose.html:69
+#: .\templates\payments\saspay_redirect.html:45
+msgid "Retour à ma réservation"
+msgstr "Back to my reservation"
+
+#: .\templates\payments\saspay_redirect.html:4
+msgid "Paiement SASPAY"
+msgstr "SASPAY payment"
+
+#: .\templates\payments\saspay_redirect.html:19
+msgid "Validez sur votre téléphone"
+msgstr "Confirm on your phone"
+
+#: .\templates\payments\saspay_redirect.html:22
+msgid "Une notification de paiement vient d'être envoyée sur votre téléphone. Saisissez votre code mobile money pour confirmer le paiement."
+msgstr "A payment notification has been sent to your phone. Enter your mobile money PIN to confirm the payment."
+
+#: .\templates\payments\saspay_redirect.html:28
+#: .\templates\payments\whatsapp_proof.html:27
+#: .\templates\reservations\cancel.html:26
+msgid "Référence :"
+msgstr "Reference:"
+
+#: .\templates\payments\saspay_redirect.html:29
+#: .\templates\payments\whatsapp_proof.html:28
+msgid "Montant :"
+msgstr "Amount:"
+
+#: .\templates\payments\saspay_redirect.html:30
+msgid "Réseau :"
+msgstr "Network:"
+
+#: .\templates\payments\saspay_redirect.html:37
+msgid "En attente de validation sur votre téléphone..."
+msgstr "Waiting for confirmation on your phone..."
+
+#: .\templates\payments\saspay_redirect.html:50
+#: .\templates\payments\whatsapp_instructions.html:120
+msgid "Vérifier le statut"
+msgstr "Check status"
+
+#: .\templates\payments\whatsapp_instructions.html:4
+msgid "Paiement WhatsApp"
+msgstr "WhatsApp payment"
+
+#: .\templates\payments\whatsapp_instructions.html:18
+msgid "Paiement via WhatsApp"
+msgstr "Pay via WhatsApp"
+
+#: .\templates\payments\whatsapp_instructions.html:20
+msgid "Suivez ces 3 étapes pour valider votre réservation."
+msgstr "Follow these three steps to confirm your reservation."
+
+#: .\templates\payments\whatsapp_instructions.html:26
+msgid "Montant à payer"
+msgstr "Amount due"
+
+#: .\templates\payments\whatsapp_instructions.html:34
+msgid "Référence à mentionner :"
+msgstr "Reference to include:"
+
+#: .\templates\payments\whatsapp_instructions.html:46
+msgid "Contactez-nous sur WhatsApp"
+msgstr "Contact us on WhatsApp"
+
+#: .\templates\payments\whatsapp_instructions.html:48
+msgid "Cliquez sur le bouton ci-dessous pour ouvrir WhatsApp avec un message pré-rempli contenant votre référence."
+msgstr "Select the button below to open WhatsApp with a pre-filled message that includes your reservation reference."
+
+#: .\templates\payments\whatsapp_instructions.html:58
+msgid "OUVRIR WHATSAPP"
+msgstr "OPEN WHATSAPP"
+
+#: .\templates\payments\whatsapp_instructions.html:63
+msgid "Numéro WhatsApp non configuré."
+msgstr "The WhatsApp number has not been configured."
+
+#: .\templates\payments\whatsapp_instructions.html:73
+msgid "Effectuez le paiement et envoyez la capture"
+msgstr "Complete the payment and send a screenshot"
+
+#: .\templates\payments\whatsapp_instructions.html:75
+msgid "Une fois sur WhatsApp :"
+msgstr "Once you are on WhatsApp:"
+
+#: .\templates\payments\whatsapp_instructions.html:78
+msgid "Nous vous enverrons les instructions de paiement (M-Pesa, Airtel, Orange, carte bancaire)"
+msgstr "We will send you payment instructions (M-Pesa, Airtel, Orange, or bank card)."
+
+#: .\templates\payments\whatsapp_instructions.html:79
+msgid "Effectuez le paiement"
+msgstr "Complete the payment."
+
+#: .\templates\payments\whatsapp_instructions.html:80
+msgid "Envoyez la CAPTURE D'ÉCRAN du paiement sur WhatsApp"
+msgstr "Send a SCREENSHOT of your payment on WhatsApp."
+
+#: .\templates\payments\whatsapp_instructions.html:91
+msgid "Attendez la validation"
+msgstr "Wait for verification"
+
+#: .\templates\payments\whatsapp_instructions.html:94
+msgid "Un administrateur va vérifier votre paiement et valider votre réservation."
+msgstr "An administrator will verify your payment and confirm your reservation."
+
+#: .\templates\payments\whatsapp_instructions.html:97
+msgid "Dès la validation, vous recevrez :"
+msgstr "Once it is confirmed, you will receive:"
+
+#: .\templates\payments\whatsapp_instructions.html:100
+msgid "Un email avec votre billet PDF"
+msgstr "An email with your PDF ticket"
+
+#: .\templates\payments\whatsapp_instructions.html:101
+msgid "Un message WhatsApp avec le lien de téléchargement"
+msgstr "A WhatsApp message with a download link"
+
+#: .\templates\payments\whatsapp_instructions.html:112
+msgid "Délai de validation : quelques minutes à quelques heures. Vous pouvez vérifier votre statut à tout moment."
+msgstr "Verification may take a few minutes or a few hours. You can check your status at any time."
+
+#: .\templates\payments\whatsapp_instructions.html:123
+msgid "Retour à l'accueil"
+msgstr "Back to home"
+
+#: .\templates\payments\whatsapp_proof.html:4
+#: .\templates\payments\whatsapp_proof.html:52
+msgid "Envoyer ma preuve"
+msgstr "Submit my proof"
+
+#: .\templates\payments\whatsapp_proof.html:18
+msgid "Envoyer ma preuve de paiement"
+msgstr "Submit my payment proof"
+
+#: .\templates\payments\whatsapp_proof.html:20
+msgid "Capture d'écran ou PDF du paiement effectué"
+msgstr "Screenshot or PDF of your completed payment"
+
+#: .\templates\payments\whatsapp_proof.html:46
 msgid "Formats acceptés : JPG, PNG, PDF (max 5 Mo)"
 msgstr "Accepted formats: JPG, PNG, PDF (up to 5 MB)"
 
+#: .\templates\payments\whatsapp_proof.html:59
 msgid "Retour aux instructions"
 msgstr "Back to instructions"
+
+#: .\templates\reservations\cancel.html:4
+msgid "Annuler la réservation"
+msgstr "Cancel reservation"
+
+#: .\templates\reservations\cancel.html:18
+msgid "Annuler la réservation ?"
+msgstr "Cancel reservation?"
+
+#: .\templates\reservations\cancel.html:20
+msgid "Cette action est irréversible. Votre réservation sera annulée et les places seront libérées."
+msgstr "This action cannot be undone. Your reservation will be cancelled and the seats released."
+
+#: .\templates\reservations\cancel.html:27
+msgid "Places :"
+msgstr "Seats:"
+
+#: .\templates\reservations\cancel.html:36
+msgid "Oui, annuler"
+msgstr "Yes, cancel"
+
+#: .\templates\reservations\cancel.html:39 .\templates\tickets\detail.html:146
+#: .\templates\tickets\reservation_tickets.html:23
+msgid "Retour"
+msgstr "Back"
+
+#: .\templates\reservations\create.html:34
+msgid "Vous avez déjà"
+msgstr "You already have"
+
+#: .\templates\reservations\create.html:36
+msgid "réservation(s) active(s)."
+msgstr "active reservation(s)."
+
+#: .\templates\reservations\create.html:38
+msgid "Places restantes pour cette conférence :"
+msgstr "Seats remaining for this conference:"
+
+#: .\templates\reservations\create.html:68
+msgid "Détails de votre réservation"
+msgstr "Reservation details"
+
+#: .\templates\reservations\create.html:80
+msgid "Entre 1 et 5 places par réservation. Une place = un billet."
+msgstr "Between 1 and 5 seats per reservation. One seat equals one ticket."
+
+#: .\templates\reservations\create.html:95
+msgid "Ce numéro recevra la demande de paiement SASPAY ou WhatsApp. Par défaut : votre numéro WhatsApp."
+msgstr "This number will receive the SASPAY or WhatsApp payment request. Defaults to your WhatsApp number."
+
+#: .\templates\reservations\create.html:102
+msgid "Places disponibles"
+msgstr "Available seats"
+
+#: .\templates\reservations\create.html:106
+msgid "Prix unitaire"
+msgstr "Price per seat"
+
+#: .\templates\reservations\create.html:121
+msgid "Réserver gratuitement"
+msgstr "Reserve for free"
+
+#: .\templates\reservations\create.html:123
+msgid "Continuer vers le paiement"
+msgstr "Continue to payment"
+
+#: .\templates\reservations\detail.html:83
+#: .\templates\tickets\reservation_tickets.html:34
+msgid "Places réservées"
+msgstr "Seats reserved"
+
+#: .\templates\reservations\detail.html:85
+#, python-format
+msgid "%(seat_count)s place réservée"
+msgid_plural "%(seat_count)s places réservées"
+msgstr[0] "%(seat_count)s reserved seat"
+msgstr[1] "%(seat_count)s reserved seats"
+
+#: .\templates\reservations\detail.html:116
+msgid "Finaliser le paiement"
+msgstr "Complete payment"
+
+#: .\templates\reservations\detail.html:117
+msgid "Votre réservation n'est pas encore confirmée. Procédez au paiement pour la valider."
+msgstr "Your reservation is not confirmed yet. Complete payment to confirm it."
+
+#: .\templates\reservations\detail.html:121
+msgid "Payer maintenant"
+msgstr "Pay now"
+
+#: .\templates\reservations\detail.html:137
+msgid "Réservation confirmée"
+msgstr "Reservation confirmed"
+
+#: .\templates\reservations\detail.html:138
+msgid "Votre place est garantie. Téléchargez votre billet ci-dessous."
+msgstr "Your seat is reserved. Download your ticket below."
+
+#: .\templates\reservations\detail.html:142
+msgid "Voir mes billets"
+msgstr "View my tickets"
+
+#: .\templates\reservations\detail.html:147
+msgid "Vos billets sont en cours de génération. Vous recevrez un email dès qu'ils seront prêts."
+msgstr "Your tickets are being generated. You will receive an email when they are ready."
+
+#: .\templates\reservations\detail.html:163
+msgid "Récapitulatif"
+msgstr "Summary"
+
+#: .\templates\reservations\detail.html:189
+msgid "Total"
+msgstr "Total"
+
+#: .\templates\reservations\detail.html:204
+msgid "Actions"
+msgstr "Actions"
+
+#: .\templates\reservations\detail.html:210
+msgid "Toutes mes réservations"
+msgstr "All my reservations"
+
+#: .\templates\reservations\detail.html:214
+msgid "Contacter l'organisation"
+msgstr "Contact the organizers"
+
+#: .\templates\reservations\list.html:15
+msgid "Historique"
+msgstr "History"
+
+#: .\templates\reservations\list.html:16
+msgid "Consultez et gérez toutes vos réservations"
+msgstr "View and manage all your reservations"
+
+#: .\templates\reservations\list.html:20
+msgid "Nouvelle réservation"
+msgstr "New reservation"
+
+#: .\templates\reservations\list.html:82
+#, python-format
+msgid "%(seat_count)s place"
+msgid_plural "%(seat_count)s places"
+msgstr[0] "%(seat_count)s seat"
+msgstr[1] "%(seat_count)s seats"
+
+#: .\templates\reservations\list.html:116
+msgid "Aucune réservation"
+msgstr "No reservations"
+
+#: .\templates\reservations\list.html:117
+msgid "Vous n'avez pas encore réservé de place pour cette conférence."
+msgstr "You have not booked a seat for this conference yet."
+
+#: .\templates\reservations\list.html:120
+msgid "Réserver maintenant"
+msgstr "Book now"
+
+#: .\templates\tickets\detail.html:18
+msgid "Billet valide"
+msgstr "Valid ticket"
+
+#: .\templates\tickets\detail.html:21
+msgid "Billet utilisé"
+msgstr "Ticket used"
+
+#: .\templates\tickets\detail.html:24
+msgid "Billet annulé"
+msgstr "Cancelled ticket"
+
+#: .\templates\tickets\detail.html:37
+msgid "BILLET D'ENTRÉE"
+msgstr "ADMISSION TICKET"
+
+#: .\templates\tickets\detail.html:45
+msgid "ACCÈS PERSONNEL — CONFÉRENCE"
+msgstr "PERSONAL ADMISSION — CONFERENCE"
+
+#: .\templates\tickets\detail.html:89
+msgid "Email :"
+msgstr "Email:"
+
+#: .\templates\tickets\detail.html:92
+msgid "WhatsApp :"
+msgstr "WhatsApp:"
+
+#: .\templates\tickets\detail.html:95
+msgid "Place :"
+msgstr "Seat:"
+
+#: .\templates\tickets\detail.html:103
+msgid "Référence du billet"
+msgstr "Ticket reference"
+
+#: .\templates\tickets\detail.html:109
+#: .\templates\tickets\reservation_tickets.html:99 .\tickets\admin.py:46
+msgid "Place"
+msgstr "Seat"
+
+#: .\templates\tickets\detail.html:117
+#: .\templates\tickets\reservation_tickets.html:105
+msgid "QR code du billet"
+msgstr "Ticket QR code"
+
+#: .\templates\tickets\detail.html:120
+msgid "Scannez ce code à l'entrée"
+msgstr "Scan this code at the entrance"
+
+#: .\templates\tickets\detail.html:129
+msgid "Billet non transférable — Une seule entrée — Ne pas plier"
+msgstr "Non-transferable ticket — Single admission — Do not fold"
+
+#: .\templates\tickets\detail.html:140
+msgid "Télécharger le PDF"
+msgstr "Download PDF"
+
+#: .\templates\tickets\detail.html:155
+msgid "Ce billet a été utilisé le"
+msgstr "This ticket was used on"
+
+#: .\templates\tickets\reservation_tickets.html:4
+#: .\templates\tickets\reservation_tickets.html:14
+msgid "Mes billets"
+msgstr "My tickets"
+
+#: .\templates\tickets\reservation_tickets.html:42
+msgid "Billets générés"
+msgstr "Tickets generated"
+
+#: .\templates\tickets\reservation_tickets.html:52
+msgid "Billets utilisés"
+msgstr "Tickets used"
+
+#: .\templates\tickets\reservation_tickets.html:64
+msgid "PDF groupé"
+msgstr "Combined PDF"
+
+#: .\templates\tickets\reservation_tickets.html:65
+msgid "Tous les billets dans un seul fichier"
+msgstr "All tickets in one file"
+
+#: .\templates\tickets\reservation_tickets.html:76
+msgid "Archive ZIP"
+msgstr "ZIP archive"
+
+#: .\templates\tickets\reservation_tickets.html:77
+msgid "Billets séparés en fichiers PDF"
+msgstr "Individual ticket PDFs in a ZIP archive"
+
+#: .\templates\tickets\reservation_tickets.html:87
+msgid "Vos billets individuels"
+msgstr "Your individual tickets"
+
+#: .\templates\tickets\reservation_tickets.html:89
+msgid "Cliquez sur un billet pour le voir et le télécharger."
+msgstr "Select a ticket to view and download it."
+
+#: .\templates\tickets\reservation_tickets.html:116
+msgid "Valide"
+msgstr "Valid"
+
+#: .\templates\tickets\reservation_tickets.html:121 .\tickets\models.py:21
+msgid "Utilisé"
+msgstr "Used"
+
+#: .\templates\tickets\reservation_tickets.html:147
+msgid "Billets en cours de génération"
+msgstr "Tickets are being generated"
+
+#: .\templates\tickets\reservation_tickets.html:148
+msgid "Vos billets seront disponibles dès que votre paiement sera validé."
+msgstr "Your tickets will be available as soon as your payment is confirmed."
+
+#: .\tickets\admin.py:35
+msgid "QR"
+msgstr "QR code"
+
+#: .\tickets\admin.py:38
+msgid "PDF"
+msgstr "PDF"
+
+#: .\tickets\admin.py:41
+msgid "Contrôle"
+msgstr "Check-in"
+
+#: .\tickets\admin.py:58
+msgid "Aperçu QR"
+msgstr "QR preview"
+
+#: .\tickets\models.py:20
+msgid "Généré"
+msgstr "Generated"
+
+#: .\tickets\models.py:22
+msgid "Annulé"
+msgstr "Cancelled"
+
+#: .\tickets\models.py:32
+msgid "Référence billet"
+msgstr "Ticket reference"
+
+#: .\tickets\models.py:36
+msgid "Format : BGA-2026-XXXXXXX-01"
+msgstr "Format: BGA-2026-XXXXXXX-01"
+
+#: .\tickets\models.py:39
+msgid "Numéro de place"
+msgstr "Seat number"
+
+#: .\tickets\models.py:41
+msgid "Position dans la réservation (1 à N)."
+msgstr "Position within the reservation (1 to N)."
+
+#: .\tickets\models.py:44
+msgid "Token QR"
+msgstr "QR token"
+
+#: .\tickets\models.py:48
+msgid "Token HMAC signé, sans données personnelles."
+msgstr "Signed HMAC token; contains no personal data."
+
+#: .\tickets\models.py:51
+msgid "Image QR"
+msgstr "QR image"
+
+#: .\tickets\models.py:57
+msgid "Fichier PDF individuel"
+msgstr "Individual PDF file"
+
+#: .\tickets\models.py:69
+msgid "Généré le"
+msgstr "Generated on"
+
+#: .\tickets\models.py:70
+msgid "Utilisé le"
+msgstr "Used on"
+
+#: .\tickets\models.py:77
+msgid "Contrôlé par"
+msgstr "Checked by"
+
+#: .\tickets\models.py:81
+msgid "Billet"
+msgstr "Ticket"
+
+#: .\tickets\models.py:82
+msgid "Billets"
+msgstr "Tickets"
+
+#: .\tickets\views.py:92
+msgid "Le PDF n'est pas encore disponible."
+msgstr "The PDF is not available yet."
+
+#: .\tickets\views.py:113 .\tickets\views.py:139
+msgid "Aucun billet n'est disponible."
+msgstr "No tickets are available."
